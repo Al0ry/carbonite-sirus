@@ -1,4 +1,41 @@
-﻿-- Carbonite Copyright 2007-2009 Carbon Based Creations, LLC
+﻿--FIXES FOR SIRUS
+local function GetMapZones1(c)
+	local zones = {GetMapZones(c)}
+	if c==1 then
+		table.remove(zones, 14)
+	elseif c==2 then
+		table.remove(zones, 29)
+		table.remove(zones, 29)
+		table.remove(zones, 29)
+	end
+	return unpack(zones)
+end
+
+local function SetMapZoom1(c, z)
+	if z and (c == 1 and z >= 14) then
+		SetMapZoom(c, z + 1)
+	elseif z and (c == 2 and z >= 29) then
+		SetMapZoom(c, z + 3)
+	else
+		SetMapZoom(c, z)
+	end
+end
+
+local function GetCurrentMapZone1()
+	local z, c = GetCurrentMapZone(), GetCurrentMapContinent()
+	if (c == 1 and z >= 14) then
+		return GetCurrentMapZone() - 1
+	elseif (c == 2 and z >= 29) then
+		return GetCurrentMapZone() - 3
+	else
+		return GetCurrentMapZone()
+	end
+end
+
+local GetMapZones = GetMapZones1
+local SetMapZoom = SetMapZoom1
+local GetCurrentMapZone = GetCurrentMapZone1
+-- Carbonite Copyright 2007-2009 Carbon Based Creations, LLC
 function NXInit()
 Nx={}
 local Nx=Nx
