@@ -4,9 +4,9 @@ local function GetMapZones1(c)
 	if c==1 then
 		table.remove(zones, 14)
 	elseif c==2 then
-		table.remove(zones, 29)
-		table.remove(zones, 29)
-		table.remove(zones, 29)
+		table.remove(zones, 30)
+		table.remove(zones, 30)
+		table.remove(zones, 30)
 	end
 	return unpack(zones)
 end
@@ -14,7 +14,7 @@ end
 local function SetMapZoom1(c, z)
 	if z and (c == 1 and z >= 14) then
 		SetMapZoom(c, z + 1)
-	elseif z and (c == 2 and z >= 29) then
+	elseif z and (c == 2 and z >= 30) then
 		SetMapZoom(c, z + 3)
 	else
 		SetMapZoom(c, z)
@@ -25,21 +25,27 @@ local function GetCurrentMapZone1()
 	local z, c = GetCurrentMapZone(), GetCurrentMapContinent()
 	if (c == 1 and z >= 14) then
 		return GetCurrentMapZone() - 1
-	elseif (c == 2 and z >= 29) then
+	elseif (c == 2 and z >= 30) then
 		return GetCurrentMapZone() - 3
 	else
 		return GetCurrentMapZone()
 	end
 end
 
+local function SendAddonMessage1(pref, text, ch, tar)
+	if ch == "MESSAGE" and UnitFactionGroup("player") == "Renegade" then return end
+	SendAddonMessage(pref, text, ch, tar)
+end
+
 local GetMapZones = GetMapZones1
 local SetMapZoom = SetMapZoom1
 local GetCurrentMapZone = GetCurrentMapZone1
--- Carbonite Copyright 2007-2009 Carbon Based Creations, LLC
+local SendAddonMessage = SendAddonMessage1
+--
 function NXInit()
 Nx={}
 local Nx=Nx
-Nx.WeS="carboniteaddon.com"
+Nx.WeS="https://gitlab.com/knights-of-sunwell/carbonite-sirus"
 NXTITLEFULL=NXTITLE
 Nx.VERMAJOR=3.340
 Nx.VERMINOR=.000
@@ -345,6 +351,7 @@ Map.MWI={
 [2030]={Nam="Plaguelands: The Scarlet Enclave",6.32,1200,-650,Ove1="scarletenclave",Cit=true,},
 --Sirus.su
 [2031]={Nam="Scarl1",0,0,0,Ove1="scarl1",Fis=425,},
+[2032]={Nam="Gilneas",0,0,0,Ove1="gilneas",Fis=425,},
 --
 [3000]={34.606,-2587.3,-1151.7,},
 [3001]={Nam="Blade's Edge Mountains",10.85003,-1769.168,-881.6678,Ove1="bladesedgemountains",QAI=1193,},

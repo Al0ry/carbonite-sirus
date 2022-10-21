@@ -1456,6 +1456,7 @@ elseif GetLocale() == "ruRU" then		-- Russian
 		["Zul'Drak"] = "Зул'Драк",
 		["Hijal"] = "Хиджал",
 		["Scarl1"] = "Монастырь Алого Ордена",
+		["Gilneas"] = "Гилнеас",
 	}
 	NXlMapSubNames = {
 		["Даларан"] = {
