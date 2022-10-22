@@ -1,14 +1,26 @@
 
- CARBONITE
- Addon for World of Warcraft(tm)
+ CARBONITE - Addon for World of Warcraft(tm)
 
- Copyright 2007-2010 Carbon Based Creations, LLC
+ Copyright 2007-2012 Carbon Based Creations, LLC
  CARBONITE(tm) is a registered trademark of Carbon Based Creations, LLC.
 
  World of Warcraft(tm) and "WOW" are trademarks owned by Blizzard Entertainment, Inc.
  The CARBONITE addon is not endorsed by or affiliated with Blizzard Entertainment, Inc.
 
  Website: carboniteaddon.com
+ 
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ----------------------------------------------------------
 
@@ -37,7 +49,7 @@ Common Installation Instructions
  
  Windows XP "C:\Program Files\World of Warcraft\Interface\AddOns"
  Vista "C:\Users\Public\Games\World of Warcraft\Interface\AddOns"
- Machintosh "Machintosh HD/Applications/World of Warcraft/Interface/AddOns"
+ Macintosh "Macintosh HD/Applications/World of Warcraft/Interface/AddOns"
 
  Delete any existing Carbonite folders in the AddOns folder before you unzip a
  new version.
@@ -564,7 +576,7 @@ CarboniteNodes is a simple data addon that contains predefined locations for Her
 To import the data into Carbonite's gather data, you right click the Carbonite minimap button, select "Options" and select the Guide page of Options window. You would then left click the text that says "Import Carbonite Nodes Herbalism locations" to get the herbs and "Import Carbonite Nodes Mining locations" to get the mining data.
 
 
--- Carbonite Transfer
+-- Carbonite Transfer (OLD)
 
 CarboniteTransfer is a simple addon that is used to move Warehouse data between accounts. It will also be used to send and receive favorites in the future. You can delete it or disable it, although it takes almost no memory since it is empty until used.
 
