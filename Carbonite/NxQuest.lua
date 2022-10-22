@@ -1597,7 +1597,7 @@ function Nx.Quest:RecordQuestsLog()
 
 			cur.CanShare = GetQuestLogPushable()
 			cur.Complete = isComplete		-- 1 is Done, nil not. Otherwise failed
-			cur.IsAutoComplete = GetQuestLogIsAutoComplete (qn)
+			cur.IsAutoComplete = nil --GetQuestLogIsAutoComplete (qn)
 
 			local left = GetQuestLogTimeLeft()
 			if left then
@@ -1873,7 +1873,7 @@ function Nx.Quest:ScanBlizzQuestDataTimer()
 
 --			Nx.prt ("ScanQ next %s %s", cont, mapId)
 
-			if cont == 5 then			-- Done?
+			if cont == 4 then			-- Done?
 
 				WatchFrame:RegisterEvent ("WORLD_MAP_UPDATE")	-- Back on when done
 

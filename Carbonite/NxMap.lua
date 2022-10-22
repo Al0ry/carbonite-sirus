@@ -29,9 +29,9 @@ local function GetMapZones1(c)
 	if c==1 then
 		table.remove(zones, 14)
 	elseif c==2 then
-		table.remove(zones, 29)
-		table.remove(zones, 29)
-		table.remove(zones, 29)
+		table.remove(zones, 30)
+		table.remove(zones, 30)
+		table.remove(zones, 30)
 	end
 	return unpack(zones)
 end
@@ -39,7 +39,7 @@ end
 local function SetMapZoom1(c, z)
 	if z and (c == 1 and z >= 14) then
 		SetMapZoom(c, z + 1)
-	elseif z and (c == 2 and z >= 29) then
+	elseif z and (c == 2 and z >= 30) then
 		SetMapZoom(c, z + 3)
 	else
 		SetMapZoom(c, z)
@@ -50,11 +50,15 @@ local function GetCurrentMapZone1()
 	local z, c = GetCurrentMapZone(), GetCurrentMapContinent()
 	if (c == 1 and z >= 14) then
 		return GetCurrentMapZone() - 1
-	elseif (c == 2 and z >= 29) then
+	elseif (c == 2 and z >= 30) then
 		return GetCurrentMapZone() - 3
 	else
 		return GetCurrentMapZone()
 	end
+end
+
+local function GetPOITextureCoords(arg)
+	return 0,0,0,0
 end
 
 local GetMapZones = GetMapZones1
@@ -135,7 +139,7 @@ NxMapOptsDefaults = {
 			NXBackgndAlphaFade = .4,
 			NXBackgndAlphaFull = 1,
 
-			NXArchAlpha = .3,
+--			NXArchAlpha = .3,
 			NXQuestAlpha = .3,
 			
 			NXAutoScaleMin = .01,
@@ -393,7 +397,7 @@ function Nx.Map:UpdateOptions (index)
 	dst.NXBackgndAlphaFade = src.BackgndAlphaFade	
 	dst.NXBackgndAlphaFull = src.BackgndAlphaFull
 
-	dst.NXArchAlpha = src.ArchAlpha
+--	dst.NXArchAlpha = src.ArchAlpha
 	dst.NXQuestAlpha = src.QuestAlpha
 	
 	dst.NXDotZoneScale = src.DotZoneScale
@@ -613,7 +617,7 @@ function Nx.Map:Create (index)
 	m.MapsDrawnOrder = {}									-- [index (1st is newest)] = map id
 	m.MapsDrawnFade = {}										-- [map id] = fade
 	m.MiniBlks = gopts["MapDetailSize"]
-	m.ArchAlpha = opts.NXArchAlpha
+--	m.ArchAlpha = opts.NXArchAlpha
 	m.QuestAlpha = opts.NXQuestAlpha
 	m.BackgndAlphaFade = opts.NXBackgndAlphaFade
 	m.BackgndAlphaFull = opts.NXBackgndAlphaFull
@@ -853,8 +857,8 @@ function Nx.Map:Create (index)
 	local item = showMenu:AddItem (0, "Show Punks")
 	item:SetChecked (gopts, "MapShowPunks")
 
-	local item = showMenu:AddItem(0, "Show Archaeology Blobs", func, m)
-	item:SetChecked (Nx.CharOpts, "MapShowArchBlobs")
+	-- local item = showMenu:AddItem(0, "Show Archaeology Blobs", func, m)
+	-- item:SetChecked (Nx.CharOpts, "MapShowArchBlobs")
 
 	local item = showMenu:AddItem(0, "Show Quest Blobs", func, m)
 	item:SetChecked (Nx.CharOpts, "MapShowQuestBlobs")
@@ -1017,8 +1021,8 @@ function Nx.Map:Create (index)
 	local item = tmenu:AddItem (0, "Unexplored Transparency", func, m)
 	item:SetSlider (opts.NXUnexploredAlpha, 0, .9)
 	
-	local item = tmenu:AddItem(0, "Archaeology Blob Transparency",self.Menu_OnArchAlpha, m)
-	item:SetSlider (m.ArchAlpha,0,1)
+	-- local item = tmenu:AddItem(0, "Archaeology Blob Transparency",self.Menu_OnArchAlpha, m)
+	-- item:SetSlider (m.ArchAlpha,0,1)
 
 	local item = tmenu:AddItem(0, "Quest Blob Transparency",self.Menu_OnQuestAlpha, m)
 	item:SetSlider (m.QuestAlpha,0,1)	
@@ -1177,16 +1181,16 @@ function Nx.Map:Create (index)
 	m.QuestWin:SetBorderTexture([[Interface\WorldMap\UI-QuestBlob-Outside]])
 	m.QuestWin:SetBorderScalar(0.15)
 	
-	local arch = CreateFrame("ArchaeologyDigSiteFrame")
-	m.Arch = arch
-    m.Arch:SetParent(m.TextScFrm:GetScrollChild())		
-    m.Arch:Hide()
-	m.Arch:SetSize(WorldMapButton:GetSize())
-	m.Arch:SetFillAlpha(255 * m.ArchAlpha)
-	m.Arch:SetBorderAlpha(255 * m.ArchAlpha )
-	m.Arch:SetFillTexture( [[Interface\WorldMap\UI-ArchaeologyBlob-Inside]] )
-	m.Arch:SetBorderTexture( [[Interface\WorldMap\UI-ArchaeologyBlob-Outside]] )
-	m.Arch:SetBorderScalar( 0.15 )
+	-- local arch = CreateFrame("ArchaeologyDigSiteFrame")
+	-- m.Arch = arch
+    -- m.Arch:SetParent(m.TextScFrm:GetScrollChild())		
+    -- m.Arch:Hide()
+	-- m.Arch:SetSize(WorldMapButton:GetSize())
+	-- m.Arch:SetFillAlpha(255 * m.ArchAlpha)
+	-- m.Arch:SetBorderAlpha(255 * m.ArchAlpha )
+	-- m.Arch:SetFillTexture( [[Interface\WorldMap\UI-ArchaeologyBlob-Inside]] )
+	-- m.Arch:SetBorderTexture( [[Interface\WorldMap\UI-ArchaeologyBlob-Outside]] )
+	-- m.Arch:SetBorderScalar( 0.15 )
 	
 	self.RMapId = 9000		-- Safe default
 
@@ -1559,21 +1563,21 @@ function Nx.Map:UpdateWorldMap()
 			f:SetScale (.001)
 		end
 	end
-	if not InCombatLockdown() then	
-		self.Arch:DrawNone();
-		if Nx.CharOpts["MapShowArchBlobs"] then
-			for i = 1, ArchaeologyMapUpdateAll() do
-				self.Arch:DrawBlob(ArcheologyGetVisibleBlobID(i), true)	  
-			end
-			self:ClipZoneFrm( self.Cont, self.Zone, self.Arch, 1 )
-			self.Arch:SetFrameLevel(self.Level)		
-			self.Arch:SetFillAlpha(255 * self.ArchAlpha)
-			self.Arch:SetBorderAlpha( 255 * self.ArchAlpha )		
-			self.Arch:Show()
-		else
-			self.Arch:Hide()
-		end
-	end
+	-- if not InCombatLockdown() then	
+		-- self.Arch:DrawNone();
+		-- if Nx.CharOpts["MapShowArchBlobs"] then
+			-- for i = 1, ArchaeologyMapUpdateAll() do
+				-- self.Arch:DrawBlob(ArcheologyGetVisibleBlobID(i), true)	  
+			-- end
+			-- self:ClipZoneFrm( self.Cont, self.Zone, self.Arch, 1 )
+			-- self.Arch:SetFrameLevel(self.Level)		
+			-- self.Arch:SetFillAlpha(255 * self.ArchAlpha)
+			-- self.Arch:SetBorderAlpha( 255 * self.ArchAlpha )		
+			-- self.Arch:Show()
+		-- else
+			-- self.Arch:Hide()
+		-- end
+	-- end
 end
 
 --------
@@ -2218,7 +2222,7 @@ function Nx.Map:GetMapNameDesc (mapId)
 		infoStr = "Any"
 	end
 
-	if self:GetWorldZone (mapId).City then
+	if self:GetWorldZone(mapId).City then
 		infoStr = "City"
 		minLvl = -1
 	end
@@ -3122,9 +3126,9 @@ function Nx.Map:Menu_OnBackgndAlphaFade (item)
 	self.BackgndAlphaFade = item:GetSlider()
 end
 
-function Nx.Map:Menu_OnArchAlpha (item)
-	self.ArchAlpha = item:GetSlider()
-end
+-- function Nx.Map:Menu_OnArchAlpha (item)
+	-- self.ArchAlpha = item:GetSlider()
+-- end
 
 function Nx.Map:Menu_OnQuestAlpha (item)
 	self.QuestAlpha = item:GetSlider()
@@ -3812,16 +3816,16 @@ function Nx.Map:OnEvent (event, ...)
 			this.NxMap:UpdateAll()
 		end
 	elseif event == "PLAYER_REGEN_DISABLED" then
-	  self.Arch:Hide()
+--	  self.Arch:Hide()
 	  self.QuestWin:Hide()
-	  self.Arch:SetParent(nil)
+--	  self.Arch:SetParent(nil)
 	  self.QuestWin:SetParent(nil)
-	  self.Arch:ClearAllPoints()
+--	  self.Arch:ClearAllPoints()
 	  self.QuestWin:ClearAllPoints()
 	elseif event == "PLAYER_REGEN_ENABLED" then
-	  self.Arch:SetParent(this.NxMap.TextScFrm:GetScrollChild())
+--	  self.Arch:SetParent(this.NxMap.TextScFrm:GetScrollChild())
 	  self.QuestWin:SetParent(this.NxMap.TextScFrm:GetScrollChild())
-	  self.Arch:Show()
+--	  self.Arch:Show()
 	  self.QuestWin:Hide()
 	end
 end
@@ -4380,10 +4384,7 @@ end
 
 function Nx.Map:UpdateWorld()
 
-	if self.Debug then
-		Nx.prt ("%d Map UpdateWorld1 %d L%d",
-				self.Tick, self:GetCurrentMapId(), GetCurrentMapDungeonLevel())
-	end
+	--Nx.prt ("%d Map UpdateWorld1 %d L%d", self.Tick, self:GetCurrentMapId(), GetCurrentMapDungeonLevel())
 
 	self.NeedWorldUpdate = false
 
@@ -6943,7 +6944,7 @@ function Nx.Map:UpdateMiniFrames()
 
 					f:SetFrameLevel (level)
 					f.texture:SetVertexColor (1, 1, 1, al)
---					txname = "Textures\\Minimap\\"..txname
+					txname = "Textures\\Minimap\\"..txname
 					f.texture:SetTexture (txname)
 
 --[[
@@ -8719,38 +8720,36 @@ function Nx.Map:InitTables()
 
 	-- Move MapGenAreas to MapWorldInfo (scale, x, y, overlay)
 
-	for id, area in pairs (Nx.Map.MapGenAreas) do
+	-- for id, area in pairs (Nx.Map.MapGenAreas) do
 
-		local s = Nx.Zones[id]
-		local name = strsplit ("!", s)
-		local mapId = Nx.MapNameToId[name]
+		-- local s = Nx.Zones[id]
+		-- local name = strsplit ("!", s)
+		-- local mapId = Nx.MapNameToId[name]
 
-		if not mapId then
-			Nx.prt ("Err MapGenAreas %s", name)
+		-- if not mapId then
+			-- Nx.prt ("Err MapGenAreas %s" .. " " .. id, name)
+		-- else
+			-- local cont = floor (mapId / 1000)
+			-- if cont <= 2 or cont == 5 then
 
-		else
+				-- local wi = worldInfo[mapId]
+				-- wi[1] = area[1]				-- Scale
+				-- wi[2] = area[2]				-- X
+				-- wi[3] = area[3]				-- Y
 
-			local cont = floor (mapId / 1000)
-			if cont <= 2 or cont == 5 then
+				-- if wi.XOff then	-- Had pos offset?
+					-- wi[2] = wi[2] + wi.XOff	-- X
+					-- wi[3] = wi[3] + wi.YOff	-- Y
+					-- wi.XOff = nil
+					-- wi.YOff = nil
+				-- end
 
-				local wi = worldInfo[mapId]
-				wi[1] = area[1]				-- Scale
-				wi[2] = area[2]				-- X
-				wi[3] = area[3]				-- Y
+				-- wi.Overlay = area[4]
+			-- end
+		-- end
+	-- end
 
-				if wi.XOff then	-- Had pos offset?
-					wi[2] = wi[2] + wi.XOff	-- X
-					wi[3] = wi[3] + wi.YOff	-- Y
-					wi.XOff = nil
-					wi.YOff = nil
-				end
-
-				wi.Overlay = area[4]
-			end
-		end
-	end
-
-	Nx.Map.MapGenAreas = nil
+	-- Nx.Map.MapGenAreas = nil
 
 	-- Make world coords for each zone
 
@@ -8760,13 +8759,14 @@ function Nx.Map:InitTables()
 		local cx = info.X
 		local cy = info.Y
 
---		Nx.prt ("WC %s %s %s", ci, cx, cy)
+		Nx.prt ("WC %s %s %s", ci, cx, cy)
 
 		for n = 0, 999 do
 			local winfo = worldInfo[ci * 1000 + n]
 			if not winfo then
 				break
-			end			
+			end
+			Nx.prt ("KEKW %s (%s,%s)", n, winfo[2] or "", winfo[3] or "")
 			winfo[4] = cx + winfo[2]
 			winfo[5] = cy + winfo[3]
 		end
@@ -8810,7 +8810,7 @@ function Nx.Map:InitTables()
 			end
 --]]
 
---			Nx.prt ("Inst %s %d", name, id)
+			Nx.prt ("Inst %s %d %s", name, id, entryId)
 
 			local entryZone = Nx.Zones[tonumber (entryId)]
 			local ename, _, _, _, cont = strsplit ("!", entryZone)
@@ -9111,6 +9111,7 @@ function Nx.Map:GetRealMapId()
 	if (difficultyIndex == 1) then      
 		local aid=GetCurrentMapAreaID()
 		local id=Nx.AIdToId[aid]  	
+		--print("dsad " .. (aid or ""))
 		return id
 	end	
 	local subT = self.MapSubNames[zName]	-- Find subzone name
@@ -9124,7 +9125,6 @@ function Nx.Map:GetRealMapId()
 --	if GetCurrentMapDungeonLevel() > 1 then
 --		return self.MapWorldInfo[mapId].Level2Id or mapId
 --	end
-
 	return mapId
 end
 
@@ -9139,7 +9139,7 @@ function Nx.Map:GetCurrentMapId()
 	local cont = GetCurrentMapContinent()
 	local zone = GetCurrentMapZone()
 
-	if cont <= 0 or cont >= 6 then
+	if cont <= 0 or cont >= 4 then
 
 		local aid = GetCurrentMapAreaID()
 
@@ -9188,7 +9188,7 @@ function Nx.Map:SetCurrentMap (mapId)
 
 		self.BaseScale = 1
 
-		if mapId > 1000 and mapId < 7000 then
+		if mapId > 1000 and mapId < 5000 then
 
 			local cont = self.MapWorldInfo[mapId].Cont
 			local zone = self.MapWorldInfo[mapId].Zone
@@ -9495,7 +9495,7 @@ end
 --
 
 function Nx.Map:IsNormalMap (mapId)
-	return mapId > 1000 and mapId % 1000 > 0 and mapId < 7000
+	return mapId > 1000 and mapId % 1000 > 0 and mapId < 5000
 end
 
 --------

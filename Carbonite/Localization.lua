@@ -5257,6 +5257,10 @@ elseif GetLocale() == "ruRU" then		-- Russian
 		["Vale of Eternal Blossoms"] = "Вечноцветущий дол",
 		["Valley of the Four Winds"] = "Долина Четырех Ветров",
 		["Townlong Steppes"] = "Танлунские степи",
+		["The Barrens"] = "Степи",
+		["Alterac Mountains"] = "Альтеракские горы",
+		["Hyjal"] = "Хиджал",
+		["Scarlet Monastery"] = "Монастырь Алого Ордена"
 	}
 	NXlMapSubNames = {
 		["Даларан"] = {

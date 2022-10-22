@@ -167,6 +167,8 @@ function NXInit()
 	Nx.NXMiniMapBut = {}
 
 	Nx.InfoStats = {}
+	
+	Nx.V30 = true
 
 	Nx.TooltipLastDiffNumLines = 0
 end
@@ -2157,11 +2159,8 @@ function Nx:RecordCharacterLogin()
 	ch["LXPMax"] = UnitXPMax ("player")
 	ch["LXPRest"] = GetXPExhaustion() or 0
 
-	local _, arena = GetCurrencyInfo (390)
-	local _, honor = GetCurrencyInfo (392)
-
-	ch["LArenaPts"] = arena		--V4 gone GetArenaCurrency()
-	ch["LHonor"] = honor			--V4 gone GetHonorCurrency()
+	ch["LArenaPts"] = GetArenaCurrency()
+	ch["LHonor"] = GetHonorCurrency()
 
 	Nx.Warehouse:GuildRecord()
 
@@ -2197,11 +2196,8 @@ function Nx:RecordCharacter()
 	ch["XPMax"] = UnitXPMax ("player")
 	ch["XPRest"] = GetXPExhaustion() or 0
 
-	local _, arena = GetCurrencyInfo (390)
-	local _, honor = GetCurrencyInfo (392)
-
-	ch["ArenaPts"] = arena		--V4 gone GetArenaCurrency()
-	ch["Honor"] = honor			--V4 gone GetHonorCurrency()
+	ch["ArenaPts"] = GetArenaCurrency()
+	ch["Honor"] = GetHonorCurrency()
 
 	if self.Warehouse.TimePlayed then
 		ch["TimePlayed"] = self.Warehouse.TimePlayed
@@ -2879,7 +2875,7 @@ function Nx.Combat:OnEvent (event, ...)
 		local OBJ_TYPE_PET			= 0x00001000
 		local OBJ_TYPE_GUARDIAN		= 0x00002000
 
-		local time, cEvent, _hideCaster, sId, sName, sFlags, sf2, dId, dName, dFlags, df2, a1, a2, a3, a4 = select (1, ...)
+		local time, cEvent, sId, sName, sFlags, dId, dName, dFlags, a1, a2, a3, a4 = select (1, ...)
 
 --		local plName = UnitName ("player")
 

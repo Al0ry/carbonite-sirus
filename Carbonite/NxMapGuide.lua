@@ -1191,8 +1191,8 @@ function Nx.Map.Guide:PatchFolder (folder, parent)
 			cont2 = Map.ContCnt
 		end
 
-		for cont = cont1, cont2 do
-
+		for cont = cont1, 4 do
+			Nx.prt (cont)
 			local info = Map.MapInfo[cont]
 
 			for id = info.Min, info.Max do
@@ -1200,7 +1200,6 @@ function Nx.Map.Guide:PatchFolder (folder, parent)
 				if Nx.V30 or id ~= 2030 then		-- Skip DK starting area
 
 					local f = {}
-
 					local color, infoStr, minLvl = Map:GetMapNameDesc (id)
 					local name = Map:IdToName (id)
 
@@ -2070,7 +2069,6 @@ function Nx.Map.Guide:UpdateMapGeneralIcons (cont, showType, hideFac, tx, name, 
 				local mapId = Map.NxzoneToMapId[zone]
 
 				if not mapId then
-
 					local name, minLvl, maxLvl, faction, cont = strsplit ("!", Nx.Zones[zone])
 
 					if tonumber (faction) ~= 3 then

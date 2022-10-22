@@ -200,7 +200,7 @@ function Nx.Com:OnEvent (event)
 
 	if event == "PLAYER_LOGIN" then
 
-		RegisterAddonMessagePrefix (self.Name)		-- 4.1 must register for guild messages
+		--RegisterAddonMessagePrefix (self.Name)		-- 4.1 must register for guild messages
 
 		self.PlyrName = UnitName ("player")
 		self.PlyrMapId = Nx.Map:GetRealMapId()
@@ -748,7 +748,6 @@ function Nx.Com:UpdateChannelsTimer()
 
 	if UnitIsAFK ("player") or opts["ComNoZone"] then		-- No current zone channel?
 		curMapId = nil
-
 	else
 		if Nx.Map:IsNormalMap (curMapId) then
 			local zs = self.ZStatus[curMapId] or {}
@@ -1328,7 +1327,7 @@ end
 
 function Nx.Com:OnCombat_log_event_unfiltered (event, ...)
 
-	local sName, sFlags, sFlags2, dId, dName, dFlags = select (5, ...)
+	local sName, sFlags, dId, dName, dFlags = select (5, ...)
 
 --	Nx.prt ("Com:Combat %s %x, %s %x", sName or "nil", sFlags, dName or "nil", dFlags)
 

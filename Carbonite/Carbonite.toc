@@ -1,7 +1,6 @@
 ## Interface: 30300
 ## Title: Carbonite 5.05.07
 ## Version: 5.05.07
-## Author: Rythal
 ## Notes: Released Under GPL
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
