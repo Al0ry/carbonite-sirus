@@ -710,9 +710,7 @@ function Nx.Warehouse:Update()
 					local honorStr = ""
 
 					if cname == myName then		-- Me?
-						local _, honor = GetCurrencyInfo (392)		--V4
-						honor = honor - ch["LHonor"]
---						local hk, honor = GetPVPSessionStats()		-- OLD
+						local hk, honor = GetPVPSessionStats()
 						if honor > 0 then
 							honorStr = format (" (+%d)", honor)
 						end
@@ -1926,37 +1924,6 @@ function Nx.Warehouse:RecordCharacterSkills()
 
 	self.SkillRiding = 0
 
-	for skill, name in pairs (self.RidingSpells) do
-		if GetSpellInfo (name) then
-			self.SkillRiding = skill
-			break
-		end
-	end
-
---	Nx.prt ("WH riding %s", self.SkillRiding)
-
-	-- Scan professions
-
---	local prof_1, prof_2, archaeology, fishing, cooking, firstaid = GetProfessions()		-- Indices for GetProfessionInfo
-	local proI = { GetProfessions() }		-- Indices for GetProfessionInfo
-
-	for _, i in pairs (proI) do
-
-		local name, icon, rank, maxrank, numspells, spelloffset, skillline = GetProfessionInfo (i)
-		if name then
-
---			Nx.prt ("Prof %s %s %d", i, name, rank)
-
-			local t = ch["Profs"]
-			local p = t[name] or {}
-			t[name] = p
-			p["Rank"] = rank
-			p.Old = nil
-		end
-	end
-
-
---[[	OLD <4.0
 	for n = 1, GetNumSkillLines() do
 
 		local name, hdr, expanded = GetSkillLineInfo (n)
@@ -2005,7 +1972,6 @@ function Nx.Warehouse:RecordCharacterSkills()
 			end
 		end
 	end
---]]
 
 	-- Nuke any old ones
 

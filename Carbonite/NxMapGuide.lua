@@ -794,7 +794,7 @@ end
 
 function Nx.Map.Guide:ToggleShow()
 
---	Nx.Sec:ValidateMsg()
+	Nx.Sec:ValidateMsg()
 end
 
 --------
@@ -2064,6 +2064,7 @@ function Nx.Map.Guide:UpdateMapGeneralIcons (cont, showType, hideFac, tx, name, 
 
 				local oStr = strsub (npcStr, 2)
 				local desc, zone, loc = Quest:UnpackObjective (oStr)
+
 				desc = gsub (desc, "!", ", ")
 
 				local mapId = Map.NxzoneToMapId[zone]

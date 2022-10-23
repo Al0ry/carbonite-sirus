@@ -4676,17 +4676,6 @@ function Nx.Quest.List:OnQuestUpdate (event)
 		end
 
 		return
-
-	elseif event == "QUEST_DETAIL" then		-- Happens when auto accept quest is given
-
-		if QuestGetAutoAccept() and QuestIsFromAreaTrigger() then
-
-			Quest:RecordQuestAcceptOrFinish()
-
---			Quest.AcceptQId = GetQuestID()
-			Nx.prt ("QUEST_DETAIL %s", GetQuestID())
-		end
-
 	elseif event == "QUEST_LOG_UPDATE" then
 
 --		Nx.prtStack ("QUpdate")
@@ -6937,38 +6926,7 @@ function Nx.Quest.Watch:UpdateList()
 			list:SetItemFrameScaleAlpha (gopts["QWItemScale"], Nx.Util_num2a (gopts["QWItemAlpha"]))
 			if gopts["QWHideBlizz"] then
 				WatchFrame:Hide()		-- Hide Blizzard's
-			end
-			if gopts["QWChalTrack"] then
-			  local cTimer ={GetWorldElapsedTimers()}
-				for _,id in ipairs(cTimer) do
- 		          local description, elapsedTime, isChallengeModeTimer = GetWorldElapsedTime(id) 
- 		          if (isChallengeModeTimer) then
- 		            list:ItemAdd(0)
- 			        list:ItemSet(2,format("|cffff8888%s",description))
- 			        list:ItemSetButton("QuestWatchTip",false)
- 			        local s = "  |cffffffff" .. SecondsToTime(elapsedTime)
- 			        list:ItemAdd(0)
- 			        list:ItemSet(2,s)
- 		          end
- 		        end			
-			end
-			if gopts["QWScenTrack"] then
-				local name, currentStage, numStages = C_Scenario.GetInfo()
-				if (currentStage > 0) then
-					local stageName, stageDescription, numCriteria = C_Scenario.GetStepInfo()	      
-					list:ItemAdd(0)
-					list:ItemSet(2,format("|cffff8888Scenario: %s",name))		  
-					list:ItemSetButtonTip(stageDescription)
-					list:ItemSetButton("QuestWatchTip",false)
-					if (currentStage <= numStages) then		    
-						s = format("  |cffff0000Stage [|cffffffff%d|cffff0000/|cffffffff%d|cffff0000]:|cff00ff00%s", currentStage, numStages,stageName)
-					else			
-						s = "  |cffff0000[|cffffffffComplete|cffff0000]"
-					end
-					list:ItemAdd(0)
-					list:ItemSet(2,s)		  		  
-				end
-			end						
+			end				
 			if gopts["QWAchTrack"] then
 				local ach = { GetTrackedAchievements() }
 				for _, id in ipairs (ach) do
@@ -8132,7 +8090,7 @@ function Nx.Quest:UnpackObjective (obj)
 	end
 
 	local zone = strbyte (obj, i + 1) - 35
-
+	zone = zone >= 163 and 0 or zone
 	return desc, zone, i + 2
 end
 
