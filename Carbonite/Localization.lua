@@ -5260,7 +5260,9 @@ elseif GetLocale() == "ruRU" then		-- Russian
 		["The Barrens"] = "Степи",
 		["Alterac Mountains"] = "Альтеракские горы",
 		["Hyjal"] = "Хиджал",
-		["Scarlet Monastery"] = "Монастырь Алого Ордена"
+		["Scarlet Monastery"] = "Монастырь Алого Ордена",
+		["Blackrock Mountain2"] = "Черная гора2",
+		["Blackrock Mountain3"] = "Черная гора3"
 	}
 	NXlMapSubNames = {
 		["Даларан"] = {

@@ -2890,11 +2890,11 @@ function Nx.Combat:OnEvent (event, ...)
 --					a1 or "nil", a2 or "nil", a3 or "nil", a4 or "nil")
 
 			local spellId, spellName, spellSchool
-			local i = 12
+			local i = 9
 
 			if pre ~= "SWING" then
-				spellId, spellName, spellSchool = select (12, ...)
-				i = 15
+				spellId, spellName, spellSchool = select (9, ...)
+				i = 12
 			end
 
 			local amount, school, resist, block, absorb, crit = select (i, ...)

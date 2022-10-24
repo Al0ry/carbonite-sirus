@@ -23,47 +23,9 @@
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 -- Map
---FIXES FOR SIRUS
-local function GetMapZones1(c)
-	local zones = {GetMapZones(c)}
-	if c==1 then
-		table.remove(zones, 14)
-	elseif c==2 then
-		table.remove(zones, 30)
-		table.remove(zones, 30)
-		table.remove(zones, 30)
-	end
-	return unpack(zones)
-end
-
-local function SetMapZoom1(c, z)
-	if z and (c == 1 and z >= 14) then
-		SetMapZoom(c, z + 1)
-	elseif z and (c == 2 and z >= 30) then
-		SetMapZoom(c, z + 3)
-	else
-		SetMapZoom(c, z)
-	end
-end
-
-local function GetCurrentMapZone1()
-	local z, c = GetCurrentMapZone(), GetCurrentMapContinent()
-	if (c == 1 and z >= 14) then
-		return GetCurrentMapZone() - 1
-	elseif (c == 2 and z >= 30) then
-		return GetCurrentMapZone() - 3
-	else
-		return GetCurrentMapZone()
-	end
-end
-
 local function GetPOITextureCoords(arg)
 	return 0,0,0,0
 end
-
-local GetMapZones = GetMapZones1
-local SetMapZoom = SetMapZoom1
-local GetCurrentMapZone = GetCurrentMapZone1
 
 NxMAPOPTS_VERSION	= .26
 
@@ -8572,21 +8534,17 @@ function Nx.Map:InitTables()
 
 	-- Get Blizzard's alphabetical set of names
 
-	--V403
-
 	self.MapNames = {
-		{ GetMapZones (1) },
-		{ GetMapZones (2) },
-		{ GetMapZones (3) },
-		{ GetMapZones (4) },
+		{ GetMapZones(1)},
+		{ GetMapZones(2)},
+		{ GetMapZones(3)},
+		{ GetMapZones(4)},
 	}
 
-	tinsert (self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
-	-- tinsert (self.MapNames[2], NXlMapNames["Gilneas"] or "Gilneas")
-	-- tinsert (self.MapNames[2], NXlMapNames["Gilneas City"] or "Gilneas City")
+	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
 
-	for mi, mapName in pairs (self.MapNames[2]) do
-		for mi2, mapName2 in pairs (self.MapNames[2]) do
+	for mi, mapName in ipairs(self.MapNames[2]) do
+		for mi2, mapName2 in ipairs(self.MapNames[2]) do
 			if mapName == mapName2 and mi ~= mi2 then			-- Duplicate name? (Gilneas, Ruins of Gilneas (EU))
 				self.MapNames[2][mi2] = mapName .. "2"			-- Hack it!
 --				Nx.prt ("Dup zone name %s", mapName)
@@ -8595,6 +8553,10 @@ function Nx.Map:InitTables()
 		end
 	end
 
+	for mi, mapName in ipairs (self.MapNames[2]) do
+		Nx.prt("%s %s", mi, mapName)
+	end
+	
 	local BGNames = {}
 	self.MapNames[9] = BGNames
 
@@ -9100,6 +9062,7 @@ end
 
 --------
 -- Get the real player location map id
+local aid2
 
 function Nx.Map:GetRealMapId()
 
@@ -9110,8 +9073,12 @@ function Nx.Map:GetRealMapId()
 	local name, instanceType, difficultyIndex, difficultyName, maxPlayers, dynamicDifficulty, isDynamic, mapID = GetInstanceInfo()
 	if (difficultyIndex == 1) then      
 		local aid=GetCurrentMapAreaID()
-		local id=Nx.AIdToId[aid]  	
-		--print("dsad " .. (aid or ""))
+		aid2 = aid2 or aid
+		local id=Nx.AIdToId[aid]
+		if aid2 ~= aid then
+			print("aid " .. (aid or ""))
+			aid2 = aid
+		end
 		return id
 	end	
 	local subT = self.MapSubNames[zName]	-- Find subzone name

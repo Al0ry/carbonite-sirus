@@ -212,18 +212,18 @@ Map.MapInfo = {
 	{
 		Name = "Kalimdor",
 		FileName = "Kalimdor",
-		X = 0,	-- Was 0
+		X = 0,
 		Y = 500,
 		Min = 1001,
-		Max = 1025,
+		Max = 1026,
 	},
 	{
 		Name = "Eastern Kingdoms",
 		FileName = "Azeroth",
-		X = 3784,	-- Was 3784
+		X = 3784,
 		Y = -200,
 		Min = 2001,
-		Max = 2032,
+		Max = 2033,
 	},
 	{
 		Name = "Outland",
@@ -303,7 +303,8 @@ Map.MapWorldInfo = {
 [1023]={Name="Un'Goro Crater",7.399998,-106.6661,1193.333,Overlay="ungorocrater",Fish = 300,},
 [1024]={Name="Winterspring",14.20029,63.32512,-1706.666,Overlay="winterspring",Fish = 425,},
 --Sirus.su specific
-[1025]={Name="Hyjal",14.20029,63.32512,-1706.666,Overlay="hyjal",Fish = 425,},
+[1025]={Name="Hyjal",0,0,0,Overlay="hyjal",Fish = 425,},
+[1026]={Name="Wailing Caverns",0,0,0,Overlay="wailingcaverns",Fish = 425,},
 --
 [2000]={81.53,-3645.96,-2249.31,},
 [2001]={Name="Alterac Mountains",5.599993,-156.6661,-299.9998,Overlay="alterac",Fish = 225,},
@@ -339,6 +340,7 @@ Map.MapWorldInfo = {
 --Sirus.su
 [2031]={Name="Scarlet Monastery",0,0,0,Overlay="scarletmonastery",Fish = 425,},
 [2032]={Name="Gilneas",0,0,0,Overlay="gilneas",Fish = 425,},
+[2033]={Name="Blackrock Mountain",0,0,0,Overlay="blackrockmountain",Fish = 425,},
 --
 [3000]={34.606,-2587.3,-1151.7,},
 [3001]={Name="Blade's Edge Mountains",10.85003,-1769.168,-881.6678,Overlay="bladesedgemountains",QAchievementId=1193,},

@@ -1327,7 +1327,7 @@ end
 
 function Nx.Com:OnCombat_log_event_unfiltered (event, ...)
 
-	local sName, sFlags, dId, dName, dFlags = select (5, ...)
+	local sName, sFlags, dId, dName, dFlags = select (4, ...)
 
 --	Nx.prt ("Com:Combat %s %x, %s %x", sName or "nil", sFlags, dName or "nil", dFlags)
 
