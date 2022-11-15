@@ -1792,7 +1792,6 @@ function Nx.Map:InitFrames()
 		{ 0,1,1,0, 0,1,1,0, 0,1,1,0 },
 		{ 1,1,1,1, 1,1,1,1, 1,1,1,1 },
 		{ 1,1,1,1, 1,1,1,1, 1,1,1,1 },
-		{ 1,1,1,0, 1,1,1,0, 1,1,1,0 },
 		{ 1,1,1,1, 1,1,1,1, 1,1,1,1 },
 	}
 
@@ -2399,7 +2398,6 @@ function Nx.Map:Ping()
 end
 
 function Nx.Map:MinimapOnEnter (motion)
-
 	local map = Nx.Map.Maps[1]
 	if map.MMZoomType ~= 0 then
 		local this = self			--V4
@@ -3469,7 +3467,8 @@ function ToggleFrame (frame)
 	end
 
 --	Nx.prt ("ToggleWorldMap")
-
+	SetMapToCurrentZone()
+	
 	local opts = Nx:GetGlobalOpts()
 
 	if Nx.Map.BlizzToggling or WorldMapFrame:IsShown() or IsAltKeyDown() or not opts["MapMaxOverride"] then
@@ -3727,7 +3726,7 @@ function Nx.Map:MouseEnable (max)
 
 	if self.MouseEnabled ~= on then
 
---		Nx.prt ("MouseEnable up")
+		Nx.prt ("MouseEnable up")
 
 		self.MouseEnabled = on
 
@@ -4346,12 +4345,12 @@ end
 
 function Nx.Map:UpdateWorld()
 
-	--Nx.prt ("%d Map UpdateWorld1 %d L%d", self.Tick, self:GetCurrentMapId(), GetCurrentMapDungeonLevel())
-
 	self.NeedWorldUpdate = false
 
 	local mapId = self:GetCurrentMapId()
 	local winfo = self.MapWorldInfo[mapId]
+
+	--Nx.prt ("%d Map UpdateWorld1 %d L%d", self.Tick, mapId or 0, GetCurrentMapDungeonLevel())
 
 	if winfo.MapLevel then
 		if GetCurrentMapDungeonLevel() ~= winfo.MapLevel then	-- Wrong level?
@@ -4580,6 +4579,16 @@ function Nx.Map:Update (elapsed)
 
 		local lvl = max (GetCurrentMapDungeonLevel(), 1)		-- 0 if no level
 
+		local xShift = 0
+		local yShift = 0
+
+		if not Nx.Map.InstanceInfo[rid] or not Nx.Map.InstanceInfo[rid][3*lvl] then
+			Nx.prt ("No InstanceInfo for ", plZX, plZY)
+		else
+			xShift = Nx.Map.InstanceInfo[rid][3*lvl-2]/100
+			yShift = Nx.Map.InstanceInfo[rid][3*lvl-1]/100
+		end
+
 		if not self.InstMapId then		-- Not showing instance?
 			plZX = 0
 			plZY = 0
@@ -4589,8 +4598,8 @@ function Nx.Map:Update (elapsed)
 			self.InstLevelSet = -1
 		end
 
-		self.PlyrX = x + plZX * 1002 / 25600
-		self.PlyrY = y + plZY * 668 / 25600 + (lvl - 1) * 668 / 256
+		self.PlyrX = x + plZX * 1002 / 25600 - xShift * 1002 / 256
+		self.PlyrY = y + plZY * 668 / 25600 - yShift * 668 / 256
 
 --		self.InstanceLevel = GetCurrentMapDungeonLevel()
 
@@ -5277,7 +5286,7 @@ function Nx.Map:SetInstanceMap (mapId)
 
 	if info then
 
-		self:SetCurrentMap (mapId)
+		self:SetCurrentMap(mapId)
 
 		self.InstMapId = mapId
 		self.InstMapInfo = info
@@ -8426,7 +8435,7 @@ function Nx.Map:UpdateInstanceMap()
 
 			local imgI = 1
 
-			local offx = 0		-- info[n] * .04 * 1002 / 1024
+			local offx = info[n] * .04 * 1002 / 1024
 			local offy = info[n + 1] * .03 * 668 / 768
 
 			for by = 0, 2 do
@@ -8539,6 +8548,7 @@ function Nx.Map:InitTables()
 		{ GetMapZones(2)},
 		{ GetMapZones(3)},
 		{ GetMapZones(4)},
+		{ GetMapZones(5)},
 	}
 
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
@@ -8587,8 +8597,8 @@ function Nx.Map:InitTables()
 	-- Setup mapping to and from Blizzard cont/zone to Map Id
 	-- and overlay name to map id
 
-	self.ContCnt = 4
-	continentNums = { 1, 2, 3, 4, 9 }
+	self.ContCnt = 5
+	continentNums = { 1, 2, 3, 4, 5, 9 }
 
 	local CZ2Id = {}
 	self.CZ2Id = CZ2Id
@@ -8728,7 +8738,7 @@ function Nx.Map:InitTables()
 			if not winfo then
 				break
 			end
-			Nx.prt ("KEKW %s (%s,%s)", n, winfo[2] or "", winfo[3] or "")
+--			Nx.prt ("KEKW %s (%s,%s)", n, winfo[2] or "", winfo[3] or "")
 			winfo[4] = cx + winfo[2]
 			winfo[5] = cy + winfo[3]
 		end
@@ -8860,10 +8870,9 @@ function Nx.Map:InitTables()
 			if id then
 				Nx.IdToAId[id] = aid
 			end
---			if not id then
---				Nx.prt ("AId %s (%s) = %s", aid, zid, id or "nil")
---			end
-
+			if not id then
+				Nx.prt ("AId %s (%s) = %s", aid, zid, id or "nil")
+			end
 		end
 	end
 
@@ -9071,12 +9080,11 @@ function Nx.Map:GetRealMapId()
 	local zName = GetRealZoneText()	
 	local mapId = Nx.MapNameToId[zName] or 9000	
 	local name, instanceType, difficultyIndex, difficultyName, maxPlayers, dynamicDifficulty, isDynamic, mapID = GetInstanceInfo()
-	if (difficultyIndex == 1) then      
+	if (difficultyIndex >= 1) then      
 		local aid=GetCurrentMapAreaID()
 		aid2 = aid2 or aid
 		local id=Nx.AIdToId[aid]
 		if aid2 ~= aid then
-			print("aid " .. (aid or ""))
 			aid2 = aid
 		end
 		return id
@@ -9102,11 +9110,10 @@ end
 function Nx.Map:GetCurrentMapId()
 
 	--V403
-
 	local cont = GetCurrentMapContinent()
 	local zone = GetCurrentMapZone()
 
-	if cont <= 0 or cont >= 4 then
+	if cont < 1 or cont > self.ContCnt then
 
 		local aid = GetCurrentMapAreaID()
 
@@ -9118,25 +9125,24 @@ function Nx.Map:GetCurrentMapId()
 
 		local id = Nx.AIdToId[aid]
 		if id then
---			Nx.prt ("GetCurrentMapId from aid %s", id)
+			--Nx.prt ("GetCurrentMapId from aid %s", id)
 			return id
 		end
-
+--		Nx.prtCtrl ("GetCurrentMapId from aid %s", aid)
 		return self:GetRealMapId()
 	end
 
---[[
-	if not self.CZ2Id[cont] then
+
+--[[ 	if not self.CZ2Id[cont] then
 		Nx.prt ("cont %s", cont)
 	end
 
 	if not self.CZ2Id[cont][zone] then
 		Nx.prt ("%s %s", cont, zone)
-	end
---]]
+	end ]]
+--
 
 	local mapId = self.CZ2Id[cont][zone] or 9000
-
 	if mapId == Nx.MapNameToId[GetRealZoneText()] then		-- Same as real zone?
 		return self:GetRealMapId()
 	end
@@ -9155,7 +9161,7 @@ function Nx.Map:SetCurrentMap (mapId)
 
 		self.BaseScale = 1
 
-		if mapId > 1000 and mapId < 5000 then
+		if mapId > 1000 and mapId < (self.ContCnt + 1) *1000 then
 
 			local cont = self.MapWorldInfo[mapId].Cont
 			local zone = self.MapWorldInfo[mapId].Zone

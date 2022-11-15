@@ -1873,11 +1873,11 @@ function Nx.Quest:ScanBlizzQuestDataTimer()
 
 --			Nx.prt ("ScanQ next %s %s", cont, mapId)
 
-			if cont == 4 then			-- Done?
+			if cont == Nx.Map.ContCnt then			-- Done?
 
 				WatchFrame:RegisterEvent ("WORLD_MAP_UPDATE")	-- Back on when done
 
-				Map:SetCurrentMap (curMapId)
+				Map:SetCurrentMap(curMapId)
 
 --				Nx.prt ("ScanQ changed")
 
@@ -8090,7 +8090,7 @@ function Nx.Quest:UnpackObjective (obj)
 	end
 
 	local zone = strbyte (obj, i + 1) - 35
-	zone = zone >= 163 and 0 or zone
+	zone = zone > #Nx.Zones and 0 or zone
 	return desc, zone, i + 2
 end
 
