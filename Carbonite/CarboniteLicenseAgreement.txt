@@ -1,6 +1,6 @@
 
- CARBONITE Quest
- Copyright 2007-2008 Carbon Based Creations, LLC
+ CARBONITE
+ Copyright 2007-2012 Carbon Based Creations, LLC
  CARBONITE(tm) is a registered trademark of Carbon Based Creations, LLC.
 
 ----------------------------------------------------------
