@@ -3468,7 +3468,6 @@ function ToggleFrame (frame)
 
 --	Nx.prt ("ToggleWorldMap")
 	SetMapToCurrentZone()
-	
 	local opts = Nx:GetGlobalOpts()
 
 	if Nx.Map.BlizzToggling or WorldMapFrame:IsShown() or IsAltKeyDown() or not opts["MapMaxOverride"] then
@@ -8531,7 +8530,6 @@ function Nx.Map:InitTables()
 	NxData.NXMapDebugZones4 = { GetMapZones (4) }
 	Nx.prt ("zone cap!!!!!")
 --]]
-
 	local worldInfo = self.MapWorldInfo
 
 	Nx.MapNameToId = {}
@@ -8553,19 +8551,20 @@ function Nx.Map:InitTables()
 
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
 
+	local numDupes = 0
 	for mi, mapName in ipairs(self.MapNames[2]) do
 		for mi2, mapName2 in ipairs(self.MapNames[2]) do
-			if mapName == mapName2 and mi ~= mi2 then			-- Duplicate name? (Gilneas, Ruins of Gilneas (EU))
-				self.MapNames[2][mi2] = mapName .. "2"			-- Hack it!
---				Nx.prt ("Dup zone name %s", mapName)
-				break
+			if mapName == mapName2 and mi ~= mi2 then
+				numDupes = numDupes + 1
+				self.MapNames[2][mi2] = mapName .. numDupes
 			end
 		end
+		numDupes = 0
 	end
 
-	for mi, mapName in ipairs (self.MapNames[2]) do
-		Nx.prt("%s %s", mi, mapName)
-	end
+	-- for mi, mapName in ipairs (self.MapNames[2]) do
+	-- 	Nx.prt("%s %s", mi, mapName)
+	-- end
 	
 	local BGNames = {}
 	self.MapNames[9] = BGNames
@@ -8600,14 +8599,10 @@ function Nx.Map:InitTables()
 	self.ContCnt = 5
 	continentNums = { 1, 2, 3, 4, 5, 9 }
 
-	local CZ2Id = {}
-	self.CZ2Id = CZ2Id
+	self.CZ2Id = {}
 
 	for _, ci in ipairs (continentNums) do
-
-		local z2id = {}
-		CZ2Id[ci] = z2id
-
+		self.CZ2Id[ci] = {}
 		for n = 1, 999 do
 
 			local mapId = ci * 1000 + n
@@ -8624,17 +8619,17 @@ function Nx.Map:InitTables()
 			end
 
 			local locName = NXlMapNames[winfo.Name] or winfo.Name
-
+			Nx.prt ("Loc Name %s", locName or "nil") 
 			for i, name in ipairs (self.MapNames[ci]) do
 				if name == locName then
---					Nx.prt ("%s #%s = %s", name, i, mapId)
-					z2id[i] = mapId
+					--if ci == 2 then Nx.prt ("%s #%s = %s", name, i, mapId) end
+					self.CZ2Id[ci][i] = mapId
 					break
 				end
 			end
 		end
        
-		for k, v in ipairs (CZ2Id[ci]) do
+		for k, v in ipairs (self.CZ2Id[ci]) do
             
 			worldInfo[v].Cont = ci
 			worldInfo[v].Zone = k
@@ -8647,7 +8642,7 @@ function Nx.Map:InitTables()
 	end
 
 	for n = 1, self.ContCnt do
-		CZ2Id[n][0] = n * 1000
+		self.CZ2Id[n][0] = n * 1000
 	end
 
 	-- Init for getting map id to and from name
@@ -8656,9 +8651,9 @@ function Nx.Map:InitTables()
 
 		for mi, mapName in pairs (self.MapNames[ci]) do
 
---			if ci == 2 then
---				Nx.prt ("Map %s %s", mapName, self.CZ2Id[ci][mi] or "nil")
---			end
+			if ci == 2 then
+				Nx.prt ("Map %s %s", mapName, self.CZ2Id[ci][mi] or "nil")
+			end
 			local mid = self.CZ2Id[ci][mi]
 
 			if Nx.MapNameToId[mapName] then
@@ -9177,6 +9172,7 @@ function Nx.Map:SetCurrentMap (mapId)
 
 				if self.MapWorldInfo[mapId].UseAId then
 					SetMapByID (Nx.IdToAId[mapId])
+					Nx.prt (Nx.IdToAId[mapId])
 				else
 					SetMapZoom (cont, zone)
 				end
@@ -9468,7 +9464,7 @@ end
 --
 
 function Nx.Map:IsNormalMap (mapId)
-	return mapId > 1000 and mapId % 1000 > 0 and mapId < 5000
+	return mapId > 1000 and mapId % 1000 > 0 and mapId < (self.ContCnt+1)* 1000
 end
 
 --------

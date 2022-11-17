@@ -2347,7 +2347,7 @@ function Nx.Quest:RecordQuestAcceptOrFinish()
 
 	local id = Nx.Map:GetRealMapId()
 --	self.AcceptNxzone = Nx.MapIdToNxzone[id] or 0
-	self.AcceptAId = Nx.IdToAId[id] or 0
+	self.AcceptAId = id or 0
 
 	self.AcceptDLvl = 0
 
@@ -2494,7 +2494,7 @@ function Nx.Quest:Capture (curi, objNum)
 
 		local map = self.Map
 --		local nxzone = Nx.MapIdToNxzone[map.RMapId]
-		local nxzone = Nx.IdToAId[map.RMapId]
+		local nxzone = map.RMapId
 		if nxzone then
 
 			local index = objNum + 2

@@ -223,7 +223,7 @@ Map.MapInfo = {
 		X = 3784,
 		Y = -200,
 		Min = 2001,
-		Max = 2033,
+		Max = 2035,
 	},
 	{
 		Name = "Outland",
@@ -339,8 +339,10 @@ Map.MapWorldInfo = {
 [2030]={Name="Plaguelands: The Scarlet Enclave",6.32,1200,-650,Overlay="scarletenclave",City = true,},
 --Sirus.su
 [2031]={Name="Scarlet Monastery",0,0,0,Overlay="scarletmonastery",Fish = 425,},
-[2032]={Name="Gilneas",0,0,0,Overlay="gilneas",Fish = 425,},
-[2033]={Name="Blackrock Mountain",0,0,0,Overlay="blackrockmountain",Fish = 425,},
+[2032]={Name="Gilneas",0--[[ 3.5 ]],-457,150,Overlay="fireworld",City = true,Fish = 425,},
+[2033]={Name="Blackrock Mountain",0,0,0,Overlay="blackrockmountain1",City = true, Fish = 425,},
+[2034]={Name="Blackrock Mountain1",0,0,0,Overlay="blackrockmountain2",City = true, Fish = 425,},
+[2035]={Name="Blackrock Mountain2",0,0,0,Overlay="blackrockmountain",City = true, Fish = 425,},
 --
 [3000]={34.606,-2587.3,-1151.7,},
 [3001]={Name="Blade's Edge Mountains",10.85003,-1769.168,-881.6678,Overlay="bladesedgemountains",QAchievementId=1193,},
@@ -635,13 +637,14 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 					0, -400,		"ShadowfangKeep\\ShadowfangKeep5_",
 					0, -500,		"ShadowfangKeep\\ShadowfangKeep6_",
 					0, -600,		"ShadowfangKeep\\ShadowfangKeep7_", },
-	[12086] = { 0, 0,			"Stratholme\\Stratholme1_", },
+	[12086] = { 0, 0,			"Stratholme\\Stratholme1_",
+                0, -100,		"Stratholme\\Stratholme2_",  },
 	[12192] = { 0, 0,			"TheBastionofTwilight\\TheBastionofTwilight1_",
 					0, -100,		"TheBastionofTwilight\\TheBastionofTwilight2_",
 					0, -200,		"TheBastionofTwilight\\TheBastionofTwilight3_", },
 	[12098] = { 0, 0,			"TheDeadmines\\TheDeadmines1_",
 					0, -100,		"TheDeadmines\\TheDeadmines2_", },
-	[12101] = { 0, 0,			"TheStockade\\TheStockade1_", },
+	[12101] = { 0, 0,			"TheStockade\\TheStockade_", },
 	[15195] = { 0, 0,			"TheStoneCore\\TheStoneCore1_", },
 	[12087] = { 0, 0,			"TheTempleOfAtalHakkar\\TheTempleOfAtalHakkar1_", },
 	[11198] = { 0, 0,			"Throneofthefourwinds\\Throneofthefourwinds1_", },
@@ -714,8 +717,10 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 					0, -200,		"Ulduar\\Ulduar2_",
 					0, -300,		"Ulduar\\Ulduar3_",
 					0, -400,		"Ulduar\\Ulduar4_", },
-	[14151] = { 0, 0,			"TheArgentColiseum\\TheArgentColiseum1_", },
-	[14152] = { 0, 0,			"TheArgentColiseum\\TheArgentColiseum1_", },
+	[14151] = { 0, 0,			"TheArgentColiseum\\TheArgentColiseum1_",
+                0, -100,		"TheArgentColiseum\\TheArgentColiseum2_",  },
+	[14152] = { 0, 0,			"TheArgentColiseum\\TheArgentColiseum1_",
+                0, -100,		"TheArgentColiseum\\TheArgentColiseum2_", },
 	[14153] = { 0, 0,			"TheForgeofSouls\\TheForgeofSouls1_", },
 	[14154] = { 0, 0,			"IcecrownCitadel\\IcecrownCitadel1_",
 					0, -100,		"IcecrownCitadel\\IcecrownCitadel2_",
@@ -1913,8 +1918,8 @@ end
 
 -------------------------------------------------------------------------------
 
---[[
 
+--[[ 
 -- WorldMapArea.dbc
 -- bounds y1, y2, x1, x2
 -- 4.0.1 11,1,17,"Barrens",2622.91650391,-7510.41650391,1612.49987793,-5143.75,-1,0,0,0x0,
@@ -1928,7 +1933,7 @@ end
 -- Scale = -y2 + y1 / 500
 -- X = -y1 / 5
 -- Y = -x1 / 5
---function Nx.Map:ConvertMapData()
+function Nx.Map:ConvertMapData()
 
 	local data = {}
 	NxData.DumpZoneOverlays = data
@@ -2002,12 +2007,10 @@ end
 	end
 end
 
-Nx.Map.WorldMapArea = [906,1000,6500,"DustwallowMarshScenarioAlliance",-3979.16601563,-5037.5,-3468.75,-4175.0,-1,0,0,0x0,0,0,]
+Nx.Map.WorldMapArea = {906,1000,6500,"DustwallowMarshScenarioAlliance",-3979.16601563,-5037.5,-3468.75,-4175.0,-1,0,0,0x0,0,0,}
 
-Nx.Map.WorldMapOverlay = [3515,806,6517,0,0,0,"",0,0,0,0,526,386,557,423,0x0,]
-
-self.ConvertMapData()
-]]--
+Nx.Map.WorldMapOverlay = {3515,806,6517,0,0,0,"",0,0,0,0,526,386,557,423,0x0,}
+ ]]
 -------------------------------------------------------------------------------
 --EOF
 
