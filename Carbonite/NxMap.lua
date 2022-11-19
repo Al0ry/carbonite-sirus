@@ -4391,7 +4391,7 @@ function Nx.Map:UpdateWorld()
 		for i = 1, 12 do
 			self.TileFrms[i].texture:SetTexture ("Interface\\WorldMap\\" .. mapFileName .. "\\" .. name .. i)
 		end
-	end	
+	end
 end
 
 --------
@@ -4431,9 +4431,7 @@ function Nx.Map:Update (elapsed)
 
 	if self.MapId ~= mapId then
 
-		if self.Debug then
-			Nx.prt ("%d Map change %d to %d", self.Tick, self.MapId, mapId)
-		end
+--		Nx.prt ("%d Map change %d to %d", self.Tick, self.MapId, mapId)
 
 		self.CurMapBG = self:IsBattleGroundMap (mapId)
 
@@ -4905,7 +4903,7 @@ function Nx.Map:Update (elapsed)
 	for i = 1, poiNum do
 		name, desc, txIndex, pX, pY = GetMapLandmarkInfo (i)
 
-		if txIndex ~= 0 then		-- WotLK has 0 index POIs for named locations
+		--if txIndex ~= 0 then		-- WotLK has 0 index POIs for named locations
 
 			local tip = name
 			if desc then
@@ -5048,7 +5046,7 @@ function Nx.Map:Update (elapsed)
 			txX1, txX2, txY1, txY2 = GetPOITextureCoords (txIndex)
 			f.texture:SetTexCoord (txX1 + .003, txX2 - .003, txY1 + .003, txY2 - .003)
 			f.texture:SetVertexColor (1, 1, 1, 1)
-		end
+		--end
 	end
 
 	self.Level = oldLev + 4
@@ -5135,7 +5133,6 @@ function Nx.Map:Update (elapsed)
 		self:UpdateTracking()
 		self.Level = self.Level + 2
 	end
-
 	self.TrackETA = false
 
 	local cX, cY = GetCorpseMapPosition()
@@ -6492,6 +6489,8 @@ function Nx.Map:UpdateZones()
 		for n, id in ipairs (self.MapsDrawnOrder) do
 			self:UpdateOverlay (id, .8, true)
 		end
+
+		self:UpdateOverlay (2033, .8, true) -- tolgarod hack
 --[[
 		if freeOrScale then
 
@@ -6787,16 +6786,16 @@ function Nx.Map:UpdateOverlay (mapId, bright, noUnexplored)
 
 				local wx, wy = self:GetWorldPos (mapId, (oX + bX * 256) / 1002 * 100, (oY + bY * 256) / 668 * 100)
 
-				if self:ClipFrameTL (f, wx, wy, txFileW * zscale, txFileH * zscale) then
+				if self:ClipFrameTL (f, wx, wy, txFileW * zscale*(wzone.ScaleAdjX or 1), txFileH * zscale) then
 
 --					if IsShiftKeyDown() then
 --						f.texture:SetTexture (1, 0, 0)
 --					end
---[[
-					if IsAltKeyDown() then		-- DEBUG!
-						alpha = .2
-					end
---]]
+
+					-- if IsAltKeyDown() then		-- DEBUG!
+					-- 	alpha = .2
+					-- end
+
 					f.texture:SetTexture (mode and txName or txName .. txIndex)
 					f.texture:SetVertexColor (brt, brt, brt, alpha)
 
@@ -8550,6 +8549,7 @@ function Nx.Map:InitTables()
 	}
 
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
+	tinsert(self.MapNames[2], NXlMapNames["Tol'Garod"] or "Tol'Garod")
 
 	local numDupes = 0
 	for mi, mapName in ipairs(self.MapNames[2]) do
@@ -9112,7 +9112,7 @@ function Nx.Map:GetCurrentMapId()
 
 		local aid = GetCurrentMapAreaID()
 
---		Nx.prtCtrl ("GetCurrentMapId %s, %s+%s", aid, cont, zone)
+--		Nx.prt ("GetCurrentMapId %s, %s+%s", aid, cont, zone)
 
 --		if cont == -1 and (self.MapId or 0) > 11000 then
 --			return self.MapId
@@ -9171,8 +9171,8 @@ function Nx.Map:SetCurrentMap (mapId)
 			else
 
 				if self.MapWorldInfo[mapId].UseAId then
-					SetMapByID (Nx.IdToAId[mapId])
-					Nx.prt (Nx.IdToAId[mapId])
+			--		Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
+					SetMapByID (Nx.IdToAId[mapId] - 1)
 				else
 					SetMapZoom (cont, zone)
 				end
@@ -9205,8 +9205,8 @@ function Nx.Map:SetCurrentMap (mapId)
 					local caid = GetCurrentMapAreaID()
 
 					if caid ~= aid then
---						Nx.prt ("SetCurrentMap dif %s", caid)
-						SetMapByID (aid)
+					--	Nx.prt ("SetMapByID %s", aid)
+						SetMapByID (aid - 1)
 						SetDungeonMapLevel (1)
 					end
 				end
@@ -9534,7 +9534,7 @@ function Nx.Map:GetWorldZoneInfo (cont, zone)
 	local y = info.Y + winfo[3]
 	local scale = winfo[1] * 100
 
-	return name, x, y, scale, scale / 1.5		-- x, y, w, h
+	return name, x, y, scale *(winfo.ScaleAdjX or 1), scale / 1.5		-- x, y, w, h
 end
 
 --------
@@ -9589,7 +9589,7 @@ function Nx.Map:GetWorldPos (mapId, mapX, mapY)
 
 		local scale = winfo[1]
 
-		return	winfo[4] + mapX * scale,
+		return	winfo[4] + mapX * scale *(winfo.ScaleAdjX or 1),
 					winfo[5] + mapY * scale / 1.5
 
 --		if mapId == 11050 then
@@ -9630,7 +9630,7 @@ function Nx.Map:GetZonePos (mapId, worldX, worldY)
 
 		local scale = winfo[1]
 
-		return	(worldX - winfo[4]) / scale,
+		return	(worldX - winfo[4]) / scale/(winfo.ScaleAdjX or 1),
 					(worldY - winfo[5]) / scale * 1.5
 
 --		local x = (worldX - info.X - winfo[2]) / scale
