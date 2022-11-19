@@ -1493,32 +1493,32 @@ function Nx.Map:UpdateWorldMap()
 
 		if self.StepTime ~= 0 or self.Scrolling or IsShiftKeyDown() then
 			f:Hide()
-		else
+-- 		else
 
-			local tipf = getglobal ("WorldMapTooltip")
-			if tipf then
-				tipf:SetFrameStrata ("TOOLTIP")
-			end
+-- 			local tipf = getglobal ("WorldMapTooltip")
+-- 			if tipf then
+-- 				tipf:SetFrameStrata ("TOOLTIP")
+-- 			end
 
-			local af = getglobal ("WorldMapFrameAreaFrame")
-			if af then
-				af:SetFrameStrata ("HIGH")
-			end
+-- 			local af = getglobal ("WorldMapFrameAreaFrame")
+-- 			if af then
+-- 				af:SetFrameStrata ("HIGH")
+-- 			end
 
-			f:Show()
+-- 			f:Show()
 
-			self:ClipZoneFrm (self.Cont, self.Zone, f, 1)
-			f:SetFrameLevel (self.Level)
-			if self.WorldMapFrmMapId ~= self.MapId then
+-- 			self:ClipZoneFrm (self.Cont, self.Zone, f, 1)
+-- 			f:SetFrameLevel (self.Level)
+-- 			if self.WorldMapFrmMapId ~= self.MapId then
 
---				Nx.prt ("mapid %s", self.MapId)
+-- --				Nx.prt ("mapid %s", self.MapId)
 
-				self.WorldMapFrmMapId = self.MapId
+-- 				self.WorldMapFrmMapId = self.MapId
 
-				self:SetChildLevels (f, self.Level + 1)
+-- 				self:SetChildLevels (f, self.Level + 1)
 
-				self.Level = self.Level + 4
-			end
+-- 				self.Level = self.Level + 4
+-- 			end
 		end
 
 		for k, f in ipairs (_G["MAP_VEHICLES"]) do
@@ -3265,7 +3265,7 @@ function Nx.Map:GMenu_OnTogInst()
 		else
 			local atlas = _G["AtlasMaps"]
 
---			Nx.prt ("%s", mapId)
+			Nx.prt ("%s", mapId)
 
 			if not (Nx.Map.InstanceInfo[mapId] or atlas) then
 				UIErrorsFrame:AddMessage ("This instance map requires the Atlas addon be installed", 1, .1, .1, 1)
@@ -9206,7 +9206,7 @@ function Nx.Map:SetCurrentMap (mapId)
 
 					if caid ~= aid then
 					--	Nx.prt ("SetMapByID %s", aid)
-						SetMapByID (aid - 1)
+						SetMapByID (aid)
 						SetDungeonMapLevel (1)
 					end
 				end

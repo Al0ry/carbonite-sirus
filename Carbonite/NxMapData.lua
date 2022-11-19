@@ -657,30 +657,7 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 	[12118] = { 0, 0,			"ZulAman\\ZulAman", },
 	[11116] = { 0, 0,			"ZulFarrak\\ZulFarrak", },
 	[12117] = { 0, 0,			"ZulGurub\\ZulGurub", },
-
-	-- Patch 4.2
-	[11200] = { 0, 0,			"Firelands\\Firelands",
-					0, -100,		"Firelands\\Firelands1_",
-					0, -200,		"Firelands\\Firelands2_", },
-
-	-- Patch 4.3
-	[11201] = { 0, 0,			"EndTime\\EndTime",
-					0, -100,		"EndTime\\EndTime1_",
-					0, -200,		"EndTime\\EndTime2_",
-					0, -300,		"EndTime\\EndTime3_",
-					0, -400,		"EndTime\\EndTime4_",
-					0, -500,		"EndTime\\EndTime5_", },
-	[11202] = { 0, 0,			"WellOfEternity\\WellOfEternity", },
-	[11203] = { 0, 0,			"HourofTwilight\\HourOfTwilight",
-					0, -100,		"HourofTwilight\\HourofTwilight1_", },
-	[11204] = { 0, 0,			"DragonSoul\\DragonSoul",
-					0, -100,		"DragonSoul\\DragonSoul1_",
-					0, -200,		"DragonSoul\\DragonSoul2_",
-					0, -300,		"DragonSoul\\DragonSoul3_",
-					0, -400,		"DragonSoul\\DragonSoul4_",
-					0, -500,		"DragonSoul\\DragonSoul5_",
-					0, -600,		"DragonSoul\\DragonSoul6_", },
-
+    
 	-- WotLK
 	[14065] = { 0, 0,			"Naxxramas\\Naxxramas1_",
 					0, -100,		"Naxxramas\\Naxxramas2_",
@@ -690,7 +667,7 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 					0, -500,		"Naxxramas\\Naxxramas6_", },
 	[14133] = { 0, 0,			"AhnKahet\\Ahnkahet1_",
 					0, -100,		"AhnKahet\\Ahnkahet2_", },
-	[14160] = { 0, 0,			"AzjolNerub\\AzjolNerub1_",
+	[14134] = { 0, 0,			"AzjolNerub\\AzjolNerub1_",
 					0, -100,		"AzjolNerub\\AzjolNerub2_",
 					0, -200,		"AzjolNerub\\AzjolNerub3_", },
 	[14135] = { 0, 0,			"DrakTharonKeep\\DrakTharonKeep1_",
