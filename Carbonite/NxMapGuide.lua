@@ -1248,7 +1248,7 @@ function Nx.Map.Guide:PatchFolder (folder, parent)
 
 					if cont == fcont then
 
-						if nxid == 16 then
+						if not numPlyr then
 							Nx.prt ("%s [%s] %s", longname, nxid, v)
 						end
 
