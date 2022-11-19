@@ -731,7 +731,7 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 					0, -500,		"IcecrownCitadel\\IcecrownCitadel6_",
 					0, -600,		"IcecrownCitadel\\IcecrownCitadel7_",
 					0, -700,		"IcecrownCitadel\\IcecrownCitadel8_", },
-	[11067] = { 0, 0,			"OnyxiasLair\\OnyxiasLair1_", },
+	[11067] = { 0, 0,			"onyxiasLair\\onyxiasLair", },
 	[14155] = { 0, 0,			"PitofSaron\\PitofSaron", },
 	[14156] = { 0, 0,			"HallsofReflection\\HallsofReflection1_", },
 	[14159] = { 0, 0,			"VaultofArchavon\\VaultofArchavon1_", },

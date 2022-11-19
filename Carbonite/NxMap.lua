@@ -8739,10 +8739,10 @@ function Nx.Map:InitTables()
 		end
 	end			
 	--
-
+	
 	for id, v in pairs (Nx.Zones) do
 
-		local name, minLvl, maxLvl, faction, cont, entryId, entryPos = strsplit ("!", v)
+		local name, minLvl, maxLvl, faction, cont, entryId, ex, ey = strsplit ("!", v)
 
 		-- Faction:
 		-- 0 Alliance
@@ -8764,7 +8764,7 @@ function Nx.Map:InitTables()
 
 		if faction == "3" and cont == "5" then		-- Instance
 
-			assert (entryId and entryPos)
+			assert (entryId)
 
 			if entryId == "0" then
 				entryId = "125"
@@ -8777,7 +8777,7 @@ function Nx.Map:InitTables()
 			end
 --]]
 
-			Nx.prt ("Inst %s %d %s", name, id, entryId)
+			--Nx.prt ("Inst %s %d %s", name, id, entryId)
 
 			local entryZone = Nx.Zones[tonumber (entryId)]
 			local ename, _, _, _, cont = strsplit ("!", entryZone)
@@ -8794,14 +8794,14 @@ function Nx.Map:InitTables()
 
 			local emid = Nx.MapNameToId[ename]
 
-			local ex, ey = Nx.Quest:UnpackLocPt (entryPos)
+		--	local ex, ey = Nx.Quest:UnpackLocPt (entryPos)
 
 			if self.MapWorldInfo[mid] then			-- Adjustment exists?
 				ex = ex + self.MapWorldInfo[mid][2]
 				ey = ey + self.MapWorldInfo[mid][3]
 			end
 
---			Nx.prt ("Inst %s %s, %s %s %f %f", name, mid, ename, emid or "nil", ex, ey)
+			--Nx.prt ("Inst %s %s, %s %s %f %f", name, mid, ename, emid or "nil", ex, ey)
 
 			local x, y = self:GetWorldPos (emid, ex, ey)
 

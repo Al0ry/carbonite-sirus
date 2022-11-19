@@ -1235,7 +1235,7 @@ function Nx.Map.Guide:PatchFolder (folder, parent)
 
 		for nxid, v in ipairs (Nx.Zones) do
 
-			local longname, minLvl, maxLvl, faction, typ, owner, pos, numPlyr = strsplit ("!", v)
+			local longname, minLvl, maxLvl, faction, typ, owner, x, y, numPlyr = strsplit ("!", v)
 
 			if faction == "3" then		-- Instance
 
@@ -1276,7 +1276,7 @@ function Nx.Map.Guide:PatchFolder (folder, parent)
 						f.InstMapId = mapId
 
 						local ownName = strsplit ("!", Nx.Zones[tonumber (owner)])
-						local x, y = Nx.Quest:UnpackLocPt (pos)
+						--local x, y = Nx.Quest:UnpackLocPt (pos)
 						f.InstTip = format ("%s |cffe0e040Lvl %s\n|r%s (%.1f %.1f)", f.Name, f.Column2, ownName, x, y)
 
 						f.Tx = parent.Tx
