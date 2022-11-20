@@ -231,7 +231,7 @@ Map.MapInfo = {
 		X = 3000,
 		Y = 4000,
 		Min = 3001,
-		Max = 3008,
+		Max = 3009,
 	},
 	{
 		Name = "Northrend",
@@ -354,6 +354,7 @@ Map.MapWorldInfo = {
 [3006]={Name="Shattrath City",2.6125,-1227.052,294.7909,Overlay="shattrathcity",City = true,MMOutside = true,},
 [3007]={Name="Terokkar Forest",10.8,-1416.667,200,Overlay="terokkarforest",Fish = 450,QAchievementId=1191,QAchievementIdH=1272,},
 [3008]={Name="Zangarmarsh",10.05418,-1895,-387.0831,Overlay="zangarmarsh",Fish = 400,QAchievementId=1190,},
+[3009]={Name="Shar'gel",4.16,109,42,Overlay="twistingnether", Explored = true, UseAId = true},
 [4000]={35.5,0,-0,},
 [4001]={Name="Borean Tundra",11.521,125.764810,1139.054323,Overlay="boreantundra",Fish = 475,QAchievementId=33,QAchievementIdH=1358,},
 [4002]={Name="Crystalsong Forest",5.4416,1550.386409,817.907816,Overlay="crystalsongforest",Fish = 500,},
@@ -645,7 +646,7 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 					0, -200,		"TheBastionofTwilight\\TheBastionofTwilight3_", },
 	[12098] = { 0, 0,			"TheDeadmines\\TheDeadmines1_",
 					0, -100,		"TheDeadmines\\TheDeadmines2_", },
-	[12101] = { 0, 0,			"TheStockade\\TheStockade_", },
+	[12101] = { 0, 0,			"TheStockade\\TheStockade", },
 	[15195] = { 0, 0,			"TheStoneCore\\TheStoneCore1_", },
 	[12087] = { 0, 0,			"TheTempleOfAtalHakkar\\TheTempleOfAtalHakkar1_", },
 	[11198] = { 0, 0,			"Throneofthefourwinds\\Throneofthefourwinds1_", },
@@ -656,7 +657,6 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 	[11109] = { 0, 0,			"WailingCaverns\\WailingCaverns1_", },
 	[12118] = { 0, 0,			"ZulAman\\ZulAman", },
 	[11116] = { 0, 0,			"ZulFarrak\\ZulFarrak", },
-	[12117] = { 0, 0,			"ZulGurub\\ZulGurub", },
     
 	-- WotLK
 	[14065] = { 0, 0,			"Naxxramas\\Naxxramas1_",
@@ -688,8 +688,8 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 	[14144] = { 0, 0,			"TheObsidianSanctum\\TheObsidianSanctum", },
 	[14145] = { 0, 0,			"UtgardePinnacle\\UtgardePinnacle1_",
 					0, -100,		"UtgardePinnacle\\UtgardePinnacle2_", },
-	[11147] = { 0, 0,			"CoTStratholme\\CoTStratholme2_",
-					0, -100,		"CoTStratholme\\CoTStratholme1_", },
+	[11147] = { 0, 0,			"CoTStratholme\\CoTStratholme1_",
+					0, -100,		"CoTStratholme\\CoTStratholme", },
 	[14149] = { 0, 0,			"Ulduar\\Ulduar",
 					0, -100,		"Ulduar\\Ulduar1_",
 					0, -200,		"Ulduar\\Ulduar2_",
@@ -712,6 +712,7 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 	[14155] = { 0, 0,			"PitofSaron\\PitofSaron", },
 	[14156] = { 0, 0,			"HallsofReflection\\HallsofReflection1_", },
 	[14159] = { 0, 0,			"VaultofArchavon\\VaultofArchavon1_", },
+    [14160] = { 0, 0,			"TheRubySanctum\\TheRubySanctum", },
 	[16226] = { 0, 0,			"TheGreatWall\\theGreatWall1_",
 					0, -100,	"TheGreatWall\\TheGreatWall2_", },
 	[16227] = { 0, 0,			"MogushanPalace\\MogushanPalace1_",
@@ -1847,6 +1848,20 @@ Map.ZoneOverlays = {
         ["tolgarod10"] = "256,512,256,256,1",
         ["tolgarod11"] = "512,512,256,256,1",
         ["tolgarod12"] = "768,512,256,256,1"
+    },
+    ["twistingnether"] = {
+        ["twistingnether1"] = "0,0,256,256,1",
+        ["twistingnether2"] = "256,0,256,256,1",
+        ["twistingnether3"] = "512,0,256,256,1",
+        ["twistingnether4"] = "768,0,256,256,1",
+        ["twistingnether5"] = "0,256,256,256,1",
+        ["twistingnether6"] = "256,256,256,256,1",
+        ["twistingnether7"] = "512,256,256,256,1",
+        ["twistingnether8"] = "768,256,256,256,1",
+        ["twistingnether9"] = "0,512,256,256,1",
+        ["twistingnether10"] = "256,512,256,256,1",
+        ["twistingnether11"] = "512,512,256,256,1",
+        ["twistingnether12"] = "768,512,256,256,1"
     }
 }
 
@@ -1871,13 +1886,14 @@ for i=1,4 do
         Map.VIPB[1010 + 100* i + j] =  string.format("vip_%d_%d", 36+i, 23+j)
     end
 end
+-- Shar'gel
+for i=0,3 do 
+    for j=0,2 do
+        Map.OLMB[3332 + 100* i + j] =  string.format("TWN_%d_%d", 30+i, 30+j)
+    end
+end
 
 -- TODO
--- Shar'gel
--- [4537]= "TWN_30_30",[4637]= "TWN_31_30",[4737]= "TWN_32_30",[4837]= "TWN_33_30",
--- [4538]= "TWN_30_31",[4638]= "TWN_31_31",[4738]= "TWN_32_31",[4838]= "TWN_33_31",
--- [4539]= "TWN_30_32",[4639]= "TWN_31_32",[4739]= "TWN_32_32",[4839]= "TWN_33_32",
--- [4540]= "TWN_30_33",[4640]= "TWN_31_33",[4740]= "TWN_32_33",[4840]= "TWN_33_33",
 -- Kotmogu
 -- [4537]= "valleyofpower27_27",[4637]= "valleyofpower28_27",[4737]= "valleyofpower29_27",[4837]= "valleyofpower30_27",[4937]= "valleyofpower31_27",
 -- [4538]= "valleyofpower27_28",[4638]= "valleyofpower28_28",[4738]= "valleyofpower29_28",[4838]= "valleyofpower30_28",[4938]= "valleyofpower31_28",

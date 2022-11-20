@@ -5028,6 +5028,7 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	["Caverns of Time: The Culling of Stratholme"] = "Пещеры времени: Очищение Стратхольма",
 	["Caverns of Time: Hyjal Summit"] = "Пещеры времени: Вершина Хиджала",
 	["Caverns of Time: Old Hillsbrad Foothills"] = "Пещеры времени: Старые предгорья Хилсбрада",
+	["Caverns of Time: The Black Morass"] = "Пещеры времени: Черные топи",
 	["Coilfang Reservoir: Serpentshrine Cavern"] = "Резервуар Кривого Клыка: Змеиное святилище",
 	["Coilfang Reservoir: The Slave Pens"] = "Резервуар Кривого Клыка: Узилище",
 	["Coilfang Reservoir: The Steamvault"] = "Резервуар Кривого Клыка: Паровое подземелье",
@@ -5196,7 +5197,8 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	["Blackrock Mountain"]  = "Черная гора",
 	["Blackrock Mountain1"] = "Черная гора1",
 	["Blackrock Mountain2"] = "Черная гора2",
-	["Tol'Garod"] = "Тол'Гарод"
+	["Tol'Garod"] = "Тол'Гарод",
+	["Shar'gel"] = "Шар'гел"
 	}
 	NXlMapSubNames = {
 		["Даларан"] = {

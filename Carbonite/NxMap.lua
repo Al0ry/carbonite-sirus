@@ -6491,6 +6491,7 @@ function Nx.Map:UpdateZones()
 		end
 
 		self:UpdateOverlay (2033, .8, true) -- tolgarod hack
+		self:UpdateOverlay (3009, .8, true)
 --[[
 		if freeOrScale then
 
@@ -8550,6 +8551,7 @@ function Nx.Map:InitTables()
 
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
 	tinsert(self.MapNames[2], NXlMapNames["Tol'Garod"] or "Tol'Garod")
+	tinsert(self.MapNames[3], NXlMapNames["Shar'gel"] or "Shar'gel")
 
 	local numDupes = 0
 	for mi, mapName in ipairs(self.MapNames[2]) do
@@ -9206,7 +9208,7 @@ function Nx.Map:SetCurrentMap (mapId)
 
 					if caid ~= aid then
 					--	Nx.prt ("SetMapByID %s", aid)
-						SetMapByID (aid)
+						SetMapByID (aid - 1)
 						SetDungeonMapLevel (1)
 					end
 				end
