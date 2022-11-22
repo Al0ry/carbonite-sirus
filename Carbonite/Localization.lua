@@ -5036,6 +5036,7 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	["Crystalsong Forest"] = "Лес Хрустальной Песни",
 	["Dalaran Arena"] = "Арена Даларана",
 	["Dalaran"] = "Даларан",
+	["Dalaran Underbelly"] = "Клоака",
 	["Darkshore"] = "Темные берега",
 	["Darnassus"] = "Дарнас",
 	["Deadwind Pass"] = "Перевал Мертвого Ветра",
@@ -5202,6 +5203,12 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	}
 	NXlMapSubNames = {
 		["Даларан"] = {
+			["Ведьма и Ворон"] = 2,
+			["Круг Воли"] = 2,
+			["Черный рынок"] = 2,
+			["Клоака"] = "2",
+		},
+		["Клоака"] = {
 			["Ведьма и Ворон"] = 2,
 			["Круг Воли"] = 2,
 			["Черный рынок"] = 2,

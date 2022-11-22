@@ -4210,6 +4210,7 @@ function Nx.Map.OnUpdate (this, elapsed)	--V4 this
 					if map:IsBattleGroundMap (rid) then						
 						SetMapToCurrentZone()
 					else
+						--Nx.prt ("map set to %s", rid)
 						map:SetCurrentMap (rid)
 					end
 				end
@@ -8552,6 +8553,7 @@ function Nx.Map:InitTables()
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
 	tinsert(self.MapNames[2], NXlMapNames["Tol'Garod"] or "Tol'Garod")
 	tinsert(self.MapNames[3], NXlMapNames["Shar'gel"] or "Shar'gel")
+	tinsert (self.MapNames[4], NXlMapNames["Dalaran Underbelly"] or "Dalaran Underbelly")
 
 	local numDupes = 0
 	for mi, mapName in ipairs(self.MapNames[2]) do
@@ -8580,24 +8582,8 @@ function Nx.Map:InitTables()
 		BGNames[n] = NXlMapNames[winfo.Name] or winfo.Name
 	end
 
---	Nx.Zones[152]="Icecrown: The Forge of Souls!80!80!3!5!128!####!5"
-
-
-	-- Set overlays
-
 	self.ZoneOverlays["lakewintergrasp"]["lakewintergrasp"] = "0,0,1024,768"
-
-	-- Support maps with multiple levels
-
 	self.MapSubNames = NXlMapSubNames
-
-	-- tinsert (self.MapNames[4], "Molten Front")
-	tinsert (self.MapNames[4], "Dalaran Underbelly")
-	-- tinsert (self.MapNames[5], "Darkmoon Faire")
-    -- tinsert (self.MapNames[6], "The Wandering Isle")    
-	-- Setup mapping to and from Blizzard cont/zone to Map Id
-	-- and overlay name to map id
-
 	self.ContCnt = 5
 	continentNums = { 1, 2, 3, 4, 5, 9 }
 
@@ -9068,36 +9054,9 @@ end
 
 --------
 -- Get the real player location map id
-local aid2
 
 function Nx.Map:GetRealMapId()
-
---	Nx.prtCtrl ("RealMId %s %s #%s", GetRealZoneText(), GetSubZoneText(), GetCurrentMapDungeonLevel())
-
-	local zName = GetRealZoneText()	
-	local mapId = Nx.MapNameToId[zName] or 9000	
-	local name, instanceType, difficultyIndex, difficultyName, maxPlayers, dynamicDifficulty, isDynamic, mapID = GetInstanceInfo()
-	if (difficultyIndex >= 1) then      
-		local aid=GetCurrentMapAreaID()
-		aid2 = aid2 or aid
-		local id=Nx.AIdToId[aid]
-		if aid2 ~= aid then
-			aid2 = aid
-		end
-		return id
-	end	
-	local subT = self.MapSubNames[zName]	-- Find subzone name
-
-	if subT then
-		if subT[GetSubZoneText()] then
-			return self.MapWorldInfo[mapId].Level2Id or mapId
-		end
-	end
-
---	if GetCurrentMapDungeonLevel() > 1 then
---		return self.MapWorldInfo[mapId].Level2Id or mapId
---	end
-	return mapId
+	return select(2,GetInstanceInfo()) ~= "none" and Nx.AIdToId[GetCurrentMapAreaID()] or Nx.MapNameToId[GetRealZoneText()] or 9000
 end
 
 --------
@@ -9154,8 +9113,6 @@ function Nx.Map:SetCurrentMap (mapId)
 
 	if mapId then
 
---		Nx.prt ("SetMapToCurrentZone %s", mapId)
-
 		self.BaseScale = 1
 
 		if mapId > 1000 and mapId < (self.ContCnt + 1) *1000 then
@@ -9163,25 +9120,16 @@ function Nx.Map:SetCurrentMap (mapId)
 			local cont = self.MapWorldInfo[mapId].Cont
 			local zone = self.MapWorldInfo[mapId].Zone
 
-			if not cont or not zone or mapId == self:GetRealBaseMapId() or mapId == self:GetRealMapId() then
-
---				Nx.prt ("SetMapToCurrentZone %s", mapId)
-
+			if not cont or not zone or mapId == self:GetRealBaseMapId() or mapId == self:GetRealMapId() or (self.MapWorldInfo[mapId].Level2Id and mapId ~= self:GetCurrentMapId())  then
 				SetMapToCurrentZone()		-- This fixes the Scarlet Enclave map selection, so we get player position
 				SetDungeonMapLevel (1)
-
+			elseif self.MapWorldInfo[mapId].UseAId then
+				--Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
+				SetMapByID (Nx.IdToAId[mapId] - 1)
 			else
-
-				if self.MapWorldInfo[mapId].UseAId then
-			--		Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
-					SetMapByID (Nx.IdToAId[mapId] - 1)
-				else
-					SetMapZoom (cont, zone)
-				end
+				--Nx.prt("SetMapZoom c:%s, z:%s", cont or "nil", zone or "nil" )
+				SetMapZoom (cont, zone)
 			end
-
---			Nx.prt ("CurLvl %s", GetCurrentMapDungeonLevel())
-
 --[[
 			local lvl = self.MapWorldInfo[mapId].MapLevel
 			if lvl then

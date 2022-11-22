@@ -358,16 +358,16 @@ Map.MapWorldInfo = {
 [4000]={35.5,0,-0,},
 [4001]={Name="Borean Tundra",11.521,125.764810,1139.054323,Overlay="boreantundra",Fish = 475,QAchievementId=33,QAchievementIdH=1358,},
 [4002]={Name="Crystalsong Forest",5.4416,1550.386409,817.907816,Overlay="crystalsongforest",Fish = 500,},
-[4003]={Name="Dalaran",1.6589/1.3,1629,861,Overlay="dalaran",MapBaseName = "dalaran1_",City = true,Alpha = .85,ScaleAdjust = 1.3,Fish = 525,MapLevel = 1,Level2Id = 4012,},
-[4012]={Name="Dalaran Underbelly",1.6589/1.3,1629,861,Overlay="dalaran",MapBaseName = "dalaran2_",City = true,Alpha = .85,ScaleAdjust = 1.3,Fish = 525,MapLevel = 2,Level1Id = 4003,},
-[4004]={Name="Dragonblight",11.21,1113.94,1003.78,Overlay="dragonblight",Fish = 475,QAchievementId=35,QAchievementIdH=1359,},
-[4005]={Name="Grizzly Hills",10.5,2061.032452,1015.273026,Overlay="grizzlyhills",Fish = 475,QAchievementId=37,QAchievementIdH=1357,},
-[4006]={Name="Howling Fjord",12.085,2119.306683,1495.527721,Overlay="howlingfjord",Fish = 475,QAchievementId=34,QAchievementIdH=1356,},
-[4007]={Name="Icecrown",12.533,750.941881,233.475172,Overlay="icecrownglacier",QAchievementId=40,},
-[4008]={Name="Sholazar Basin",8.7057,453.792401,661.305837,Overlay="sholazarbasin",Fish = 525,QAchievementId=39,},
-[4009]={Name="The Storm Peaks",14.214,1471.175866,79.244441,Overlay="thestormpeaks",QAchievementId=38,},
-[4010]={Name="Wintergrasp",5.9455,973.388866,975.227557,Overlay="lakewintergrasp",Explored = true,},
-[4011]={Name="Zul'Drak",9.98,1959.324066,584.635173,Overlay="zuldrak",QAchievementId=36,},
+[4003]={Name="Dalaran",1.6589/1.3,1629,861,Overlay="dalaran",MapBaseName = "dalaran1_",City = true,Alpha = .85,ScaleAdjust = 1.3,Fish = 525,Level2Id=4004,},
+[4004]={Name="Dalaran Underbelly",1.6589/1.3,1629,861,Overlay="dalaransewerage",MapBaseName = "dalaransewerage1_",City = true,UseAId = true,Levels = true, Alpha = .85,ScaleAdjust = 1.3,Fish = 525,Level1Id=4003,},
+[4005]={Name="Dragonblight",11.21,1113.94,1003.78,Overlay="dragonblight",Fish = 475,QAchievementId=35,QAchievementIdH=1359,},
+[4006]={Name="Grizzly Hills",10.5,2061.032452,1015.273026,Overlay="grizzlyhills",Fish = 475,QAchievementId=37,QAchievementIdH=1357,},
+[4007]={Name="Howling Fjord",12.085,2119.306683,1495.527721,Overlay="howlingfjord",Fish = 475,QAchievementId=34,QAchievementIdH=1356,},
+[4008]={Name="Icecrown",12.533,750.941881,233.475172,Overlay="icecrownglacier",QAchievementId=40,},
+[4009]={Name="Sholazar Basin",8.7057,453.792401,661.305837,Overlay="sholazarbasin",Fish = 525,QAchievementId=39,},
+[4010]={Name="The Storm Peaks",14.214,1471.175866,79.244441,Overlay="thestormpeaks",QAchievementId=38,},
+[4011]={Name="Wintergrasp",5.9455,973.388866,975.227557,Overlay="lakewintergrasp",Explored = true,},
+[4012]={Name="Zul'Drak",9.98,1959.324066,584.635173,Overlay="zuldrak",QAchievementId=36,},
 [4013]={Name="Hrothgar's Landing",7.35,1280,-37.5,Overlay="hrothgarslanding",Explored = true,},
 [5000]={6.4,0,-0,},
 [5001]={Name="VIP",1.48,296,45,Overlay="vip",City = true,Fish = 25,},
@@ -1676,6 +1676,7 @@ Map.ZoneOverlays = {
     ["scarletenclave"] = {["scarletenclave"] = "0,0,1024,768"},
     ["lakewintergrasp"] = {},
     ["dalaran"] = {["dalaran1_"] = "0,0,1024,768"},
+    ["dalaransewerage"] = {["dalaransewerage1_"] = "0,0,1024,768"},
     ["boreantundra"] = {
         ["deathsstand"] = "707,181,289,279",
         ["templecityofenkilah"] = "712,15,290,292",
@@ -1835,34 +1836,8 @@ Map.ZoneOverlays = {
         ["hrothgarslanding6"] = "256,256,256,256,1",
         ["hrothgarslanding7"] = "512,256,256,256,1"
     },
-    ["tolgarod"] = {
-        ["tolgarod1"] = "0,0,256,256,1",
-        ["tolgarod2"] = "256,0,256,256,1",
-        ["tolgarod3"] = "512,0,256,256,1",
-        ["tolgarod4"] = "768,0,256,256,1",
-        ["tolgarod5"] = "0,256,256,256,1",
-        ["tolgarod6"] = "256,256,256,256,1",
-        ["tolgarod7"] = "512,256,256,256,1",
-        ["tolgarod8"] = "768,256,256,256,1",
-        ["tolgarod9"] = "0,512,256,256,1",
-        ["tolgarod10"] = "256,512,256,256,1",
-        ["tolgarod11"] = "512,512,256,256,1",
-        ["tolgarod12"] = "768,512,256,256,1"
-    },
-    ["twistingnether"] = {
-        ["twistingnether1"] = "0,0,256,256,1",
-        ["twistingnether2"] = "256,0,256,256,1",
-        ["twistingnether3"] = "512,0,256,256,1",
-        ["twistingnether4"] = "768,0,256,256,1",
-        ["twistingnether5"] = "0,256,256,256,1",
-        ["twistingnether6"] = "256,256,256,256,1",
-        ["twistingnether7"] = "512,256,256,256,1",
-        ["twistingnether8"] = "768,256,256,256,1",
-        ["twistingnether9"] = "0,512,256,256,1",
-        ["twistingnether10"] = "256,512,256,256,1",
-        ["twistingnether11"] = "512,512,256,256,1",
-        ["twistingnether12"] = "768,512,256,256,1"
-    }
+    ["tolgarod"] = {["tolgarod"] = "0,0,1024,768",},
+    ["twistingnether"] = {["twistingnether"] = "0,0,1024,768",}
 }
 
 --------
