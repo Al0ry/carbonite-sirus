@@ -22,11 +22,11 @@ function NXInit()
 	Nx = {}
 	local Nx = Nx
 
-	Nx.WebSite = "wowinterface.com"
+	Nx.WebSite = "https://gitlab.com/knights-of-sunwell/carbonite-sirus"
 
 	NXTITLEFULL = NXTITLE
 
-	Nx.VERMAJOR			= 5.057
+	Nx.VERMAJOR			= 5.060
 	Nx.VERMINOR			= .000			-- Not 0 is a test version
 	Nx.BUILD				= 292
 
