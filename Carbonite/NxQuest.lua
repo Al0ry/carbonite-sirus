@@ -1074,21 +1074,21 @@ function Nx.Quest:Init()
 
 end
 
-function Nx.Quest:CheckQuestSE (q, n)
+-- function Nx.Quest:CheckQuestSE (q, n)
 
-	local _, zone, x, y = self:GetSEPos (q[n])
-	local mapId = Nx.Map.NxzoneToMapId[zone]
+-- 	local _, zone, x, y = self:GetSEPos (q[n])
+-- 	local mapId = Nx.Map.NxzoneToMapId[zone]
 
-	if (x == 0 or y == 0) and mapId and not Nx.Map:IsInstanceMap (mapId) then
-		q[n] = format ("%s# ####", strsub (q[n], 1, 2))	-- Zero it to get a red button
---		local oName = self:UnpackSE (q[n])
---		Nx.prt ("zeroed %s, %s", self:UnpackName (q[1]), oName)
-	end
-end
+-- 	if (x == 0 or y == 0) and mapId and not Nx.Map:IsInstanceMap (mapId) then
+-- 		q[n] = format ("%s# ####", strsub (q[n], 1, 2))	-- Zero it to get a red button
+-- --		local oName = self:UnpackSE (q[n])
+-- --		Nx.prt ("zeroed %s, %s", self:UnpackName (q[1]), oName)
+-- 	end
+-- end
 
 function Nx.Quest:CheckQuestObj (q, n)
-
-	local oName, zone, x, y = self:GetObjectivePos (q[n])
+	oName = self:UnpackObjective (q[n])
+	local _, zone, x, y = self:GetObjectivePos (q[n])
 	local mapId = Nx.Map.NxzoneToMapId[zone]
 
 	if (x == 0 or y == 0) and mapId and not Nx.Map:IsInstanceMap (mapId) then
@@ -1096,6 +1096,7 @@ function Nx.Quest:CheckQuestObj (q, n)
 --		Nx.prt ("zeroed %s, %s", self:UnpackName (q[1]), oName)
 	end
 end
+Nx.Quest.CheckQuestSE = Nx.Quest.CheckQuestObj
 
 --------
 -- Calculate the watch colors
@@ -8047,7 +8048,7 @@ end
 -- Example: 00,1, xxyy
 -- Example: 00,1,xywh
 
-function Nx.Quest:UnpackSE (obj)
+--[[ function Nx.Quest:UnpackSE (obj)
 
 	if not obj then
 		return
@@ -8068,7 +8069,7 @@ function Nx.Quest:UnpackSE (obj)
 	local zone = strbyte (obj, 3) - 35
 
 	return name, zone, 4
-end
+end ]]
 
 --------
 -- Unpack objective or start/end
@@ -8093,6 +8094,8 @@ function Nx.Quest:UnpackObjective (obj)
 	zone = zone > #Nx.Zones and 0 or zone
 	return desc, zone, i + 2
 end
+
+Nx.Quest.UnpackSE = Nx.Quest.UnpackObjective
 
 --------
 -- Get type of objective (not start/end)
