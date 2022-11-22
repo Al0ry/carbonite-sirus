@@ -9115,12 +9115,13 @@ function Nx.Map:SetCurrentMap (mapId)
 
 		self.BaseScale = 1
 
-		if mapId > 1000 and mapId < (self.ContCnt + 1) *1000 then
+		if self:IsNormalMap (mapId) then
 
 			local cont = self.MapWorldInfo[mapId].Cont
 			local zone = self.MapWorldInfo[mapId].Zone
+			local lvl2 = self.MapWorldInfo[mapId].Level2Id
 
-			if not cont or not zone or mapId == self:GetRealBaseMapId() or mapId == self:GetRealMapId() or (self.MapWorldInfo[mapId].Level2Id and mapId ~= self:GetCurrentMapId())  then
+			if not cont or not zone or mapId == self:GetRealBaseMapId() or mapId == self:GetRealMapId() or (lvl2 and lvl2 == self:GetCurrentMapId())  then
 				SetMapToCurrentZone()		-- This fixes the Scarlet Enclave map selection, so we get player position
 				SetDungeonMapLevel (1)
 			elseif self.MapWorldInfo[mapId].UseAId then
@@ -9137,7 +9138,7 @@ function Nx.Map:SetCurrentMap (mapId)
 				SetDungeonMapLevel (lvl)
 			end
 --]]
-		elseif mapId > 11000 then	-- Instance?
+		elseif self:IsInstanceMap (mapId) then	-- Instance?
 
 			self.BaseScale = .025
 
@@ -9380,7 +9381,7 @@ end
 
 function Nx.Map:IdToContZone (mapId)
 
-	if mapId >= 10000 then
+	if self:IsInstanceMap (mapId) then
 		return floor (mapId / 1000) - 10, 0
 	end
 
