@@ -1870,11 +1870,11 @@ function Nx.Map.Guide:UpdateMapIcons()
 									show = true
 								end
 
-								local qcati = Quest:UnpackCategory (quest[1])
+								-- local qcati = Quest:UnpackCategory (quest[1])
 
-								if qcati > 0 then
-									qname = qname .. " <" .. Nx.QuestCategory[qcati] .. ">"
-								end
+								-- if qcati > 0 then
+								-- 	qname = qname .. " <" .. Nx.QuestCategory[qcati] .. ">"
+								-- end
 
 								s = format ("%s\n|cffbfbfbf%d%s %s", s, lvl, col, qname)
 								if quest.CNum then

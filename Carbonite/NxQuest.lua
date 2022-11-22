@@ -232,7 +232,7 @@ function Nx.Quest:Init()
 	}
 
 	-- Patch quest data
---[[
+
 	local qdata = {
 		[3444] = "4^97^626^386",
 		[10447] = "5^96^738^357",
@@ -278,7 +278,7 @@ function Nx.Quest:Init()
 			end
 		end
 	end
---]]
+--
 
 	-- Patch Molten Front
 --[[
@@ -711,7 +711,7 @@ function Nx.Quest:Init()
 			self.IdToQuest[id] = q
 
 			if q[3] and q[3] == q[2] then
---				q[3] = nil							-- Release mem !!!!! FIX for non enders !!!!!
+				q[3] = nil
 				sameCnt = sameCnt + 1
 			end
 
@@ -846,7 +846,7 @@ function Nx.Quest:Init()
 	end
 
 
-	for lvl = 0, 90 do
+	for lvl = 0, 80 do
 
 		local grp = {}
 
@@ -5211,10 +5211,10 @@ function Nx.Quest.List:Update_()
 				local lvlStr = format ("|cffd0d0d0%2d", lvl)
 				local title = qname
 
-				local cati = Quest:UnpackCategory (quest[1])
-				if cati > 0 then
-					title = title .. " <" .. Nx.QuestCategory[cati] .. ">"
-				end
+				-- local cati = Quest:UnpackCategory (quest[1])
+				-- if cati > 0 then
+				-- 	title = title .. " <" .. Nx.QuestCategory[cati] .. ">"
+				-- end
 
 				if quest.CNum then
 
