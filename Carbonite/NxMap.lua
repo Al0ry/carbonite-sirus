@@ -4581,7 +4581,7 @@ function Nx.Map:Update (elapsed)
 		local yShift = 0
 
 		if not Nx.Map.InstanceInfo[rid] or not Nx.Map.InstanceInfo[rid][3*lvl] then
-			Nx.prt ("No InstanceInfo for ", plZX, plZY)
+			Nx.prt ("No InstanceInfo for %s", rid)
 		else
 			xShift = Nx.Map.InstanceInfo[rid][3*lvl-2]/100
 			yShift = Nx.Map.InstanceInfo[rid][3*lvl-1]/100
@@ -9125,7 +9125,7 @@ function Nx.Map:SetCurrentMap (mapId)
 				SetMapToCurrentZone()		-- This fixes the Scarlet Enclave map selection, so we get player position
 				SetDungeonMapLevel (1)
 			elseif self.MapWorldInfo[mapId].UseAId then
-				--Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
+				Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
 				SetMapByID (Nx.IdToAId[mapId] - 1)
 			else
 				--Nx.prt("SetMapZoom c:%s, z:%s", cont or "nil", zone or "nil" )
