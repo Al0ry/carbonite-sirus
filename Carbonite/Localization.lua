@@ -5203,7 +5203,8 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	["Lost Island"] = "Затерянный остров",
 	["Rising Depths"] = "Поднявшиеся глубины",
 	["Mangrove Island"] = "Мангровый остров",
-	["Tel'Abim"] = "Тель'Абим"
+	["Tel'Abim"] = "Тель'Абим",
+	["Andrakkis"] = "Андраккис"
 	}
 	NXlMapSubNames = {
 		["Даларан"] = {

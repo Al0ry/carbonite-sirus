@@ -6493,6 +6493,7 @@ function Nx.Map:UpdateZones()
 
 		self:UpdateOverlay (1027, .8, true) -- lostisland hack
 		self:UpdateOverlay (1028, .8, true) -- telabim hack
+		self:UpdateOverlay (1029, .8, true) -- andrakkis hack
 		self:UpdateOverlay (2033, .8, true) -- tolgarod hack
 		self:UpdateOverlay (2037, .8, true) -- risingdepth hack
 		self:UpdateOverlay (2038, .8, true) -- mangroove hack
@@ -8556,6 +8557,7 @@ function Nx.Map:InitTables()
 
 	tinsert(self.MapNames[1], NXlMapNames["Lost Island"] or "Lost Island")
 	tinsert(self.MapNames[1], NXlMapNames["Tel'Abim"] or "Tel'Abim")
+	tinsert(self.MapNames[1], NXlMapNames["Andrakkis"] or "Andrakkis")
 
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
 	tinsert(self.MapNames[2], NXlMapNames["Tol'Garod"] or "Tol'Garod")

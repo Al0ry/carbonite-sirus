@@ -215,7 +215,7 @@ Map.MapInfo = {
 		X = 0,
 		Y = 500,
 		Min = 1001,
-		Max = 1028,
+		Max = 1029,
 	},
 	{
 		Name = "Eastern Kingdoms",
@@ -303,9 +303,10 @@ Map.MapWorldInfo = {
 [1023]={Name="Un'Goro Crater",7.399998,-106.6661,1193.333,Overlay="ungorocrater",Fish = 300,},
 [1024]={Name="Winterspring",14.20029,63.32512,-1706.666,Overlay="winterspring",Fish = 425,},
 [1025]={Name="Hyjal",0,0,0,Overlay="hyjal",Fish = 425,},
-[1026]={Name="Wailing Caverns",0,0,0,Overlay="wailingcaverns",Fish = 425,},
+[1026]={Name="Wailing Caverns",1.14,381.05,98.65,Overlay="wailingcavernsentrance",City = true, Fish = 75,},
 [1027]={Name="Lost Island",8.78,1388,161.5,Overlay="lostisland",Fish = 25,Explored = true,UseAId = true,},
 [1028]={Name="Tel'Abim",12.74,1121,1656,Overlay="telabim",Fish = 25,Explored = true,UseAId = true,},
+[1029]={Name="Andrakkis",6.7,1424.5,-1869.5,Overlay="andrakkis",Fish = 25,Explored = true,UseAId = true,},
 --
 [2000]={81.53,-3645.96,-2249.31,},
 [2001]={Name="Alterac Mountains",5.599993,-156.6661,-299.9998,Overlay="alterac",Fish = 225,},
@@ -657,7 +658,7 @@ Map.InstanceInfo = {			-- Blizzard instance maps (SetInstanceMap uses size of 3 
 	[12194] = { 0, 0,			"ThroneOfTides\\ThroneOfTides1_",
 					0, -100,		"ThroneOfTides\\ThroneOfTides2_", },
 	[12106] = { 0, 0,			"Uldaman\\Uldaman1_", },
-	[11109] = { 0, 0,			"WailingCaverns\\WailingCaverns1_", },
+	[11109] = { 0, 0,			"WailingCaverns\\WailingCaverns", },
 	[12118] = { 0, 0,			"ZulAman\\ZulAman", },
 	[11116] = { 0, 0,			"ZulFarrak\\ZulFarrak", },
     
@@ -1682,6 +1683,7 @@ Map.ZoneOverlays = {
     ["blackrockmountain1"] = {["blackrockmountai1"] = "0,0,1024,768"},
     ["blackrockmountain2"] = {["blackrockmountai2"] = "0,0,1024,768"},
     ["blackrockmountain3"] = {["blackrockmountai3"] = "0,0,1024,768"},
+    ["wailingcavernsentrance"] = {["wailingcavernsentrance"] = "0,0,1024,768"},
     ["lakewintergrasp"] = {},
     ["dalaran"] = {["dalaran1_"] = "0,0,1024,768"},
     ["dalaransewerage"] = {["dalaransewerage1_"] = "0,0,1024,768"},
@@ -1849,7 +1851,8 @@ Map.ZoneOverlays = {
     ["lostisland"] = {["lostisland"] = "0,0,1024,768",},
     ["risingdepths"] = {["risingdepths"] = "0,0,1024,768",},
     ["mangroveisland"] = {["mangroveisland"] = "0,0,1024,768",},
-    ["telabim"] = {["telabim"] = "0,0,1024,768",}
+    ["telabim"] = {["telabim"] = "0,0,1024,768",},
+    ["andrakkis"] = {["andrakkis"] = "0,0,1024,768",}
 }
 
 --------
@@ -1898,12 +1901,19 @@ for i=0,4 do
     end
 end
 Map.EMB[2154 +  100* 4 + 4] = string.format("Sirus3_%d", 1+ 5* 3 + 4)
-
+-- Tel Abim
 for i=2,10 do 
     for j=3,9 do
         Map.KMB[4245 +  100* i + j] =  string.format("Sirus8_%d_%d", 27+i, 27+j)
     end
 end
+-- Andrakkis
+for i=1,7 do 
+    for j=1,7 do
+        Map.KMB[4412 +  100* i + j] =  string.format("Andrakkis_%d_%d", 28+i, 28+j)
+    end
+end
+
 
 -- TODO
 -- Kotmogu
