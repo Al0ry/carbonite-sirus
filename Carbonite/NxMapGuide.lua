@@ -1090,11 +1090,10 @@ function Nx.Map.Guide:PatchFolder (folder, parent)
 			["Thunder Bluff"] = "Spell_Arcane_TeleportThunderBluff",
 			["Undercity"] = "Spell_Arcane_TeleportUnderCity",
 		}
-
+		
 		for i, str in ipairs (Nx.ZoneConnections) do
 
 			local flags, conTime, mapId1, x1, y1, mapId2, x2, y2, name1, name2 = Nx.Map:ConnectionUnpack (str)
-
 			if conTime ~= 1 then
 
 --				Nx.prt ("Travel %s %s, flags %x", name1, name2, flags)

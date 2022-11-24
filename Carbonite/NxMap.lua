@@ -8906,20 +8906,8 @@ function Nx.Map:InitTables()
 
 			for _, str in ipairs (Nx.ZoneConnections) do
 
-				local flags, ta, tb, z1, x1a, x1b, y1a, y1b, z2, x2a, x2b, y2a, y2b, name1len = strbyte (str, 1, 14)
+				local flags, conTime, mapId1, x1, y1, mapId2, x2, y2, name1, name2 = Nx.Map:ConnectionUnpack (str)
 
-				flags = flags - 35
-				local conTime = (ta - 35) * 221 + tb - 35
-				local mapId1 = self.NxzoneToMapId[z1 - 35]
-				local mapId2 = self.NxzoneToMapId[z2 - 35]
---[[
-				if mapId1 == 1017 or mapId2 == 1017 or mapId1 == 1028 or mapId2 == 1028 then
-					Nx.prt ("%s %d %d to %s %d %d, %s f%x",
-							Nx.MapIdToName[mapId1] or mapId1, ((x1a - 35) * 221 + x1b - 35) / 100, ((y1a - 35) * 221 + y1b - 35) / 100,
-							Nx.MapIdToName[mapId2] or mapId2, ((x2a - 35) * 221 + x2b - 35) / 100, ((y2a - 35) * 221 + y2b - 35) / 100,
-							conTime, flags)
-				end
---]]
 				if not (mapId1 and mapId2) then
 --					Nx.prt ("zone conn err %s to %s", z1 - 35, z2 - 35)
 					conTime = 0
@@ -8932,24 +8920,6 @@ function Nx.Map:InitTables()
 
 					if cont1 == cont2 then
 
-						name1len = name1len - 35
-						local name1 = name1len == 0 and "" or strsub (str, 15, 14 + name1len)
-						local i = 15 + name1len
-						local name2len = strbyte (str, i)
-						local name2 = name2len == 0 and "" or strsub (str, i + 1, i + name2len)
-
-						local x1 = ((x1a - 35) * 221 + x1b - 35) / 100
-						local y1 = ((y1a - 35) * 221 + y1b - 35) / 100
-						local x2 = ((x2a - 35) * 221 + x2b - 35) / 100
-						local y2 = ((y2a - 35) * 221 + y2b - 35) / 100
---[[
-						if mapId1 == 1017 or mapId2 == 1017 or mapId1 == 1028 or mapId2 == 1028 then
-							Nx.prt ("%s %d %d to %s %d %d, %s, %s %s",
-									Nx.MapIdToName[mapId1] or mapId1, x1, y1,
-									Nx.MapIdToName[mapId2] or mapId2, x2, y2,
-									conTime, name1, name2)
-						end
---]]
 						if mapId == mapId2 then		-- Swap?
 							mapId1, mapId2 = mapId2, mapId1
 							x1, y1, x2, y2 = x2, y2, x1, y1
@@ -9007,29 +8977,14 @@ function Nx.Map:ConnectionUnpack (str)
 	To choose icons to show you could search the string to work out what it is.
 	Boat, Tram, Zeppelin, Portal
 --]]
-
-	local flags, ta, tb, z1, x1a, x1b, y1a, y1b, z2, x2a, x2b, y2a, y2b, name1len = strbyte (str, 1, 14)
-
-	flags = flags - 35
-	local conTime = (ta - 35) * 221 + tb - 35
-	local mapId1 = self.NxzoneToMapId[z1 - 35]
-	local mapId2 = self.NxzoneToMapId[z2 - 35]
-
---	local cont1 = self:IdToContZone (mapId1)
---	local cont2 = self:IdToContZone (mapId2)
-
-	name1len = name1len - 35
-	local name1 = name1len == 0 and "" or strsub (str, 15, 14 + name1len)
-	local i = 15 + name1len
-	local name2len = strbyte (str, i)
-	local name2 = name2len == 0 and "" or strsub (str, i + 1, i + name2len)
-
-	local x1 = ((x1a - 35) * 221 + x1b - 35) / 100
-	local y1 = ((y1a - 35) * 221 + y1b - 35) / 100
-	local x2 = ((x2a - 35) * 221 + x2b - 35) / 100
-	local y2 = ((y2a - 35) * 221 + y2b - 35) / 100
-
-	return flags, conTime, mapId1, x1, y1, mapId2, x2, y2, name1, name2
+	local flags, conTime, mapId1, x1, y1, mapId2, x2, y2, name1, name2 = strsplit ("|", str)
+	if not name1 then
+		name1 = ""
+	end
+	if not name2 then
+		name2 = ""
+	end
+	return tonumber(flags), tonumber(conTime), tonumber(mapId1), tonumber(x1), tonumber(y1), tonumber(mapId2), tonumber(x2), tonumber(y2), name1, name2
 end
 
 --------
