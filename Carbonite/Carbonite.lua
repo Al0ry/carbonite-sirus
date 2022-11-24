@@ -26,9 +26,9 @@ function NXInit()
 
 	NXTITLEFULL = NXTITLE
 
-	Nx.VERMAJOR			= 5.061
+	Nx.VERMAJOR			= 5.062
 	Nx.VERMINOR			= .000			-- Not 0 is a test version
-	Nx.BUILD				= 300
+	Nx.BUILD				= 310
 
 	Nx.VERSION			= Nx.VERMAJOR + Nx.VERMINOR / 1000
 
