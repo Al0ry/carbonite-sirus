@@ -215,7 +215,7 @@ Map.MapInfo = {
 		X = 0,
 		Y = 500,
 		Min = 1001,
-		Max = 1026,
+		Max = 1028,
 	},
 	{
 		Name = "Eastern Kingdoms",
@@ -223,7 +223,7 @@ Map.MapInfo = {
 		X = 3784,
 		Y = -200,
 		Min = 2001,
-		Max = 2036,
+		Max = 2038,
 	},
 	{
 		Name = "Outland",
@@ -304,6 +304,8 @@ Map.MapWorldInfo = {
 [1024]={Name="Winterspring",14.20029,63.32512,-1706.666,Overlay="winterspring",Fish = 425,},
 [1025]={Name="Hyjal",0,0,0,Overlay="hyjal",Fish = 425,},
 [1026]={Name="Wailing Caverns",0,0,0,Overlay="wailingcaverns",Fish = 425,},
+[1027]={Name="Lost Island",8.78,1388,161.5,Overlay="lostisland",Fish = 25,Explored = true,UseAId = true,},
+[1028]={Name="Tel'Abim",12.74,1121,1656,Overlay="telabim",Fish = 25,Explored = true,UseAId = true,},
 --
 [2000]={81.53,-3645.96,-2249.31,},
 [2001]={Name="Alterac Mountains",5.599993,-156.6661,-299.9998,Overlay="alterac",Fish = 225,},
@@ -342,6 +344,8 @@ Map.MapWorldInfo = {
 [2034]={Name="Blackrock Mountain",1.4253,152.24,1465.03,Overlay="blackrockmountain1",City = true, Fish = 225,},
 [2035]={Name="Blackrock Mountain1",1.52,125.5,1417.4,Overlay="blackrockmountain2",City = true, Fish = 225,},
 [2036]={Name="Blackrock Mountain2",0.5,229,1496.5,Overlay="blackrockmountain3",City = true, Fish = 225,},
+[2037]={Name="Rising Depths",8,-1388,1387,Overlay="risingdepths",Explored = true, UseAId = true,},
+[2038]={Name="Mangrove Island",8,-1280.5,2347.5,Overlay="mangroveisland",Explored = true, UseAId = true,},
 --
 [3000]={34.606,-2587.3,-1151.7,},
 [3001]={Name="Blade's Edge Mountains",10.85003,-1769.168,-881.6678,Overlay="bladesedgemountains",QAchievementId=1193,},
@@ -1841,7 +1845,11 @@ Map.ZoneOverlays = {
         ["hrothgarslanding7"] = "512,256,256,256,1"
     },
     ["tolgarod"] = {["tolgarod"] = "0,0,1024,768",},
-    ["twistingnether"] = {["twistingnether"] = "0,0,1024,768",}
+    ["twistingnether"] = {["twistingnether"] = "0,0,1024,768",},
+    ["lostisland"] = {["lostisland"] = "0,0,1024,768",},
+    ["risingdepths"] = {["risingdepths"] = "0,0,1024,768",},
+    ["mangroveisland"] = {["mangroveisland"] = "0,0,1024,768",},
+    ["telabim"] = {["telabim"] = "0,0,1024,768",}
 }
 
 --------
@@ -1871,6 +1879,31 @@ for i=0,3 do
         Map.OLMB[3332 + 100* i + j] =  string.format("TWN_%d_%d", 30+i, 30+j)
     end
 end
+-- Lost Island
+for i=0,6 do 
+    for j=0,6 do
+        Map.KMB[4533 +  100* i + j] =  string.format("Sirus1_%d_%d", 21+i, 27+j)
+    end
+end
+-- Rising Depths
+for i=1,7 do 
+    for j=1,7 do
+        Map.EMB[1943 +  100* i + j] = string.format("Sirus2_%d", 1+ 9* j + i)
+    end
+end
+-- Mangroove Island
+for i=0,4 do 
+    for j=0,4 do
+        Map.EMB[2154 +  100* i + j] = string.format("Sirus3_%d", 1+ 5* j + i)
+    end
+end
+Map.EMB[2154 +  100* 4 + 4] = string.format("Sirus3_%d", 1+ 5* 3 + 4)
+
+for i=2,10 do 
+    for j=3,9 do
+        Map.KMB[4245 +  100* i + j] =  string.format("Sirus8_%d_%d", 27+i, 27+j)
+    end
+end
 
 -- TODO
 -- Kotmogu
@@ -1883,13 +1916,7 @@ end
 -- [4537]= "TWP30_27",[4637]= "TWP31_27",[4737]= "TWP32_27",
 -- [4538]= "TWP30_28",[4638]= "TWP31_28",[4738]= "TWP32_28",
 -- [4539]= "TWP30_29",[4639]= "TWP31_29",[4739]= "TWP32_29",
--- ???
--- local MMname = "Sirus2_%d"
--- for i=0,8 do 
---     for j=0,8 do
---         Map.NRMB[3022 +  100* i + j] = MMname:format(1+ 9* j + i)
---     end
--- end
+
 -- ???
 -- local MMname = "Sirus3_%d"
 -- for i=0,4 do 

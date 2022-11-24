@@ -6491,8 +6491,12 @@ function Nx.Map:UpdateZones()
 			self:UpdateOverlay (id, .8, true)
 		end
 
+		self:UpdateOverlay (1027, .8, true) -- lostisland hack
+		self:UpdateOverlay (1028, .8, true) -- telabim hack
 		self:UpdateOverlay (2033, .8, true) -- tolgarod hack
-		self:UpdateOverlay (3009, .8, true)
+		self:UpdateOverlay (2037, .8, true) -- risingdepth hack
+		self:UpdateOverlay (2038, .8, true) -- mangroove hack
+		self:UpdateOverlay (3009, .8, true) -- shargel hack
 --[[
 		if freeOrScale then
 
@@ -8550,9 +8554,16 @@ function Nx.Map:InitTables()
 		{ GetMapZones(5)},
 	}
 
+	tinsert(self.MapNames[1], NXlMapNames["Lost Island"] or "Lost Island")
+	tinsert(self.MapNames[1], NXlMapNames["Tel'Abim"] or "Tel'Abim")
+
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
 	tinsert(self.MapNames[2], NXlMapNames["Tol'Garod"] or "Tol'Garod")
+	tinsert(self.MapNames[2], NXlMapNames["Rising Depths"] or "Rising Depths")
+	tinsert(self.MapNames[2], NXlMapNames["Mangrove Island"] or "Mangrove Island")
+
 	tinsert(self.MapNames[3], NXlMapNames["Shar'gel"] or "Shar'gel")
+	
 	tinsert (self.MapNames[4], NXlMapNames["Dalaran Underbelly"] or "Dalaran Underbelly")
 
 	local numDupes = 0

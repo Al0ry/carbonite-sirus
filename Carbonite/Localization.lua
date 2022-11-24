@@ -5199,7 +5199,11 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	["Blackrock Mountain1"] = "Черная гора1",
 	["Blackrock Mountain2"] = "Черная гора2",
 	["Tol'Garod"] = "Тол'Гарод",
-	["Shar'gel"] = "Шар'гел"
+	["Shar'gel"] = "Шар'гел",
+	["Lost Island"] = "Затерянный остров",
+	["Rising Depths"] = "Поднявшиеся глубины",
+	["Mangrove Island"] = "Мангровый остров",
+	["Tel'Abim"] = "Тель'Абим"
 	}
 	NXlMapSubNames = {
 		["Даларан"] = {
