@@ -60,42 +60,22 @@ function Nx.Travel:Add (typ, cont)
 	local Map = Nx.Map
 	local Quest = Nx.Quest
 	local hideFac = UnitFactionGroup ("player") == "Horde" and 1 or 2
-
-	if 1 then
-
-		local dataStr = Nx.GuideData[typ][cont]
-
-		for n = 1, #dataStr, 2 do
-
-			local npcI = (strbyte (dataStr, n) - 35) * 221 + (strbyte (dataStr, n + 1) - 35)
-			local npcStr = Nx.NPCData[npcI]
-
-			local fac = strbyte (npcStr, 1) - 35
+	for mapId, data in pairs( Nx.GuideData[typ][cont] or {}) do
+		local dataTbl = {strsplit ("|", data)}
+		for i, fxy in pairs(dataTbl) do
+			local fac, x, y = strsplit (",", fxy)
 			if fac ~= hideFac then
-
-				local oStr = strsub (npcStr, 2)
-				local desc, zone, loc = Quest:UnpackObjective (oStr)
-				local name, locName = strsplit ("!", desc)
-
---				local locName = strsplit (",", locName)
-
-				if strbyte (oStr, loc) == 32 then  -- Points
-
-					local mapId = Map.NxzoneToMapId[zone]
-					local x, y = Quest:UnpackLocPtOff (oStr, loc + 1)
-					local wx, wy = Map:GetWorldPos (mapId, x, y)
-
-					local node = {}
-					node.Name = desc
-					node.LocName = NXlTaxiNames[locName] or locName		-- Localize it
-					node.MapId = mapId
-					node.WX = wx
-					node.WY = wy
-					tinsert (tdata, node)
-
-				else
-					assert (0)
-				end
+				local namecamp = Nx.NPCNames[mapId..","..fxy]
+				local name, locName = strsplit (",", namecamp)
+				local wx, wy = Map:GetWorldPos (mapId, x, y)
+				local node = {}
+				locName = strsub(locName,2)
+				node.Name = namecamp
+				node.LocName = NXlTaxiNames[locName] or locName		-- Localize it
+				node.MapId = mapId
+				node.WX = wx
+				node.WY = wy
+				tinsert (tdata, node)
 			end
 		end
 	end
@@ -124,8 +104,8 @@ function Nx.Travel:CaptureTaxi()
 
 	for n = 1, NumTaxiNodes() do
 
---		local locName = strsplit (",", TaxiNodeName (n))
-		local locName = TaxiNodeName (n)
+		local locName = strsplit (",", TaxiNodeName (n))
+--		local locName = TaxiNodeName (n)
 
 		taxiT[locName] = true
 
@@ -149,10 +129,11 @@ function Nx.Travel.TakeTaxiNode (node)
 	local self = Nx.Travel
 	local map = Nx.Map
 
---	map.TaxiName = strsplit (",", TaxiNodeName (node))
-	map.TaxiName = TaxiNodeName (node)
+	map.TaxiName = strsplit (",", TaxiNodeName (node))
+--	map.TaxiName = TaxiNodeName (node)
 
 	local name, x, y = Nx.Map.Guide:FindTaxis (map.TaxiName)
+
 --	map.TaxiNPCName = name
 	map.TaxiX = x
 	map.TaxiY = y
@@ -201,11 +182,11 @@ function Nx.Travel:TaxiCalcTime (dest)
 
 			if srcNode and destNode then
 
---				local srcName = strsplit (",", TaxiNodeName (srcNode))
---				local destName = strsplit (",", TaxiNodeName (destNode))
+				local srcName = strsplit (",", TaxiNodeName (srcNode))
+				local destName = strsplit (",", TaxiNodeName (destNode))
 
-				local srcName = TaxiNodeName (srcNode)
-				local destName = TaxiNodeName (destNode)
+				-- local srcName = TaxiNodeName (srcNode)
+				-- local destName = TaxiNodeName (destNode)
 
 				local t = self:TaxiFindConnectionTime (srcName, destName)
 
@@ -275,58 +256,14 @@ function Nx.Travel:TaxiFindConnectionTime (srcName, destName)
 	local srcNPCName, x, y = Nx.Map.Guide:FindTaxis (srcName)
 	local destNPCName, x, y = Nx.Map.Guide:FindTaxis (destName)
 
---	Nx.prt ("NPC src %s %s", srcName, srcNPCName or "nil")
---	Nx.prt ("NPC dest %s %s", destName, destNPCName or "nil")
-
-	-- single string comprising multiple 6 byte entries
-	-- aabbcc
-	-- aa = index of start npc (Nx.NPCData table)
-	-- bb = index of end npc (Nx.NPCData table)
-	-- cc = flight time in 10ths of a second
-	-- all are base 221 encoded (indicies start at 1)
-
-	local conn = Nx.FlightConnection
-
-	for n = 1, #conn, 6 do
-
-		local a1, a2, b1, b2, c1, c2 = strbyte (conn, n, n + 5)
-
-		local i = (a1 - 35) * 221 + a2 - 35
-
-		local npc = Nx.NPCData[i]
-		if npc then
-
-			local oStr = strsub (npc, 2)
-			local desc, zone, loc = Quest:UnpackObjective (oStr)
-			local name = strsplit ("!", desc)
-
-			if name == srcNPCName then
-
---				Nx.prt ("SNPC %s", desc)
-
-				local i = (b1 - 35) * 221 + b2 - 35
-				local npc = Nx.NPCData[i]
-				if npc then
-
-					local oStr = strsub (npc, 2)
-					local desc, zone, loc = Quest:UnpackObjective (oStr)
-					local name = strsplit ("!", desc)
-
-					if name == destNPCName then
-
---						Nx.prt ("DNPC %s", desc)
-
-						return ((c1 - 35) * 221 + c2 - 35) / 10
-					end
-				else
-					Nx.prt ("Travel: missing dnpc %s %s", destName, i)
-				end
-			end
-		else
-			Nx.prt ("Travel: missing snpc %s %s", srcName, i)
+	for i, stenti in pairs(Nx.FlightConnection) do
+		local st, en, time = Nx.NPCNames[stenti[1]], Nx.NPCNames[stenti[2]], stenti[3]
+		local stName = strsplit (",", st)
+		local enName = strsplit (",", en)
+		if stName == srcNPCName and enName == destNPCName then
+			return time/10
 		end
 	end
-
 	return 0
 end
 

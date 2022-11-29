@@ -407,8 +407,6 @@ Nx.GuideTrainerInfo = {
 
 function Nx.Map.Guide:Create (map)
 
-	self:PatchData()
-
 	local g = {}
 
 	setmetatable (g, self)
@@ -517,136 +515,6 @@ function Nx.Map.Guide:Create (map)
 	--
 
 	return g
-end
-
---------
-
-function Nx.Map.Guide:PatchData()
-
-	--	DEBUG for Jamie
-
-	Nx.GuideData = Nx["GuideData"] or Nx.GuideData	-- Copy unmunged data to munged data
-	Nx.NPCData = Nx["NPCData"] or Nx.NPCData			-- Copy unmunged data to munged data
-
-	--
-
-	local data = Nx.GuideData
-	local npc = Nx.NPCData
-
-	local fix =	{
---		"Ohura", 0, 2119, 48.35, 25.08, "FlightMaster",
---		"Caregiver Inaara", 0, 2119, 51.18, 33.88, "Innkeeper",
---[[
-		"Mailbox",
-		2, nil, 1068, 81.5, 21.1,	-- Org
-		2, nil, 1068, 60.8, 55.5,
-		2, nil, 1068, 53.6, 65.8,
-		2, nil, 1068, 49.5, 71.3,
-		2, nil, 1068, 38.1, 74.8,
-		2, nil, 1068, 45.6, 54.1,
-		2, nil, 1068, 51.7, 59.1,
-		2, nil, 2108, 69.8, 36.4,	-- Undercity
-		2, nil, 2108, 62.2, 36.4,
-		2, nil, 2108, 62.1, 51.6,
-		2, nil, 2108, 69.7, 51.6,
-		2, nil, 2108, 71.4, 61.6,
-		1, nil, 1032, 67.0, 16.4,	-- Darnassus
-		1, nil, 1032, 55.8, 45.5,
-		1, nil, 1032, 59.8, 55.0,
-		1, nil, 1032, 64.8, 71.2,
-		1, nil, 2084, 72.8, 48.6,	-- Stormwind
-		1, nil, 2084, 66.6, 65.3,
-		1, nil, 2084, 72.5, 69.1,
-		1, nil, 2084, 67.4, 49.7,
-		1, nil, 2084, 61.5, 43.5,
-		1, nil, 2084, 60.7, 50.6,
-		1, nil, 2084, 54.6, 63.0,
-		1, nil, 2084, 45.7, 54.0,
-		1, nil, 2084, 50.9, 70.5,
-		1, nil, 2084, 57.3, 71.7,
-		1, nil, 2084, 62.5, 74.8,
-		1, nil, 2084, 61.6, 70.7,
-		1, nil, 2084, 49.7, 87.0,
-		1, nil, 2084, 40.9, 62.0,
-		1, nil, 2084, 36.8, 69.1,
-		1, nil, 2084, 54.7, 57.6,
-		1, nil, 2084, 64.7, 37.0,
-		1, nil, 2084, 75.7, 64.6,
-		1, nil, 2084, 37.9, 34.4,
-		1, nil, 2084, 30.3, 25.5,
-		1, nil, 2084, 30.3, 49.2,
---]]
-	  }
-
-	local typ
-
-	local n = 1
-	while fix[n] do
-
-		if type (fix[n]) == "string" then
-			typ = fix[n]
-			n = n + 1
-
-		else
-
-			local x = fix[n + 3] * 100
-			local y = fix[n + 4] * 100
-			local xs = strchar (floor (x / 221) + 35, x % 221 + 35)
-			local ys = strchar (floor (y / 221) + 35, y % 221 + 35)
-
-			local cont = floor (fix[n + 2] / 1000)
-			local zone = fix[n + 2] % 1000			-- Zones.lua zone #
-
-			if fix[n + 1] then	-- NPC?
---[[
-				-- Side, name len, name, zone, space, x, y
-				local s = format ("%c%c%s%c %s%s", fix[n+1] + 35, #fix[n] + 35, fix[n], zone + 35, xs, ys)
-				tinsert (npc, s)
-
-				local len = #npc
-				local typ = fix[n + 5]
-				data[typ][cont] = data[typ][cont] .. strchar (floor (len / 221) + 35, len % 221 + 35)
---]]
-			else
-
---				Nx.prt ("Patch %s %s %s", typ, x, y)
-
-				local s = format ("%c%c%s%s", fix[n] + 35, zone + 35, xs, ys)
-				data[typ][cont] = data[typ][cont] .. s
-			end
-
-			n = n + 5
-		end
-	end
-
-	--
-
---[[
-	local fix =	{
-		"AzuremistIsleBoat",
-		"BootyBayBoat",
-		"MenethilHarborBoat",
-		"RatchetBoat",
-		"TeldrassilBoat",
-		"TheramoreBoat",
-		"DarnassusPortal",
-		"ExodarPortal",
-		"IronforgePortal",
-		"OrgrimmarPortal",
-		"SilvermoonPortal",
-		"StormwindPortal",
-		"ThunderBluffPortal",
-		"UndercityPortal",
-		"Grom'golZeppelin",
-		"OrgrimmarZeppelin",
-		"UndercityZeppelin",
-	}
-	for _, name in pairs (fix) do
-		Nx.GuideData[name] = Nx.GuideDataOld[name]
-	end
-
---]]
-
 end
 
 --------
@@ -1288,8 +1156,6 @@ function Nx.Map.Guide:PatchFolder (folder, parent)
 				end
 			end
 		end
-
---		Nx.GuideData["Instances"][fcont] = guideInstStr		-- Override bad guide data
 
 	end
 end
@@ -2006,113 +1872,30 @@ function Nx.Map.Guide:UpdateMapGeneralIcons (cont, showType, hideFac, tx, name, 
 	local Map = Nx.Map
 	local map = self.Map
 
---	assert (Nx.GuideData[showType])
 	if not Nx.GuideData[showType] then
 		Nx.prt ("guide showType %s", showType)
 		return
 	end
 
-	local dataStr = Nx.GuideData[showType][cont]
-
-	if not dataStr then	-- Happens for WotLK
-		return
-	end
-
-	local mode = strbyte (dataStr)
-
-	if mode == 32 then		-- Inline data
-
-		for n = 2, #dataStr, 6 do
-
-			local fac = strbyte (dataStr, n) - 35
-			if fac ~= hideFac then
-
-				local zone = strbyte (dataStr, n + 1) - 35
-				local mapId = Map.NxzoneToMapId[zone]
-
-				if not showMapId or mapId == showMapId then
-
---					local loc = strsub (dataStr, n + 2, n + 5)
-					local x, y = Quest:UnpackLocPtOff (dataStr, n + 2)
---					Nx.prt ("UpdateMapGeneralIcons %s %s %s", name, x, y)
-					local wx, wy = map:GetWorldPos (mapId, x, y)
-
-					local icon = map:AddIconPt (iconType, wx, wy, nil, tx)
-
-					local str = format ("%s\n%s %.1f %.1f", name, Nx.MapIdToName[mapId], x, y)
-					map:SetIconTip (icon, str)
-				end
-			end
-		end
-
-	elseif mode == 33 then		-- ! (Instance)
-
-	else	-- NPC
-
-		for n = 1, #dataStr, 2 do
-
-			local npcI = (strbyte (dataStr, n) - 35) * 221 + (strbyte (dataStr, n + 1) - 35)
-			local npcStr = Nx.NPCData[npcI]
-
-			if not npcStr then
-				Nx.prt ("%s", name)
-			end
-
-			local fac = strbyte (npcStr, 1) - 35
-			if fac ~= hideFac then
-
-				local oStr = strsub (npcStr, 2)
-				local desc, zone, loc = Quest:UnpackObjective (oStr)
-
-				desc = gsub (desc, "!", ", ")
-
-				local mapId = Map.NxzoneToMapId[zone]
-
-				if not mapId then
-					local name, minLvl, maxLvl, faction, cont = strsplit ("!", Nx.Zones[zone])
-
-					if tonumber (faction) ~= 3 then
-						Nx.prt ("Guide icon err %s %d", desc, zone)
---						assert (mapId)
-					end
-
-				elseif not showMapId or mapId == showMapId then
-
-					local mapName = Nx.MapIdToName[mapId]
-
-					if strbyte (oStr, loc) == 32 then  -- Points
-
-						loc = loc + 1
-						local cnt = floor ((#oStr - loc + 1) / 4)
-
-						for locN = loc, loc + cnt * 4 - 1, 4 do
-
---							local loc1 = strsub (oStr, locN, locN + 3)
-							local x, y = Quest:UnpackLocPtOff (oStr, locN)
-							local wx, wy = map:GetWorldPos (mapId, x, y)
-
---							Nx.prt ("UpdateMapGeneralIcons %s %s %s", name, x, y)
-
+	if Nx.GuideData[showType][cont] then
+		for mapId, b in pairs(Nx.GuideData[showType][cont]) do
+			if mapId then
+				if not showMapid or mapId == showMapId then
+					local temp_arr = { strsplit("|",b) }
+					for c,d in pairs(temp_arr) do
+						local fac,x,y = strsplit(",",d)
+						fac,x,y = tonumber(fac), tonumber(x), tonumber(y)
+						if fac ~= hideFac then
+							local wx, wy = map:GetWorldPos(mapId, x, y)
 							local icon = map:AddIconPt (iconType, wx, wy, nil, tx)
-
-							local str = format ("%s\n%s\n%s %.1f %.1f", name, desc, mapName, x, y)
+							local npcName = Nx.NPCNames[mapId..","..d] and ( "\n" .. Nx.NPCNames[mapId..","..d]) or ""
+							local str = format ("%s\n%s %.1f %.1f", name .. npcName , Nx.MapIdToName[mapId], x, y)
 							map:SetIconTip (icon, str)
 						end
-					else
-
-						local _, zone, x, y = Quest:GetObjectivePos (oStr)
-						local wx, wy = map:GetWorldPos (mapId, x, y)
-
-						local icon = map:AddIconPt (iconType, wx, wy, nil, tx)
-
-						local str = format ("%s\n%s\n%s %.1f %.1f", name, desc, mapName, x, y)
-						map:SetIconTip (icon, str)
-
---						Nx.prt ("Guide span xy %f %f %s", wx, wy, tx)
 					end
 				end
 			end
-		end
+		end	
 	end
 end
 
@@ -2343,7 +2126,7 @@ function Nx.Map.Guide:FindClosest (findType)
 	assert (map)
 
 	local cont1 = 1
-	local cont2 = 4
+	local cont2 = Map.ContCnt
 
 	if not self.ShowAllCont then
 		local mapId = map.RMapId
@@ -2478,89 +2261,20 @@ function Nx.Map.Guide:FindClosest (findType)
 						return
 					end
 
-					local dataStr = data0[cont]
-
-					if strbyte (dataStr, 1) == 32 then		-- Inline data
-
-						for n = 2, #dataStr, 6 do
-
-							local fac = strbyte (dataStr, n) - 35
-							if fac ~= hideFac then
-
-								local zone = strbyte (dataStr, n + 1) - 35
-								local mapId = Map.NxzoneToMapId[zone]
-
---								local loc = strsub (dataStr, n + 2, n + 5)
-								local x, y = Quest:UnpackLocPtOff (dataStr, n + 2)
-								local wx, wy = map:GetWorldPos (mapId, x, y)
-
-								local dist = (wx - px) ^ 2 + (wy - py) ^ 2
-								if dist < closeDist then
-
---									Nx.prt ("FindClose %s %d", showType, n)
-
-									closeDist = dist
-									close = 0
-									closeMapId = mapId
-									closeX, closeY = wx, wy
-								end
-							end
-						end
-
-					elseif strbyte (dataStr) == 33 then		-- ! Instance
-
-					else	-- NPC
-
-						for n = 1, #dataStr, 2 do
-
-							local npcI = (strbyte (dataStr, n) - 35) * 221 + (strbyte (dataStr, n + 1) - 35)
-							local npcStr = Nx.NPCData[npcI]
-
-							local fac = strbyte (npcStr, 1) - 35
-							if fac ~= hideFac then
-
-								local oStr = strsub (npcStr, 2)
-								local desc, zone, loc = Quest:UnpackObjective (oStr)
-
---								Nx.prt ("Guide icons %s %d %s", desc, zone, loc)
-
-								local mapId = Map.NxzoneToMapId[zone]
-								if mapId then
-
-									if strbyte (oStr, loc) == 32 then  -- Points
-
-										loc = loc + 1
-										local cnt = floor ((#oStr - loc + 1) / 4)
-
-										for locN = loc, loc + cnt * 4 - 1, 4 do
-
---											local loc1 = strsub (oStr, locN, locN + 3)
-											local x, y = Quest:UnpackLocPtOff (oStr, locN)
-											local wx, wy = map:GetWorldPos (mapId, x, y)
-
-											local dist = (wx - px) ^ 2 + (wy - py) ^ 2
-
-											if dist < closeDist then
-
---												Nx.prt ("FindClose %s %s", showType, n)
-
-												closeDist = dist
-												close = npcI
-												closeMapId = mapId
-												closeX, closeY = wx, wy
-											end
-										end
-									else
-
-										local desc, zone, x, y = Quest:GetObjectivePos (oStr)
+					if data0[cont] then
+						for mapId, b in pairs(data0[cont]) do
+							if mapId then
+								local temp_arr = { strsplit("|",b) }
+								for c,d in pairs(temp_arr) do
+									local fac,x,y = strsplit(",",d)
+									fac,x,y = tonumber(fac), tonumber(x), tonumber(y)
+									if fac ~= hideFac then
 										local wx, wy = map:GetWorldPos (mapId, x, y)
---										local wx, wy = Quest:GetClosestObjectivePos (oStr, mapId, x, y)
-
 										local dist = (wx - px) ^ 2 + (wy - py) ^ 2
-
 										if dist < closeDist then
+--											Nx.prt ("FindClose %s %d", showType, n)
 											closeDist = dist
-											close = npcI
+											close = 0
 											closeMapId = mapId
 											closeX, closeY = wx, wy
 										end
@@ -3195,57 +2909,24 @@ end
 
 function Nx.Map.Guide:FindTaxis (campName)
 
---	campName = strsplit (",", campName)
-
---[[
-	local enCampName = campName
-
-	for k, name in pairs (NXlTaxiNames) do
-		if name == campName then
-			enCampName = k
-			break
-		end
-	end
-
-	if enCampName == "Hellfire Peninsula" then
-		campName = "The Dark Portal"
-	end
---]]
-
 	local Map = Nx.Map
 	local Quest = Nx.Quest
 	local hideFac = UnitFactionGroup ("player") == "Horde" and 1 or 2
 
 	for cont = 1, Map.ContCnt do
-
-		local dataStr = Nx.GuideData["Flight Master"][cont] or ""
-
-		for n = 1, #dataStr, 2 do
-
-			local npcI = (strbyte (dataStr, n) - 35) * 221 + (strbyte (dataStr, n + 1) - 35)
-			local npcStr = Nx.NPCData[npcI]
-
-			local fac = strbyte (npcStr, 1) - 35
-			if fac ~= hideFac then
-
-				local oStr = strsub (npcStr, 2)
-				local desc, zone, loc = Quest:UnpackObjective (oStr)
-				local name, camp = strsplit ("!", desc)
-
---				camp = strsplit (",", camp)
-				camp = NXlTaxiNames[camp] or camp	-- Localize it
-
---				Nx.prt ("FTaxi (%s)(%s) %s", campName, desc, strbyte (oStr, loc + 1))
-
-				if camp == campName then
-
-					local mapId = Map.NxzoneToMapId[zone]
-					local x, y = Quest:UnpackLoc (oStr, loc)
-					local wx, wy = Map:GetWorldPos (mapId, x, y)
-
---					Nx.prt ("FTaxi %s (%s %s)", mapId, x, y)
-
-					return name, wx, wy
+		for mapId, data in pairs(Nx.GuideData["Flight Master"][cont] or {}) do
+			local dataTbl = {strsplit ("|", data)}
+			for i, fxy in pairs(dataTbl) do
+				local fac, x, y = strsplit (",", fxy)
+				if fac ~= hideFac then
+					local namecamp = Nx.NPCNames[mapId..","..fxy]
+					local name, camp = strsplit (",", namecamp)
+					camp = strsub(camp,2)
+					camp = NXlTaxiNames[camp] or camp	-- Localize it
+					if camp == campName then
+						local wx, wy = Map:GetWorldPos (mapId, x, y)
+						return name, wx, wy
+					end
 				end
 			end
 		end

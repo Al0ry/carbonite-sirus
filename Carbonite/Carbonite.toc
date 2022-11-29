@@ -27,7 +27,7 @@ NxWarehouse.lua
 NxSec.lua
 NxTimer.lua
 MapWorldHotspots.lua
-Guide.lua
+Data\data.xml
 Quests.lua
 ZoneConnections.lua
 Zones.lua

@@ -6491,13 +6491,13 @@ function Nx.Map:UpdateZones()
 			self:UpdateOverlay (id, .8, true)
 		end
 
-		self:UpdateOverlay (1027, .8, true) -- lostisland hack
-		self:UpdateOverlay (1028, .8, true) -- telabim hack
-		self:UpdateOverlay (1029, .8, true) -- andrakkis hack
-		self:UpdateOverlay (2033, .8, true) -- tolgarod hack
-		self:UpdateOverlay (2037, .8, true) -- risingdepth hack
-		self:UpdateOverlay (2038, .8, true) -- mangroove hack
-		self:UpdateOverlay (3009, .8, true) -- shargel hack
+		-- self:UpdateOverlay (1027, .8, true) -- lostisland hack
+		-- self:UpdateOverlay (1028, .8, true) -- telabim hack
+		-- self:UpdateOverlay (1029, .8, true) -- andrakkis hack
+		-- self:UpdateOverlay (2033, .8, true) -- tolgarod hack
+		-- self:UpdateOverlay (2037, .8, true) -- risingdepth hack
+		-- self:UpdateOverlay (2038, .8, true) -- mangroove hack
+		-- self:UpdateOverlay (3009, .8, true) -- shargel hack
 --[[
 		if freeOrScale then
 
