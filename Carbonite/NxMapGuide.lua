@@ -1879,19 +1879,16 @@ function Nx.Map.Guide:UpdateMapGeneralIcons (cont, showType, hideFac, tx, name, 
 
 	if Nx.GuideData[showType][cont] then
 		for mapId, b in pairs(Nx.GuideData[showType][cont]) do
-			if mapId then
-				if not showMapid or mapId == showMapId then
-					local temp_arr = { strsplit("|",b) }
-					for c,d in pairs(temp_arr) do
-						local fac,x,y = strsplit(",",d)
-						fac,x,y = tonumber(fac), tonumber(x), tonumber(y)
-						if fac ~= hideFac then
-							local wx, wy = map:GetWorldPos(mapId, x, y)
-							local icon = map:AddIconPt (iconType, wx, wy, nil, tx)
-							local npcName = Nx.NPCNames[mapId..","..d] and ( "\n" .. Nx.NPCNames[mapId..","..d]) or ""
-							local str = format ("%s\n%s %.1f %.1f", name .. npcName , Nx.MapIdToName[mapId], x, y)
-							map:SetIconTip (icon, str)
-						end
+			if not showMapId or mapId == showMapId then
+				for c,d in pairs({strsplit("|",b)}) do
+					local fac,x,y = strsplit(",",d)
+					fac,x,y = tonumber(fac), tonumber(x), tonumber(y)
+					if fac ~= hideFac then
+						local wx, wy = map:GetWorldPos(mapId, x, y)
+						local icon = map:AddIconPt (iconType, wx, wy, nil, tx)
+						local npcName = Nx.NPCNames[mapId..","..d] and ( "\n" .. Nx.NPCNames[mapId..","..d]) or ""
+						local str = format ("%s\n%s %.1f %.1f", name .. npcName , Nx.MapIdToName[mapId], x, y)
+						map:SetIconTip (icon, str)
 					end
 				end
 			end
