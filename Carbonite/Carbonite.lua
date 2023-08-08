@@ -1,4 +1,30 @@
-﻿---------------------------------------------------------------------------------------
+﻿-- COMPAT
+
+if not IsInGroup then
+	function IsInGroup()
+		return GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0
+	end
+end
+
+if not IsInRaid then
+	function IsInRaid()
+		return GetNumRaidMembers() > 0
+	end
+end
+
+if not GetNumSubgroupMembers then
+	function GetNumSubgroupMembers()
+		return GetNumPartyMembers()
+	end
+end
+
+if not GetNumGroupMembers then
+	function GetNumGroupMembers()
+		return IsInRaid() and GetNumRaidMembers() or GetNumPartyMembers()
+	end
+end
+
+---------------------------------------------------------------------------------------
 -- Carbonite - Addon for World of Warcraft(tm)
 -- Copyright 2007-2012 Carbon Based Creations, LLC
 --
@@ -26,7 +52,7 @@ function NXInit()
 
 	NXTITLEFULL = NXTITLE
 
-	Nx.VERMAJOR			= 5.063
+	Nx.VERMAJOR			= 5.064
 	Nx.VERMINOR			= .000			-- Not 0 is a test version
 	Nx.BUILD				= 320
 
@@ -376,9 +402,11 @@ function Nx:ADDON_LOADED (event, arg1, ...)
 
 	if arg1 == NXTITLELOW then
 
---		DEFAULT_CHAT_FRAME:AddMessage ("|cffc0c0ff"..NXTITLE.." |cffffffff"..Nx.VERSION.." B"..Nx.BUILD.." "..NXLOADING)
+		DEFAULT_CHAT_FRAME:AddMessage ("|cffc0c0ff"..NXTITLE.." |cffffffff"..Nx.VERSION.." B"..Nx.BUILD.." "..NXLOADING)
 
-		--
+		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", function(self, event, msg, ...) 
+			return msg:match('Персонаж по имени "([^_]+)" в игре не найден') end)
+
 
 		local fact = UnitFactionGroup ("player")
 		Nx.PlFactionNum = strsub (fact, 1, 1) == "A" and 0 or 1

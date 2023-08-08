@@ -42,48 +42,48 @@ NxMapOptsDefaults = {
 				NXPlyrFollow = true,
 				NXWorldShow = true,
 			},
-			[9001] = {	-- AB
+			[90001] = {	-- AB
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 --				NXScale = 1,
 			},
-			[9002] = {	-- WG
+			[90002] = {	-- WG
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
-			[9003] = {	-- AV
+			[90003] = {	-- AV
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
-			[9004] = {	-- EOS
+			[90004] = {	-- EOS
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
-			[9008] = {	-- SoA
+			[90008] = {	-- SoA
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
-			[9009] = {	-- IC
+			[90009] = {	-- IC
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
-			[9010] = {	-- TBG
+			[90010] = {	-- TBG
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
-			[9011] = {	-- TP
+			[90011] = {	-- TP
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
-			[9012] = {	-- TK
+			[90012] = {	-- TK
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
-			[9013] = {	-- SM
+			[90013] = {	-- SM
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
-			[9014] = {	-- TPG
+			[90014] = {	-- TPG
 				NXPlyrFollow = false,
 				NXWorldShow = false,
 			},
@@ -1788,16 +1788,35 @@ function Nx.Map:InitFrames()
 	-- Init continent frames
 
 	Nx.ContBlks = {
-		{ 0,1,1,0, 0,1,1,0, 0,1,1,0 },
-		{ 0,1,1,0, 0,1,1,0, 0,1,1,0 },
+		[0] = { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		-- { 0,1,1,0, 0,1,1,0, 0,1,1,0 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
 		{ 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
 		{ 1,1,1,1, 1,1,1,1, 1,1,1,1 },
-		{ 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		-- { 0,0,0,0, 0,0,0,0, 0,0,0,0 },
 	}
 
 	self.ContFrms = {}
 
-	for n = 1, Nx.Map.ContCnt do
+	for n = 0, Nx.Map.ContCnt do
 
 		self.ContFrms[n] = {}
 
@@ -1819,7 +1838,8 @@ function Nx.Map:InitFrames()
 				cf.texture = t
 
 				if n == 0 then
-					t:SetTexture ("Interface\\AddOns\\Carbonite\\Gfx\\Map\\Cont\\".."Kal"..texi)
+					-- t:SetTexture ("Interface\\AddOns\\Carbonite\\Gfx\\Map\\Cont\\".."Kal"..texi)
+					t:SetTexture ("Interface\\WorldMap\\"..mapFileName.."\\"..mapFileName..i)
 					texi = texi + 1
 				else
 					t:SetTexture ("Interface\\WorldMap\\"..mapFileName.."\\"..mapFileName..i)
@@ -1827,6 +1847,8 @@ function Nx.Map:InitFrames()
 			end
 		end
 	end
+
+
 
 --[[
 	local cf = CreateFrame ("Frame", nil, f)
@@ -4581,7 +4603,7 @@ function Nx.Map:Update (elapsed)
 		local yShift = 0
 
 		if not Nx.Map.InstanceInfo[rid] or not Nx.Map.InstanceInfo[rid][3*lvl] then
-			Nx.prt ("No InstanceInfo for %s", rid)
+	--		Nx.prt ("No InstanceInfo for %s", rid)
 		else
 			xShift = Nx.Map.InstanceInfo[rid][3*lvl-2]/100
 			yShift = Nx.Map.InstanceInfo[rid][3*lvl-1]/100
@@ -5334,8 +5356,9 @@ function Nx.Map:ScanContinents()
 
 		local poiT = {}
 		self.ContPOIs[cont] = poiT
-
-		SetMapZoom (cont)
+		if cont ~= 12 then
+			SetMapZoom (cont)
+		end
 		local mapId = cont * 1000
 
 		local name, description, txIndex, pX, pY
@@ -6052,8 +6075,9 @@ function Nx.Map:MoveContinents()
 
 	if self.CurOpts.NXWorldShow then
 
-		for contN = 1, Nx.Map.ContCnt do
+		for contN = 0, Nx.Map.ContCnt do
 			local lvl = contN <= 2 and self.Level or self.Level + 1
+			-- local lvl = self.Level + 1
 			self:MoveZoneTiles (contN, 0, self.ContFrms[contN], self.WorldAlpha, lvl)
 		end
 
@@ -6086,7 +6110,7 @@ function Nx.Map:MoveContinents()
 
 		local frms, frm
 
-		for contN = 1, Nx.Map.ContCnt do
+		for contN = 0, Nx.Map.ContCnt do
 			frms = self.ContFrms[contN]
 
 			for i = 1, 12 do
@@ -6889,6 +6913,7 @@ function Nx.Map:UpdateMiniFrames()
 	local frmNum = 1
 
 	local scale = 256 * 0.416767770014
+	if mapId >= 5000 and mapId <= 5011 then scale = scale*1.62 end -- Felyard hack TEMP
 	local size = scale
 
 --	size = size - 4
@@ -8528,14 +8553,6 @@ end
 function Nx.Map:InitTables()
 
 	local Nx = Nx
-
---[[
-	NxData.NXMapDebugZones1 = { GetMapZones (1) }
-	NxData.NXMapDebugZones2 = { GetMapZones (2) }
-	NxData.NXMapDebugZones3 = { GetMapZones (3) }
-	NxData.NXMapDebugZones4 = { GetMapZones (4) }
-	Nx.prt ("zone cap!!!!!")
---]]
 	local worldInfo = self.MapWorldInfo
 
 	Nx.MapNameToId = {}
@@ -8548,24 +8565,27 @@ function Nx.Map:InitTables()
 	-- Get Blizzard's alphabetical set of names
 
 	self.MapNames = {
+		[0]={},
 		{ GetMapZones(1)},
 		{ GetMapZones(2)},
 		{ GetMapZones(3)},
 		{ GetMapZones(4)},
 		{ GetMapZones(5)},
+		{ GetMapZones(6)},
+		{ GetMapZones(7)},
+		{}, -- мангровый пока не допилили
+		{}, -- тель абим
+		{ GetMapZones(10)},
+		{ GetMapZones(11)},
+		{ GetMapZones(-2)}, -- Forbes
 	}
 
-	tinsert(self.MapNames[1], NXlMapNames["Lost Island"] or "Lost Island")
-	tinsert(self.MapNames[1], NXlMapNames["Tel'Abim"] or "Tel'Abim")
-	tinsert(self.MapNames[1], NXlMapNames["Andrakkis"] or "Andrakkis")
-
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
-	tinsert(self.MapNames[2], NXlMapNames["Tol'Garod"] or "Tol'Garod")
-	tinsert(self.MapNames[2], NXlMapNames["Rising Depths"] or "Rising Depths")
-	tinsert(self.MapNames[2], NXlMapNames["Mangrove Island"] or "Mangrove Island")
+
+	tinsert(self.MapNames[8], NXlMapNames["Mangrove Island"] or "Mangrove Island")
+	tinsert(self.MapNames[9], NXlMapNames["Tel'Abim"] or "Tel'Abim")
 
 	tinsert(self.MapNames[3], NXlMapNames["Shar'gel"] or "Shar'gel")
-	
 	tinsert (self.MapNames[4], NXlMapNames["Dalaran Underbelly"] or "Dalaran Underbelly")
 
 	local numDupes = 0
@@ -8584,10 +8604,10 @@ function Nx.Map:InitTables()
 	-- end
 	
 	local BGNames = {}
-	self.MapNames[9] = BGNames
+	self.MapNames[90] = BGNames
 
 	for n = 1, 999 do
-		local winfo = worldInfo[9000 + n]
+		local winfo = worldInfo[90000 + n]
 		if not winfo then
 			break
 		end
@@ -8597,8 +8617,8 @@ function Nx.Map:InitTables()
 
 	self.ZoneOverlays["lakewintergrasp"]["lakewintergrasp"] = "0,0,1024,768"
 	self.MapSubNames = NXlMapSubNames
-	self.ContCnt = 5
-	continentNums = { 1, 2, 3, 4, 5, 9 }
+	self.ContCnt = 12
+	continentNums = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 90 }
 
 	self.CZ2Id = {}
 
@@ -8642,7 +8662,7 @@ function Nx.Map:InitTables()
 		end
 	end
 
-	for n = 1, self.ContCnt do
+	for n = 0, self.ContCnt do
 		self.CZ2Id[n][0] = n * 1000
 	end
 
@@ -8788,7 +8808,7 @@ function Nx.Map:InitTables()
 			if cont == "8" then
 				cont = 5
 			end
-			local mid = cont * 1000 + 10000 + id
+			local mid = cont * 1000 + 100000 + id
 
 			Nx.MapNameToId[name] = mid
 			Nx.MapIdToName[mid] = name
@@ -8906,7 +8926,7 @@ function Nx.Map:InitTables()
 
 	-- Init zone connections
 
-	for ci = 1, self.ContCnt do
+	for ci = 0, self.ContCnt do
 		for n = 0, 999 do
 
 			local mapId = ci * 1000 + n
@@ -9007,7 +9027,7 @@ end
 function Nx.Map:CZ2MapId (cont, zone)
 
 	if cont <= 0 then
-		return 9000
+		return 90000
 	end
 
 	return self.CZ2Id[cont][zone]
@@ -9017,14 +9037,14 @@ end
 -- Get the real player location map id without map level calculation
 
 function Nx.Map:GetRealBaseMapId()
-	return Nx.MapNameToId[GetRealZoneText()] or 9000
+	return Nx.MapNameToId[GetRealZoneText()] or 90000
 end
 
 --------
 -- Get the real player location map id
 
 function Nx.Map:GetRealMapId()
-	return select(2,GetInstanceInfo()) ~= "none" and Nx.AIdToId[GetCurrentMapAreaID()] or Nx.MapNameToId[GetRealZoneText()] or 9000
+	return select(2,GetInstanceInfo()) ~= "none" and Nx.AIdToId[GetCurrentMapAreaID()] or Nx.MapNameToId[GetRealZoneText()] or 90000
 end
 
 --------
@@ -9037,7 +9057,7 @@ function Nx.Map:GetCurrentMapId()
 	local cont = GetCurrentMapContinent()
 	local zone = GetCurrentMapZone()
 
-	if cont < 1 or cont > self.ContCnt then
+	if cont < 0 or cont > self.ContCnt then
 
 		local aid = GetCurrentMapAreaID()
 
@@ -9066,7 +9086,7 @@ function Nx.Map:GetCurrentMapId()
 	end ]]
 --
 
-	local mapId = self.CZ2Id[cont][zone] or 9000
+	local mapId = self.CZ2Id[cont][zone] or 90000
 	if mapId == Nx.MapNameToId[GetRealZoneText()] then		-- Same as real zone?
 		return self:GetRealMapId()
 	end
@@ -9093,7 +9113,7 @@ function Nx.Map:SetCurrentMap (mapId)
 				SetMapToCurrentZone()		-- This fixes the Scarlet Enclave map selection, so we get player position
 				SetDungeonMapLevel (1)
 			elseif self.MapWorldInfo[mapId].UseAId then
-				Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
+				--Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
 				SetMapByID (Nx.IdToAId[mapId] - 1)
 			else
 				--Nx.prt("SetMapZoom c:%s, z:%s", cont or "nil", zone or "nil" )
@@ -9350,7 +9370,7 @@ end
 function Nx.Map:IdToContZone (mapId)
 
 	if self:IsInstanceMap (mapId) then
-		return floor (mapId / 1000) - 10, 0
+		return floor ((mapId - 100000)/1000), 0
 	end
 
 	local info = self.MapWorldInfo[mapId]
@@ -9359,7 +9379,7 @@ function Nx.Map:IdToContZone (mapId)
 --		Nx.prt ("IdToContZone info nil %s", mapId)
 --	end
 
-	return info.Cont or 9, info.Zone or 0
+	return info.Cont or 90, info.Zone or 0
 end
 
 --------
@@ -9397,14 +9417,14 @@ end
 --
 
 function Nx.Map:IsInstanceMap (mapId)
-	return mapId >= 10000
+	return mapId >= 100000
 end
 
 --------
 --
 
 function Nx.Map:IsBattleGroundMap (mapId)
-	return mapId >= 9001 and mapId <= 9099
+	return mapId >= 99001 and mapId <= 99999
 end
 
 --------

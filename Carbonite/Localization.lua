@@ -5101,7 +5101,7 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	["Redridge Mountains"] = "Красногорье",
 	["Ruins of Ahn'Qiraj"] = "Руины Ан'Киража",
 	["Ruins of Lordaeron"] = "Руины Лордерона",
-	["Scarlet Monastery"] = "Монастырь Алого ордена",
+	["Scarlet Monastery"] = "Монастырь Алого Ордена",
 	["Searing Gorge"] = "Тлеющее ущелье",
 	["Serpentshrine Cavern"] = "Змеиное святилище",
 	["Sethekk Halls"] = "Сетеккские залы",
@@ -5204,7 +5204,20 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	["Rising Depths"] = "Поднявшиеся глубины",
 	["Mangrove Island"] = "Мангровый остров",
 	["Tel'Abim"] = "Тель'Абим",
-	["Andrakkis"] = "Андраккис"
+	["Andrakkis"] = "Андраккис",
+	["Northeron"] = "Нордерон",
+	["Felyard"] = "Фельярд",
+	["Dlan Hodira"] = "Длань Ходира",
+	["Pokoi Grolana"] = "Копье Гиннунга и Покой Гролана",
+	["Les Velikanov"] = "Лес Великанов",
+	["Ognenni Holm"] = "Огненный холм",
+	["Oskvernenni Krai"] = "Осквернённый Край",
+	["Alh"] = "Остров Западного Ветра",
+	["Lunar"] = "Остров Лунар",
+	["Tronheim"] = "Тронхейм",
+	["Haustlund"] = "Хаустлунд",
+	["Chasha Proklyatih"] = "Чаща Проклятых",
+	["Yarnvid"] = "Ярнвид"
 	}
 	NXlMapSubNames = {
 		["Даларан"] = {

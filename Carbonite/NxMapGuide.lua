@@ -1864,7 +1864,7 @@ end
 
 function Nx.Map.Guide:UpdateMapGeneralIcons (cont, showType, hideFac, tx, name, iconType, showMapId)
 
-	if cont >= 9 then
+	if cont >= 90 then
 		return
 	end
 
@@ -1987,7 +1987,7 @@ function Nx.Map.Guide:UpdateZonePOIIcons()
 
 --	Nx.prt ("zpoi mapid %s, cont %s", mapId, cont)
 
-	if cont > 0 and cont < 9 then
+	if cont > 0 and cont < Map.ContCnt then
 
 		for k, name in ipairs (Nx.GuidePOI) do
 

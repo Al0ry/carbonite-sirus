@@ -1253,7 +1253,7 @@ function Nx.Fav:UpdateIcons()
 
 --	Nx.prt ("mapid %s, cont %s", mapId, cont)
 
-	if cont > 0 and cont < 9 then
+	if cont > 0 and cont < Map.ContCnt then
 
 		local notes = self:FindFolder ("Notes")
 
