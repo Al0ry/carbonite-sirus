@@ -1805,13 +1805,11 @@ function Nx.Map:InitFrames()
 		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
 		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
 		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
-		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
-		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
-		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
-		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
-		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
-		{ 1,1,1,1, 1,1,1,1, 1,1,1,1 },
 		-- { 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		{ 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
+		-- { 1,1,1,1, 1,1,1,1, 1,1,1,1 },
+		{ 0,0,0,0, 0,0,0,0, 0,0,0,0 },
 	}
 
 	self.ContFrms = {}
@@ -5356,9 +5354,7 @@ function Nx.Map:ScanContinents()
 
 		local poiT = {}
 		self.ContPOIs[cont] = poiT
-		if cont ~= 12 then
-			SetMapZoom (cont)
-		end
+		SetMapZoom(cont)
 		local mapId = cont * 1000
 
 		local name, description, txIndex, pX, pY
@@ -8576,14 +8572,15 @@ function Nx.Map:InitTables()
 		{}, -- мангровый пока не допилили
 		{}, -- тель абим
 		{ GetMapZones(10)},
-		{ GetMapZones(11)},
-		{ GetMapZones(-2)}, -- Forbes
+		{ GetMapZones(11)}
 	}
 
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
 
 	tinsert(self.MapNames[8], NXlMapNames["Mangrove Island"] or "Mangrove Island")
 	tinsert(self.MapNames[9], NXlMapNames["Tel'Abim"] or "Tel'Abim")
+	tinsert(self.MapNames[9], NXlMapNames["VIP"] or "VIP")
+	tinsert(self.MapNames[9], NXlMapNames["PRIME"] or "PRIME")
 
 	tinsert(self.MapNames[3], NXlMapNames["Shar'gel"] or "Shar'gel")
 	tinsert (self.MapNames[4], NXlMapNames["Dalaran Underbelly"] or "Dalaran Underbelly")
@@ -8617,8 +8614,8 @@ function Nx.Map:InitTables()
 
 	self.ZoneOverlays["lakewintergrasp"]["lakewintergrasp"] = "0,0,1024,768"
 	self.MapSubNames = NXlMapSubNames
-	self.ContCnt = 12
-	continentNums = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 90 }
+	self.ContCnt = 11
+	continentNums = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 90 }
 
 	self.CZ2Id = {}
 

@@ -5192,6 +5192,7 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	["Zul'Drak"] = "Зул'Драк",
 	["Hyjal"] = "Хиджал",
 	["Scarlet Monastery"] = "Монастырь Алого Ордена",
+	["VIP-PRIME"] = "VIP Острова",
 	["VIP"] = "Остров Форбс",
 	["PRIME"] = "Остров Погоды",
 	["Gilneas"] = "Гилнеас",
