@@ -224,7 +224,7 @@ Map.MapInfo = {
         X = 10564,
 		Y = -150,
 		Min = 2001,
-		Max = 2036,
+		Max = 2037,
 	},
 	{
 		Name = "Outland",
@@ -385,11 +385,13 @@ Map.MapWorldInfo = {
 [2029]={Name="Isle of Quel'Danas",6.655,Map.BXO+1060.404,Map.BYO-2713.859,Overlay="sunwell",MId=2011,Fish = 450,},
 [2030]={Name="Plaguelands: The Scarlet Enclave",6.32,1200,-650,Overlay="scarletenclave",City = true,UseAId = true,},
 [2031]={Name="Scarlet Monastery",0.41,132.002,-589.765,Overlay="scarletmonasteryentrance",City = true,Fish = 425,UseAId = true,},
-[2032]={Name="Gilneas",0--[[ 3.5 ]],-457,150,Overlay="fireworld",City = true,Fish = 425,},
-[2033]={Name="Blackrock Mountain",1.4253,152.24,1465.03,Overlay="blackrockmountain1",City = true, Fish = 225,},
-[2034]={Name="Blackrock Mountain1",1.52,125.5,1417.4,Overlay="blackrockmountain2",City = true, Fish = 225,},
-[2035]={Name="Blackrock Mountain2",0.5,229,1496.5,Overlay="blackrockmountain3",City = true, Fish = 225,},
-[2036]={Name="Northeron",0,-457,150,Overlay="fireworld",City = true,Fish = 425,},
+[2032]={Name="Blackrock Mountain",1.4253,152.24,1465.03,Overlay="blackrockmountain1",City = true, Fish = 225,},
+[2033]={Name="Blackrock Mountain1",1.52,125.5,1417.4,Overlay="blackrockmountain2",City = true, Fish = 225,},
+[2034]={Name="Blackrock Mountain2",0.5,229,1496.5,Overlay="blackrockmountain3",City = true, Fish = 225,},
+-- [2035]={Name="Gilneas",9.5998,-853.32,-106.66,Overlay="gilneasmain",Fish = 425,},
+[2035]={Name="Gilneas",3.51978,-458.638,149.324,Overlay="gilneascity",Fish = 425,UseAId = true,MId=2035,},
+[2036]={Name="Gilneas: Silverpine Forest",4.7997,-586.63,-106.66,Overlay="gilneassilverpineforest",Fish = 425,UseAId = true,MId=2035,},
+[2037]={Name="Norderon",10.666,-426.64,-1243.66,Overlay="norderon",Fish = 425,},
 --
 [3000]={34.606,-2587.3,-1151.7,},
 [3001]={Name="Blade's Edge Mountains",10.85003,-1769.168,-881.6678,Overlay="bladesedgemountains",QAchievementId=1193,},
@@ -401,12 +403,12 @@ Map.MapWorldInfo = {
 [3007]={Name="Terokkar Forest",10.8,-1416.667,200,Overlay="terokkarforest",Fish = 450,QAchievementId=1191,QAchievementIdH=1272,},
 [3008]={Name="Zangarmarsh",10.05418,-1895,-387.0831,Overlay="zangarmarsh",Fish = 400,QAchievementId=1190,},
 [3009]={Name="Shar'gel",4.16,109,42,Overlay="twistingnether", Explored = true, UseAId = true},
---
+--1654.8,923
 [4000]={35.5,0.01,-0.01,},
 [4001]={Name="Borean Tundra",11.521,125.764810,1139.054323,Overlay="boreantundra",Fish = 475,QAchievementId=33,QAchievementIdH=1358,},
 [4002]={Name="Crystalsong Forest",5.4416,1550.386409,817.907816,Overlay="crystalsongforest",Fish = 500,},
-[4003]={Name="Dalaran",1.6589/1.3,1629,861,Overlay="dalaran",MapBaseName = "dalaran1_",City = true,ScaleAdjust = 1.3,Fish = 525,Level2Id=4004,},
-[4004]={Name="Dalaran Underbelly",1.6589/1.3,1629,861,Overlay="dalaransewerage",MapBaseName = "dalaransewerage1_",City = true,ScaleAdjust = 1.3,Fish = 525,Level1Id=4003,},
+[4003]={Name="Dalaran",1.6589,1629,905,Overlay="dalaran",MapBaseName = "dalaran1_",City = true,Fish = 525,Level2Id=4004,},
+[4004]={Name="Dalaran Underbelly",1.6589,1629,905,Overlay="dalaransewerage",MapBaseName = "dalaransewerage1_",City = true,Fish = 525,Level1Id=4003,},
 [4005]={Name="Dragonblight",11.21,1113.94,1003.78,Overlay="dragonblight",Fish = 475,QAchievementId=35,QAchievementIdH=1359,},
 [4006]={Name="Grizzly Hills",10.5,2061.032452,1015.273026,Overlay="grizzlyhills",Fish = 475,QAchievementId=37,QAchievementIdH=1357,},
 [4007]={Name="Howling Fjord",12.085,2119.306683,1495.527721,Overlay="howlingfjord",Fish = 475,QAchievementId=34,QAchievementIdH=1356,},
@@ -424,7 +426,7 @@ Map.MapWorldInfo = {
 [5004]={Name="Ognenni Holm",2.1332*Map.FelyardScale,53.33*Map.FelyardScale,-293.315*Map.FelyardScale,Overlay="felyardognenniholm",},
 [5005]={Name="Oskvernenni Krai",7.9995*Map.FelyardScale,-266.65*Map.FelyardScale,-639.96*Map.FelyardScale,Overlay="felyardoskvernennikrai",},
 [5006]={Name="Alh",6.3996*Map.FelyardScale,-746.62*Map.FelyardScale,-639.96*Map.FelyardScale,Overlay="felyardalh",},
-[5007]={Name="Lunar",5.333*Map.FelyardScale,426.64*Map.FelyardScale,-17.7767*Map.FelyardScale,Overlay="felyardlunar",ScaleAdjust = 0.3},
+[5007]={Name="Lunar",5.333*Map.FelyardScale,426.64*Map.FelyardScale,-17.7767*Map.FelyardScale,Overlay="felyardlunar",},
 [5008]={Name="Tronheim",2.39985*Map.FelyardScale,-159.99*Map.FelyardScale,-26.665*Map.FelyardScale,Overlay="felyardtronheim",City=true,},
 [5009]={Name="Haustlund",6.3996*Map.FelyardScale,0*Map.FelyardScale,-213.32*Map.FelyardScale,Overlay="felyardhaustlund",},
 [5010]={Name="Chasha Proklyatih",3.1998*Map.FelyardScale,-213.32*Map.FelyardScale,-213.32*Map.FelyardScale,Overlay="felyardchashaproklyatih",},
@@ -1925,6 +1927,35 @@ Map.ZoneOverlays = {
     },
     ["tolgarod"] = {["tolgarod"] = "0,0,1024,768",},
     ["twistingnether"] = {["twistingnether"] = "0,0,1024,768",},
+    ["gilneascity"] = {
+        ["worgengilneascity"] = "0,156,768,512",
+        ["worgennorthforestcrossroads"] = "234,0,768,512",
+        ["worgenheathrowestate"] = "0,0,512,512"
+    },
+    ["gilneassilverpineforest"] = {
+        ["worgensilverpineforest"] = "234,156,768,512",
+        ["thickettasshala"] = "490,412,512,256",
+        ["worgenpyrewoodvillage"] = "234,156,512,512",
+        ["worgenshadowfangkeep"] = "234,156,512,256",
+        ["worgenambermill"] = "746,156,256,256",
+        ["worgenforsakenfront"] = "746,156,256,512",
+        ["cemeteryroguesrefuge"] = "490,0,512,256",
+        ["worgenforsakenrearguard"] = "234,0,512,256"
+    },
+    ["norderon"] = {
+        ["norderonscarletwindforest"] = "0,156,512,512",
+        ["norderonspireofdawn"]	= "256,412,256,256",
+        ["norderonsilverdustmine"] = "256,156,256,256",
+        ["norderonazurepath"] = "256,412,512,256",
+        ["norderonpowerstationantelar"] = "256,156,512,512",
+        ["norderonrunestone"] = "256,156,512,512",
+        ["norderonpowerstationanbalor"] = "512,412,256,256",
+        ["norderonwandererenclave"] = "512,156,256,512",
+        ["norderonamanishioutpost"] = "490,156,512,512",
+        ["norderongreatserpenttemple"] = "490,156,512,512",
+        ["norderonzebjunga"] = "746,156,256,512",
+        ["norderoneldranil"] = "234,156,512,256"
+    },
     ["lostisland"] = {
         ["doomvalley"] = "256,156,512,512",
         ["lakelommaetal"] = "256,156,512,512",
@@ -2154,6 +2185,15 @@ for i=1,7 do
         Map.AMB[1010 +  100* i + j] =  string.format("Andrakkis_%d_%d", 28+i, 28+j)
     end
 end
+--Gilneas Starting Zone
+Map.GMB = {}
+for i=0,4 do 
+    for j=0,4 do
+        Map.GMB[2631 + 100* i + j] =  string.format("Sirus4_%d", 1+ 5* j + i)
+    end
+    Map.GMB[2631 + 100*i + 5] =  string.format("Sirus4_%d", 1+ 5*5 + i-1)
+end
+Map.GMB[2631 + 100*0 + 5] =  nil--string.format("Sirus4_%d", 1)
 
 
 -- TODO
@@ -2204,7 +2244,9 @@ Map.MiniMapBlks = {
     [11]={Map.AMB,1000,4063,-3408,},
     -- [12]={Map.VIPB,1000,3654,-2174,},
     [1003]={Map.DMB,5033,-1580.243817,-1403.381588+100,},
-    [2011]={Map.BMB,4111,4241.011121+6780-15,-1924.128369+50+40,},}
+    [2011]={Map.BMB,4111,4241.011121+6780-15,-1924.128369+50+40,},
+    [2035]={Map.GMB,2420,2930.591080+6780,-1480.211752+50,},
+}
 
 --------
 -- Get minimap info for map

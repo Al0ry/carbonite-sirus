@@ -8576,6 +8576,8 @@ function Nx.Map:InitTables()
 	}
 
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
+	-- tinsert(self.MapNames[2], NXlMapNames["Gilneas City"] or "Gilneas City")
+	tinsert(self.MapNames[2], NXlMapNames["Gilneas: Silverpine Forest"] or "Gilneas: Silverpine Forest")
 
 	tinsert(self.MapNames[8], NXlMapNames["Mangrove Island"] or "Mangrove Island")
 	tinsert(self.MapNames[9], NXlMapNames["Tel'Abim"] or "Tel'Abim")
@@ -9110,7 +9112,7 @@ function Nx.Map:SetCurrentMap (mapId)
 				SetMapToCurrentZone()		-- This fixes the Scarlet Enclave map selection, so we get player position
 				SetDungeonMapLevel (1)
 			elseif self.MapWorldInfo[mapId].UseAId then
-				--Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
+				Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
 				SetMapByID (Nx.IdToAId[mapId] - 1)
 			else
 				--Nx.prt("SetMapZoom c:%s, z:%s", cont or "nil", zone or "nil" )
