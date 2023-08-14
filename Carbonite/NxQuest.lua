@@ -248,7 +248,7 @@ function Nx.Quest:Init()
 
 		id = id <= 100000 and id or id - 100000
 
-		local quest = Nx.Quests[(id + 7) * 2 - 3]
+		local quest = Nx.Quests[id]
 
 		local objI, zone, x, y = strsplit ("^", s)
 		objI = tonumber (objI)
@@ -278,26 +278,6 @@ function Nx.Quest:Init()
 			end
 		end
 	end
---
-
-	-- Patch Molten Front
---[[
-	for mungeId, q in pairs (Nx.Quests) do
-
-		local id = (mungeId + 3) / 2 - 7		-- Decode
-
-		if q[2] then
-			local sName, zone = self:UnpackSE (q[2])
-			if zone == 199 then
-				Nx.prt ("qpatch %s", sName)
-
-				local i = 1
-				while q[3 + i] do
-				end
-			end
-		end
-	end
---]]
 
 	self.DailyTypes = {
 		["1"] = "Daily",
@@ -683,29 +663,24 @@ function Nx.Quest:Init()
 	local obj0Cnt = 0
 	local objNoZoneCnt = 0
 --]]
-
-	for mungeId, q in pairs (Nx.Quests) do
-
-		local id = (mungeId + 3) / 2 - 7		-- Decode
-
---		Nx.Quests[mungeId][2] = nil
---		Nx.Quests[mungeId][3] = nil
---		Nx.Quests[mungeId][4] = nil
+	NxData.NxQuestsDump = {}
+	
+	for id, q in pairs (Nx.Quests) do
 
 		qCnt = qCnt + 1
 		maxid = max (id, maxid)
 
-		local name, side, level = self:Unpack (q[1])
-		if side == enFact or level > 0 and level < qLoadLevel or level > qMaxLevel then
---[[
-			if side == enFact then
---				Nx.prt ("Del q %s side", id)
-			else
-				Nx.prt ("Del q %s level", id)
-			end
---]]
-			Nx.Quests[mungeId] = nil
+		local name, side, level, minlvl, nextId = self:Unpack (q[1])
 
+		if side == enFact or level > 0 and level < qLoadLevel or level > qMaxLevel then
+
+			-- if side == enFact then
+			-- 	Nx.prt ("Del q %s side", id)
+			-- else
+			-- 	Nx.prt ("Del q %s level", id)
+			-- end
+
+			Nx.Quests[id] = nil
 		else
 
 			self.IdToQuest[id] = q
@@ -780,9 +755,7 @@ function Nx.Quest:Init()
 			end
 --]]
 
-			self:CheckQuestSE (q, 3)
-
-			for n = 4, 99 do
+			for n = 3, 99 do
 				if not q[n] then
 					break
 				end
@@ -803,7 +776,7 @@ function Nx.Quest:Init()
 
 	--
 
-	for mungeId, q in pairs (Nx.Quests) do
+	for id, q in pairs (Nx.Quests) do
 
 		local name, side, lvl, minlvl, next = self:Unpack (q[1])
 
@@ -851,8 +824,6 @@ function Nx.Quest:Init()
 		local grp = {}
 
 		for id, q in pairs (Nx.Quests) do
-
-			id = (id + 3) / 2 - 7
 
 			local name, side, level = self:Unpack (q[1])
 
@@ -1092,11 +1063,10 @@ function Nx.Quest:CheckQuestObj (q, n)
 	local mapId = Nx.Map.NxzoneToMapId[zone]
 
 	if (x == 0 or y == 0) and mapId and not Nx.Map:IsInstanceMap (mapId) then
-		q[n] = format ("%c%s# ####", #oName + 35, oName)	-- Zero it to get a red button
+		q[n] = format ("%s~0~0~0~0", oName)	-- Zero it to get a red button
 --		Nx.prt ("zeroed %s, %s", self:UnpackName (q[1]), oName)
 	end
 end
-Nx.Quest.CheckQuestSE = Nx.Quest.CheckQuestObj
 
 --------
 -- Calculate the watch colors
@@ -1952,11 +1922,11 @@ function Nx.Quest:ScanBlizzQuestDataZone()
 
 --							self.ScanBlizzChanged = true
 
-							quest[1] = format ("%c%s######", #title + 35, title)
+							quest[1] = format ("%s~0~0~0~0", title)
 
 							self.IdToQuest[id] = quest
 
-							Nx.Quests[(id + 7) * 2 - 3] = quest
+							Nx.Quests[id] = quest
 						end
 
 						x = x * 10000
@@ -1966,8 +1936,7 @@ function Nx.Quest:ScanBlizzQuestDataZone()
 
 							patch = bit.bor (patch, 1)		-- Flag as a patched quest
 
-							quest[3] = format ("##%c %c%c%c%c", zone + 35,
-									floor (x / 221) + 35, x % 221 + 35, floor (y / 221) + 35, y % 221 + 35)
+							quest[3] = format ("%s~%d~p~%.2f^%.2f", title, zone, x/100, y/100)
 						end
 
 						if not isComplete then
@@ -1975,8 +1944,7 @@ function Nx.Quest:ScanBlizzQuestDataZone()
 							patch = bit.bor (patch, 2)
 
 							local s = title
-							local obj = format ("%c%s%c %c%c%c%c", #s + 35, s, zone + 35,
-									floor (x / 221) + 35, x % 221 + 35, floor (y / 221) + 35, y % 221 + 35)
+							local obj = format ("%s~%d~p~%.2f^%.2f", s, zone, x/100, y/100)
 
 							for i = 1, lbCnt do
 								quest[3 + i] = obj
@@ -2042,17 +2010,15 @@ function Nx.Quest:CalcPreviousDone (qId)
 
 	local cnt = 0
 
-	for mungeId, q in pairs (Nx.Quests) do
+	for id, q in pairs (Nx.Quests) do
 
 		if q.CNum == 1 then		-- Only look at chain starters
 
-			local id = (mungeId + 3) / 2 - 7
 			local qc = q
 			while qc do
 
 				if id == qId then		-- Found me in chain? Mark before me complete
 
-					local id = (mungeId + 3) / 2 - 7
 					local qc = q
 					while id ~= qId do
 
@@ -5693,7 +5659,7 @@ function Nx.Quest:UpdateIcons (map)
 					break
 				end
 
-				local objName, objZone, loc = Quest:UnpackObjective (obj)
+				local objName, objZone = Quest:UnpackObjective (obj)
 
 				if objZone then
 
@@ -5706,7 +5672,7 @@ function Nx.Quest:UpdateIcons (map)
 
 --					Nx.prt ("%s zone %d %s", objName, mapId, loc)
 
-					if loc and bit.band (mask, bit.lshift (1, n)) > 0 then
+					if bit.band (mask, bit.lshift (1, n)) > 0 then
 
 						local colI = n
 
@@ -5720,23 +5686,23 @@ function Nx.Quest:UpdateIcons (map)
 						local b = col[3]
 
 						local oname = cur and cur[n] or objName
+						
+						local typ = select(3, strsplit("~", obj))
+						local points = {select(4, strsplit("~", obj))}
 
-						if strbyte (obj, loc) == 32 then  -- Points
+						if typ == "p" then  -- Points
 
 --							Nx.prt ("%s, pt %s", objName, strsub (obj, loc + 1))
 
-							loc = loc + 1
-
-							local cnt = floor ((#obj - loc + 1) / 4)
 							local sz = navscale
 
-							if cnt > 1 then
+							if #points > 1 then
 								sz = map:GetWorldZoneScale (mapId) / 10.02 * ptSz
 							end
 
-							for locN = loc, loc + cnt * 4 - 1, 4 do
+							for _,p in ipairs(points) do
 
-								local x, y = Quest:UnpackLocPtOff (obj, locN)
+								local x, y = Quest:UnpackLocPtOff (p)
 								local wx, wy = map:GetWorldPos (mapId, x, y)
 
 								local f = map:GetIconStatic (4)
@@ -5751,7 +5717,7 @@ function Nx.Quest:UpdateIcons (map)
 										f.NxTip = f.NxTip .. "\n" .. cur[n + 400]
 									end
 
-									if cnt == 1 then
+									if #points == 1 then
 										f.texture:SetTexture ("Interface\\AddOns\\Carbonite\\Gfx\\Map\\IconQTarget")
 										f.texture:SetVertexColor (r, g, b, .9)
 									else
@@ -5811,17 +5777,12 @@ function Nx.Quest:UpdateIcons (map)
 									or (bit.band (trackMode, bit.lshift (1, n)) > 0 and trkA > .05) then
 
 								local scale = map:GetWorldZoneScale (mapId) / 10.02
-								local cnt = floor ((#obj - loc + 1) / 4)
+								local points = {select(4, strsplit("~", obj))}
 								local ssub = strsub
 
-								for locN = loc, loc + cnt * 4 - 1, 4 do
+								for _, p in ipairs(points) do
 
-									local loc1 = ssub (obj, locN, locN + 3)
-									if loc1 == "" then
-										break
-									end
-
-									local x, y, w, h = Quest:UnpackLocRect (loc1)
+									local x, y, w, h = Quest:UnpackLocRect (p)
 									local wx, wy = map:GetWorldPos (mapId, x, y)
 
 									local f = map:GetIconStatic (hover and 1)
@@ -7878,7 +7839,7 @@ function Nx.Quest:TrackOnMap (qId, qObj, useEnd, target, skipSame)
 			questObj = quest[qObj + 3]
 			name, zone, loc = Quest:UnpackObjective (questObj)
 		end
-
+		
 --		Nx.prt ("TrackOnMap %s %s %s %s %s", qId, qObj, track, name, zone)
 
 		if track > 0 and zone then
@@ -7926,12 +7887,12 @@ function Nx.Quest:TrackOnMap (qId, qObj, useEnd, target, skipSame)
 						-- FIX!!!!!!!!!!!!
 
 --						x1, y1, x2, y2 = Quest:GetClosestObjectiveRect (questObj, mId, px, py)
-						x1, y1 = Quest:GetClosestObjectivePos (questObj, loc, mId, px, py)
+						x1, y1 = Quest:GetClosestObjectivePos (questObj, mId, px, py)
 						x2 = x1
 						y2 = y1
 					else
 
-						x1, y1, x2, y2 = Quest:GetObjectiveRect (questObj, loc)
+						x1, y1, x2, y2 = Quest:GetObjectiveRect (questObj)
 						x1, y1 = Map:GetWorldPos (mId, x1, y1)
 						x2, y2 = Map:GetWorldPos (mId, x2, y2)
 					end
@@ -8001,75 +7962,30 @@ end
 --  name len (b), name str, side (b), level (b), min lvl (b), next id (b3), category (b)
 
 function Nx.Quest:Unpack (info)
-
-	local strbyte = strbyte
-	local i = strbyte (info, 1) - 35 + 1
-	local name = strsub (info, 2, i)
-	local side, lvl, minlvl, n1, n2, n3 = strbyte (info, i + 1, i + 6)
-	local nextId = (n1 - 35) * 48841 + (n2 - 35) * 221 + n3 - 35
---	if nextId > 0 then
---		nextId = (nextId + 3) / 2 - 7
---	end
-
-	return name, side - 35, lvl - 35, minlvl - 35, nextId
+	local name, side, level, minlvl, nextId = strsplit("~", info)
+	return name, tonumber(side), tonumber(level), tonumber(minlvl), tonumber(nextId)
 end
 
 --------
 -- Unpack quest name
 
 function Nx.Quest:UnpackName (info)
-
-	local i = strbyte (info, 1) - 35 + 1
-	return strsub (info, 2, i)
+	return strsplit("~", info)
 end
 
 --------
 -- Unpack quest next id
 
 function Nx.Quest:UnpackNext (info)
-
-	local sb = strbyte
-	local i = sb (info, 1) - 35 + 1
-	return (sb (info, i + 4) - 35) * 48841 + (sb (info, i + 5) - 35) * 221 + sb (info, i + 6) - 35
+	return tonumber(select(5, strsplit("~", info)))
 end
 
 --------
 -- Unpack quest category
 
 function Nx.Quest:UnpackCategory (info)
-
-	local i = strbyte (info, 1) - 35 + 1 + 7
-	return strbyte (info, i) - 35
+	return select(6, strsplit("~", info))
 end
-
---------
--- Unpack start/end
--- Format: name index (byte x2), zone (byte), location data (may start with space)
--- Example: 00,1, xxyy
--- Example: 00,1,xywh
-
---[[ function Nx.Quest:UnpackSE (obj)
-
-	if not obj then
-		return
-	end
-
-	local i = (strbyte (obj) - 35) * 221 + (strbyte (obj, 2) - 35)
-	local name = self.QuestStartEnd[i]
-
-	if not name then
---		Nx.prt ("UnpackSE err %s (%s)", i, obj)
-		name = "?"
-	end
-
-	if #obj == 2 then
-		return name
-	end
-
-	local zone = strbyte (obj, 3) - 35
-
-	return name, zone, 4
-end ]]
 
 --------
 -- Unpack objective or start/end
@@ -8083,16 +7999,10 @@ function Nx.Quest:UnpackObjective (obj)
 		return
 	end
 
-	local i = strbyte (obj) - 35 + 1
-	local desc = strsub (obj, 2, i)
-
-	if #obj == i then
-		return desc
-	end
-
-	local zone = strbyte (obj, i + 1) - 35
+	local desc, zone = strsplit("~", obj)
+	zone = tonumber(zone) or 0
 	zone = zone > #Nx.Zones and 0 or zone
-	return desc, zone, i + 2
+	return desc, zone
 end
 
 Nx.Quest.UnpackSE = Nx.Quest.UnpackObjective
@@ -8102,10 +8012,9 @@ Nx.Quest.UnpackSE = Nx.Quest.UnpackObjective
 
 function Nx.Quest:GetObjectiveType (obj)
 
-	local loc = strbyte (obj) - 35 + 3
-	local typ = strbyte (obj, loc) or 0			-- Can be nil somehow
+	local typ = select(3, strsplit("~", obj))
 
-	if typ <= 33 then  -- Points
+	if typ ~= "r" then  -- Points
 		return 0
 	end
 
@@ -8145,43 +8054,27 @@ function Nx.Quest:GetPosLoc (str, loc)
 	local ox = 0
 	local oy = 0
 
-	local typ = strbyte (str, loc)
+	local typ = select(3, strsplit("~", str))
+	local points = {select(4, strsplit("~", str))}
 
-	if typ == 32 then  -- Point
-
-		cnt = floor ((#str - loc) / 4)
-
-		local x, y
-
-		for locN = loc + 1, loc + cnt * 4, 4 do
-
---			local loc1 = strsub (str, locN, locN + 3)
---			assert (loc1 ~= "")
-
-			x, y = self:UnpackLocPtOff (str, locN)
+	if typ == "p" then  -- Point
+		cnt = #points
+		for _, p in ipairs(points) do
+			local x, y = self:UnpackLocPtOff (p)
 			ox = ox + x
 			oy = oy + y
 		end
 
-	elseif typ == 33 then  -- Relative point (for Icecrown airships)
-
+	elseif typ == "r" then  -- Relative point (for Icecrown airships)
 		cnt = 1
-		ox, oy = self:UnpackLocPtRelative (str, loc + 1)
+		ox, oy = self:UnpackLocPtRelative (points[1])
 
 	else -- Multiple locations
 
-		loc = loc - 1
-		local loopCnt = floor ((#str - loc) / 4)
 		cnt = 0
-
-		for locN = loc + 1, loc + loopCnt * 4, 4 do
-
-			local loc1 = strsub (str, locN, locN + 3)
---			assert (loc1 ~= "")
-
---			prtVar ("Loc1", loc1)
-
-			local x, y, w, h = self:UnpackLocRect (loc1)
+		for _, p in ipairs(points) do
+			
+			local x, y, w, h = self:UnpackLocRect (p)
 
 			w = w / 1002 * 100
 			h = h / 668 * 100
@@ -8203,10 +8096,10 @@ end
 
 --------
 
-function Nx.Quest:UnpackLocPtRelative (str, loc)
+function Nx.Quest:UnpackLocPtRelative (str)
 
 	local cnt
-	local ox, oy = Nx.Quest:UnpackLocPtOff (str, loc)
+	local ox, oy = Nx.Quest:UnpackLocPtOff (str)
 
 	ox = ox - 50
 	oy = oy - 50
@@ -8382,7 +8275,7 @@ function Nx.Quest:CalcDistances (n1, n2)
 
 				if bit.band (cur.TrackMask, bit.lshift (1, qObj)) > 0 then
 
-					local _, zone, loc
+					local _, zone
 
 					if qObj == 0 then
 						_, zone, loc = self:UnpackSE (questObj)
@@ -8395,7 +8288,7 @@ function Nx.Quest:CalcDistances (n1, n2)
 						local mId = Map.NxzoneToMapId[zone]
 						if mId then
 
-							local x, y = self:GetClosestObjectivePos (questObj, loc, mId, px, py)
+							local x, y = self:GetClosestObjectivePos (questObj, mId, px, py)
 							local dist = ((x - px) ^ 2 + (y - py) ^ 2) ^ .5
 
 							if dist < cur.Distance then
@@ -8447,13 +8340,16 @@ end
 --------
 -- Get closest position of objective or start/end
 
-function Nx.Quest:GetClosestObjectivePos (str, loc, mapId, px, py)
+function Nx.Quest:GetClosestObjectivePos (str, mapId, px, py)
 
 	local Map = Nx.Map
 
-	if strbyte (str, loc) <= 33 then  -- Point
+	local typ = select(3, strsplit("~", str))
+	local points = {select(4, strsplit("~", str))}
 
-		local x1, y1, x2, y2 = self:GetObjectiveRect (str, loc)
+	if typ == "p" or typ == "r" then  -- Point
+
+		local x1, y1, x2, y2 = self:GetObjectiveRect (str)
 		x1, y1 = Map:GetWorldPos (mapId, (x1 + x2) / 2, (y1 + y2) / 2)
 		return x1, y1
 
@@ -8462,18 +8358,11 @@ function Nx.Quest:GetClosestObjectivePos (str, loc, mapId, px, py)
 		local closeDist = 999999999
 		local closeX, closeY
 
-		loc = loc - 1
-		local loopCnt = floor ((#str - loc) / 4)
-		cnt = 0
-
-		for locN = loc + 1, loc + loopCnt * 4, 4 do
+		for _, p in ipairs(points) do
 
 			local x, y
 
-			local loc1 = strsub (str, locN, locN + 3)
-			assert (loc1 ~= "")
-
-			local x, y, w, h = self:UnpackLocRect (loc1)
+			local x, y, w, h = self:UnpackLocRect (p)
 			w = w / 1002 * 100
 			h = h / 668 * 100
 
@@ -8610,9 +8499,7 @@ end
 --------
 -- Get size of objective or start/end
 
-function Nx.Quest:GetObjectiveRect (str, loc)
-
-	local Quest = Nx.Quest
+function Nx.Quest:GetObjectiveRect (str)
 
 	local x1 = 100
 	local y1 = 100
@@ -8620,47 +8507,38 @@ function Nx.Quest:GetObjectiveRect (str, loc)
 	local y2 = 0
 	local cnt
 
-	if strbyte (str, loc) == 32 then  -- Point
+	local typ = select(3, strsplit("~", str))
+	local points = {select(4, strsplit("~", str))}
 
-		cnt = floor ((#str - loc) / 4)
-		local x, y
 
-		for locN = loc + 1, loc + cnt * 4, 4 do
+	if typ == "p" then  -- Point
 
---			local loc1 = strsub (str, locN, locN + 3)
---			assert (loc1 ~= "")
-
-			x, y = Quest:UnpackLocPtOff (str, locN)
+		cnt = #points
+		for _, p in ipairs(points) do
+			local x, y = self:UnpackLocPtOff (p)
 			x1 = min (x1, x)
 			y1 = min (y1, y)
 			x2 = max (x2, x)
 			y2 = max (y2, y)
 		end
 
-	elseif strbyte (str, loc) == 33 then  -- Point
+	elseif typ == "r" then  -- Point
 
-		x1, y1 = Quest:UnpackLocPtRelative (str, loc + 1)
+		x1, y1 = self:UnpackLocPtRelative (points[1])
 		x2, y2 = x1, y1
 
 	else -- Multiple locations
 
-		loc = loc - 1
-
-		cnt = floor ((#str - loc) / 4)
-
-		for locN = loc + 1, loc + cnt * 4, 4 do
-
-			local loc1 = strsub (str, locN, locN + 3)
---			assert (loc1 ~= "")
-
-			local x, y, w, h = Quest:UnpackLocRect (loc1)
+		cnt = #points
+		for _, p in ipairs(points) do
+			
+			local x, y, w, h = self:UnpackLocRect (p)
 
 			x1 = min (x1, x)
 			y1 = min (y1, y)
 			x2 = max (x2, x + w / 1002 * 100)
 			y2 = max (y2, y + h / 668 * 100)
 
---			Nx.prt ("Rect %f %f %f %f", x, y, w, h)
 		end
 	end
 
@@ -8673,24 +8551,9 @@ end
 -- Unpack location data " xywh" or "xxyy"
 -- (string, offset)
 
-function Nx.Quest:UnpackLoc (locStr, off)
-
-	local isPt = strbyte (locStr, off) <= 33		-- Space or !
-
-	if isPt then
-
-		local x1, x2, y1, y2 = strbyte (locStr, 1 + off, 4 + off)
-		return	((x1 - 35) * 221 + (x2 - 35)) / 100,
-					((y1 - 35) * 221 + (y2 - 35)) / 100
-	end
-
-	local x, y, w, h = strbyte (locStr, 0 + off, 3 + off)
-
-	return	(x - 35) * .5,		-- * 100 / 200, Optimised
-				(y - 35) * .5		-- * 100 / 200
-
---	return	(x - 35) * .5 + (w - 35) * 2.505,	-- * 100 / 200, * 1002 / 200, Optimised (center)
---				(y - 35) * .5 + (h - 35) * 1.67		-- * 100 / 200, * 668 / 200
+function Nx.Quest:UnpackLoc (locStr)
+	local x, y = strsplit("^", locStr)
+	return tonumber(x), tonumber(y)
 end
 
 --------
@@ -8698,6 +8561,11 @@ end
 -- (string)
 
 function Nx.Quest:UnpackLocRect (locStr)
+	local x, y, w, h = strsplit("^", locStr)
+	return tonumber(x), tonumber(y), tonumber(w), tonumber(h)
+end
+
+function Nx.Quest:UnpackLocRectOld (locStr)
 
 	local x, y, w, h = strbyte (locStr, 1, 4)
 
@@ -8712,21 +8580,17 @@ end
 -- (string)
 
 function Nx.Quest:UnpackLocPt (locStr)
-
-	local x1, x2, y1, y2 = strbyte (locStr, 1, 4)
-	return	((x1 - 35) * 221 + (x2 - 35)) / 100,
-				((y1 - 35) * 221 + (y2 - 35)) / 100
+	local x, y = strsplit("^", locStr)
+	return tonumber(x), tonumber(y)
 end
 
 --------
 -- Unpack location data point "xxyy"
 -- (string)
 
-function Nx.Quest:UnpackLocPtOff (locStr, off)
-
-	local x1, x2, y1, y2 = strbyte (locStr, off, 3 + off)
-	return	((x1 - 35) * 221 + (x2 - 35)) / 100,
-				((y1 - 35) * 221 + (y2 - 35)) / 100
+function Nx.Quest:UnpackLocPtOff (locStr)
+	local x, y = strsplit("^", locStr)
+	return tonumber(x), tonumber(y)
 end
 
 --------

@@ -350,8 +350,8 @@ Map.MapWorldInfo = {
 [1022]={Name="Thunder Bluff",2.087504,-103.3333,170,Overlay="thunderbluff",City = true,MMOutside = true,Fish = 75,},
 [1023]={Name="Un'Goro Crater",7.399998,-106.6661,1193.333,Overlay="ungorocrater",Fish = 300,},
 [1024]={Name="Winterspring",14.20029,63.32512,-1706.666,Overlay="winterspring",Fish = 425,},
-[1025]={Name="Hyjal",0,0,0,Overlay="hyjal",Fish = 425,},
-[1026]={Name="Wailing Caverns",1.14,381.05,98.65,Overlay="wailingcavernsentrance",City = true, Fish = 75,},
+[1025]={Name="Hyjal",5,297,-1229.17,Overlay="classicmounthyjal",Fish = 425,},
+[1026]={Name="Wailing Caverns",1.13554,381.066,98.6628,Overlay="wailingcavernsentrance",City = true, Fish = 75,},
 --
 [2000]={81.53,-3645.96,-2249.31,},
 [2001]={Name="Alterac Mountains",5.599993,-156.6661,-299.9998,Overlay="alterac",Fish = 225,},
@@ -384,14 +384,14 @@ Map.MapWorldInfo = {
 [2028]={Name="Wetlands",8.27078,77.92012,429.5833,Overlay="wetlands",Fish = 150,},
 [2029]={Name="Isle of Quel'Danas",6.655,Map.BXO+1060.404,Map.BYO-2713.859,Overlay="sunwell",MId=2011,Fish = 450,},
 [2030]={Name="Plaguelands: The Scarlet Enclave",6.32,1200,-650,Overlay="scarletenclave",City = true,UseAId = true,},
-[2031]={Name="Scarlet Monastery",0.41,132.002,-589.765,Overlay="scarletmonasteryentrance",City = true,Fish = 425,UseAId = true,},
-[2032]={Name="Blackrock Mountain",1.4253,152.24,1465.03,Overlay="blackrockmountain1",City = true, Fish = 225,},
-[2033]={Name="Blackrock Mountain1",1.52,125.5,1417.4,Overlay="blackrockmountain2",City = true, Fish = 225,},
-[2034]={Name="Blackrock Mountain2",0.5,229,1496.5,Overlay="blackrockmountain3",City = true, Fish = 225,},
+[2031]={Name="Scarlet Monastery",0.40998,132.001,-589.766,Overlay="scarletmonasteryentrance",City = true,Fish = 425,UseAId = true,},
+[2032]={Name="Blackrock Mountain",1.425,152.25,1465,Overlay="blackrockmountain1",City = true, Fish = 225,},
+[2033]={Name="Blackrock Mountain1",1.52005,125.497,1417.33,Overlay="blackrockmountain2",City = true, Fish = 225,},
+[2034]={Name="Blackrock Mountain2",0.51,229,1496,Overlay="blackrockmountain3",City = true, Fish = 225,},
 -- [2035]={Name="Gilneas",9.5998,-853.32,-106.66,Overlay="gilneasmain",Fish = 425,},
 [2035]={Name="Gilneas",3.51978,-458.638,149.324,Overlay="gilneascity",Fish = 425,UseAId = true,MId=2035,},
 [2036]={Name="Gilneas: Silverpine Forest",4.7997,-586.63,-106.66,Overlay="gilneassilverpineforest",Fish = 425,UseAId = true,MId=2035,},
-[2037]={Name="Norderon",10.666,-426.64,-1243.66,Overlay="norderon",Fish = 425,},
+[2037]={Name="Norderon",0--[[ 10.666 ]],-426.64,-1243.66,Overlay="norderon",Fish = 425,MId=2037}, -- будущая лока
 --
 [3000]={34.606,-2587.3,-1151.7,},
 [3001]={Name="Blade's Edge Mountains",10.85003,-1769.168,-881.6678,Overlay="bladesedgemountains",QAchievementId=1193,},
@@ -402,7 +402,7 @@ Map.MapWorldInfo = {
 [3006]={Name="Shattrath City",2.6125,-1227.052,294.7909,Overlay="shattrathcity",City = true,MMOutside = true,},
 [3007]={Name="Terokkar Forest",10.8,-1416.667,200,Overlay="terokkarforest",Fish = 450,QAchievementId=1191,QAchievementIdH=1272,},
 [3008]={Name="Zangarmarsh",10.05418,-1895,-387.0831,Overlay="zangarmarsh",Fish = 400,QAchievementId=1190,},
-[3009]={Name="Shar'gel",4.16,109,42,Overlay="twistingnether", Explored = true, UseAId = true},
+[3009]={Name="Shar'gel",4.15816,109,42,Overlay="twistingnether", Explored = true, UseAId = true},
 --1654.8,923
 [4000]={35.5,0.01,-0.01,},
 [4001]={Name="Borean Tundra",11.521,125.764810,1139.054323,Overlay="boreantundra",Fish = 475,QAchievementId=33,QAchievementIdH=1358,},
@@ -1927,6 +1927,7 @@ Map.ZoneOverlays = {
     },
     ["tolgarod"] = {["tolgarod"] = "0,0,1024,768",},
     ["twistingnether"] = {["twistingnether"] = "0,0,1024,768",},
+    ["classicmounthyjal"] = {["classicmounthyjal"] = "0,0,1024,768",},
     ["gilneascity"] = {
         ["worgengilneascity"] = "0,156,768,512",
         ["worgennorthforestcrossroads"] = "234,0,768,512",
@@ -2194,7 +2195,13 @@ for i=0,4 do
     Map.GMB[2631 + 100*i + 5] =  string.format("Sirus4_%d", 1+ 5*5 + i-1)
 end
 Map.GMB[2631 + 100*0 + 5] =  nil--string.format("Sirus4_%d", 1)
-
+--Norderon
+Map.NMB = {}
+for i=1,10 do 
+    for j=0,8 do
+        Map.NMB[2718 +  100* i + j] =  string.format("Sirus7_%d_%d", 27+i, 18+j)
+    end
+end
 
 -- TODO
 -- Kotmogu
@@ -2208,20 +2215,6 @@ Map.GMB[2631 + 100*0 + 5] =  nil--string.format("Sirus4_%d", 1)
 -- [4538]= "TWP30_28",[4638]= "TWP31_28",[4738]= "TWP32_28",
 -- [4539]= "TWP30_29",[4639]= "TWP31_29",[4739]= "TWP32_29",
 
--- ???
--- local MMname = "Sirus3_%d"
--- for i=0,4 do 
---     for j=0,4 do
---         Map.NRMB[3022 +  100* i + j] = MMname:format(1+ 5* j + i)
---     end
--- end
--- Hyjal???
--- local MMname = "Sirus8_%d_%d"
--- for i=0,12 do 
---     for j=0,12 do
---         Map.EMB[2035 +  100* i + j] =  MMname:format(27+i, 27+j)
---     end
--- end
 -- SandChamber???
 -- local MMname = "SandChamber_%d_%d"
 -- for i=0,3 do 
@@ -2246,6 +2239,7 @@ Map.MiniMapBlks = {
     [1003]={Map.DMB,5033,-1580.243817,-1403.381588+100,},
     [2011]={Map.BMB,4111,4241.011121+6780-15,-1924.128369+50+40,},
     [2035]={Map.GMB,2420,2930.591080+6780,-1480.211752+50,},
+    [2037]={Map.NMB,2420,2930.591080+6780,-1480.211752+50,},
 }
 
 --------

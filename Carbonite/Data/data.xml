@@ -21,4 +21,5 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
     <Include file="Reagents.lua" />
     <Include file="FlightMaster.lua" />
     <Include file="FlightConnection.lua" />
+    <Include file="Quests.lua" />
 </Ui>

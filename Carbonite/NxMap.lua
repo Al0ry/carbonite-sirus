@@ -1940,7 +1940,7 @@ function Nx.Map:InitHotspots()
 				local zx, zy, zw, zh
 
 				if locSize == 4 then
-					zx, zy, zw, zh = Nx.Quest:UnpackLocRect (loc1)
+					zx, zy, zw, zh = Nx.Quest:UnpackLocRectOld (loc1)
 				else
 					zx = tonumber (strsub (loc1, 1, 3), 16) * 100 / 4095
 					zy = tonumber (strsub (loc1, 4, 6), 16) * 100 / 4095
@@ -9112,7 +9112,7 @@ function Nx.Map:SetCurrentMap (mapId)
 				SetMapToCurrentZone()		-- This fixes the Scarlet Enclave map selection, so we get player position
 				SetDungeonMapLevel (1)
 			elseif self.MapWorldInfo[mapId].UseAId then
-				Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
+				--Nx.prt("SetMapByID %s", Nx.IdToAId[mapId] or "nil")
 				SetMapByID (Nx.IdToAId[mapId] - 1)
 			else
 				--Nx.prt("SetMapZoom c:%s, z:%s", cont or "nil", zone or "nil" )

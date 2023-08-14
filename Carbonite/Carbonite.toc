@@ -1,6 +1,6 @@
 ## Interface: 30300
-## Title: Carbonite 5.066
-## Version: 5.066
+## Title: Carbonite 5.067
+## Version: 5.067
 ## Notes: Released Under GPL
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
@@ -28,7 +28,6 @@ NxSec.lua
 NxTimer.lua
 MapWorldHotspots.lua
 Data\data.xml
-Quests.lua
 ZoneConnections.lua
 Zones.lua
 Carbonite.xml
