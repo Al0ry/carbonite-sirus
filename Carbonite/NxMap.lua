@@ -1140,8 +1140,18 @@ function Nx.Map:Create (index)
 	m.QuestWin:SetFillAlpha(255 * m.QuestAlpha)
 	m.QuestWin:SetBorderAlpha(255 * m.QuestAlpha)
 	m.QuestWin:SetFillTexture([[Interface\WorldMap\UI-QuestBlob-Inside]])
+	-- m.QuestWin:SetFillTexture([[Interface\AddOns\Carbonite\Gfx\Map\UI-QuestBlob-Inside-green]])
 	m.QuestWin:SetBorderTexture([[Interface\WorldMap\UI-QuestBlob-Outside]])
 	m.QuestWin:SetBorderScalar(0.15)
+
+	function m.QuestWin:DrawNone()
+		for i=1,GetNumQuestLogEntries() do
+			local id = select(9, GetQuestLogTitle(i))
+			self:DrawQuestBlob(id, false)
+		end
+	end
+
+
 	
 	-- local arch = CreateFrame("ArchaeologyDigSiteFrame")
 	-- m.Arch = arch
@@ -1357,7 +1367,7 @@ function Nx.Map:MainOnUpdate (elapsed)
 		local show, showsv = win:IsShown()
 
 --		if not show and GameTooltip:IsOwned (win.Frm) then
---			GameTooltip:Hide()
+			-- GameTooltip:Hide() -- TURN OFF FOR DEBUG CAPTURE BLOBS
 --		end
 
 		if not show then
@@ -1493,32 +1503,32 @@ function Nx.Map:UpdateWorldMap()
 
 		if self.StepTime ~= 0 or self.Scrolling or IsShiftKeyDown() then
 			f:Hide()
--- 		else
+		else
 
--- 			local tipf = getglobal ("WorldMapTooltip")
--- 			if tipf then
--- 				tipf:SetFrameStrata ("TOOLTIP")
--- 			end
+			local tipf = getglobal ("WorldMapTooltip")
+			if tipf then
+				tipf:SetFrameStrata ("TOOLTIP")
+			end
 
--- 			local af = getglobal ("WorldMapFrameAreaFrame")
--- 			if af then
--- 				af:SetFrameStrata ("HIGH")
--- 			end
+			local af = getglobal ("WorldMapFrameAreaFrame")
+			if af then
+				af:SetFrameStrata ("HIGH")
+			end
 
--- 			f:Show()
+			f:Show()
 
--- 			self:ClipZoneFrm (self.Cont, self.Zone, f, 1)
--- 			f:SetFrameLevel (self.Level)
--- 			if self.WorldMapFrmMapId ~= self.MapId then
+			self:ClipZoneFrm (self.Cont, self.Zone, f, 1)
+			f:SetFrameLevel (self.Level)
+			if self.WorldMapFrmMapId ~= self.MapId then
 
--- --				Nx.prt ("mapid %s", self.MapId)
+--				Nx.prt ("mapid %s", self.MapId)
 
--- 				self.WorldMapFrmMapId = self.MapId
+				self.WorldMapFrmMapId = self.MapId
 
--- 				self:SetChildLevels (f, self.Level + 1)
+				self:SetChildLevels (f, self.Level + 1)
 
--- 				self.Level = self.Level + 4
--- 			end
+				self.Level = self.Level + 4
+			end
 		end
 
 		for k, f in ipairs (_G["MAP_VEHICLES"]) do
@@ -4162,6 +4172,8 @@ function Nx.Map.OnUpdate (this, elapsed)	--V4 this
 	local cursorLocXY = ""
 
 	local menuOpened = Nx.Menu:IsAnyOpened()
+	
+	Nx.Map.CPx,Nx.Map.CPy = nil,nil -- BLOB CAPTURE
 
 	if winx then
 
@@ -4180,6 +4192,7 @@ function Nx.Map.OnUpdate (this, elapsed)	--V4 this
 			end
 
 			local x, y = map:GetZonePos (map.MapId, wx, wy)
+			Nx.Map.CPx,Nx.Map.CPy = x-x%0.5,y-y%0.5 -- FOR BLOB CAPTURE (remove later)
 
 			x = floor (x * 10) / 10	-- Chop fraction to tenths
 			y = floor (y * 10) / 10

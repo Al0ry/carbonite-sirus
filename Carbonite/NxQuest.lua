@@ -639,7 +639,7 @@ function Nx.Quest:Init()
 
 	--	DEBUG kill all quests
 
---	Nx.Quests = {}
+	-- Nx.Quests = {}
 
 	--
 
@@ -671,6 +671,41 @@ function Nx.Quest:Init()
 		maxid = max (id, maxid)
 
 		local name, side, level, minlvl, nextId = self:Unpack (q[1])
+		-- NxData.NxQuestsDump[id] = {}
+		-- NxData.NxQuestsDump[id][1] = q[1]
+
+		-- for i=2,15 do
+		-- 	if q[i] then
+		-- 		local name, zone = self:UnpackObjective (q[i])
+		-- 		local typ = select(3, strsplit("~", q[i]))
+		-- 		local points = {select(4, strsplit("~", q[i]))}
+
+		-- 		NxData.NxQuestsDump[id][i] = name
+		-- 		if typ then
+		-- 			NxData.NxQuestsDump[id][i] = NxData.NxQuestsDump[id][i] .. format("~%d~%s", zone, typ)
+		-- 		end
+		-- 		if typ == "p" then  -- Point
+		-- 			for _, p in ipairs(points) do
+		-- 				local x, y = self:UnpackLocPtOff (p)
+		-- 				NxData.NxQuestsDump[id][i] = NxData.NxQuestsDump[id][i] .. format("~%.2f^%.2f", x, y)
+		-- 			end
+		-- 		elseif typ == "r" then  -- Relative point (for Icecrown airships)
+		-- 			local x, y = self:UnpackLocPtRelative (points[1])
+		-- 			NxData.NxQuestsDump[id][i] = NxData.NxQuestsDump[id][i] .. format("~%.2f^%.2f", x, y)
+		-- 		else -- Multiple locations
+		-- 			for _, p in ipairs(points) do
+						
+		-- 				local x, y, w, h = self:UnpackLocRect (p)
+		-- 				--x = floor(x/0.5), floor(y/0.5)
+
+		-- 				w = floor(w / 1002 * 200)
+		-- 				h = floor(h / 668 * 200)
+
+		-- 				NxData.NxQuestsDump[id][i] = NxData.NxQuestsDump[id][i] .. format("~%.2f^%.2f^%d^%d", x, y, w, h)
+		-- 			end
+		-- 		end
+		-- 	end
+		-- end
 
 		if side == enFact or level > 0 and level < qLoadLevel or level > qMaxLevel then
 
@@ -886,8 +921,7 @@ function Nx.Quest:Init()
 
 					local stmap = starters[zone] or {}
 					starters[zone] = stmap
-					local s = stmap[sName] or ""
-					stmap[sName] = s .. format ("%4x", qId)
+					stmap[sName] = stmap[sName] and (stmap[sName] .. format ("~%d", qId)) or format ("%d", qId)
 				end
 			end
 --		else
@@ -912,16 +946,16 @@ function Nx.Quest:Init()
 	menu:AddItem (0, "Add Note", self.Map.Menu_OnAddNote, self.Map)
 
 	-- Quest area blob test
---[[
-	local f = CreateFrame ("QuestPOIFrame", "NxQuestBlob", self.Map.Frm)
-	self.BlobFrm = f
 
-	f:SetFillTexture ("Interface\\WorldMap\\UI-QuestBlob-Inside")
-	f:SetBorderTexture ("Interface\\WorldMap\\UI-QuestBlob-Outside")
-	f:SetFillAlpha (128)
-	f:SetBorderAlpha (192)
-	f:SetBorderScalar (1)
---]]
+	-- local f = CreateFrame ("QuestPOIFrame", "NxQuestBlob", self.Map.Frm)
+	-- self.BlobFrm = f
+
+	-- f:SetFillTexture ("Interface\\WorldMap\\UI-QuestBlob-Inside")
+	-- f:SetBorderTexture ("Interface\\WorldMap\\UI-QuestBlob-Outside")
+	-- f:SetFillAlpha (128)
+	-- f:SetBorderAlpha (192)
+	-- f:SetBorderScalar (1)
+--
 	-- Hook quests
 
 	self.BlizzAcceptQuest = AcceptQuest
@@ -4932,7 +4966,7 @@ function Nx.Quest.List:Update_()
 							str = format ("     %s%s", color, desc)
 
 							list:ItemAdd (qId * 0x10000 + ln * 0x100 + qn)
-
+							
 							local trkStr = ""
 
 							if zone then
@@ -5515,7 +5549,7 @@ function Nx.Quest:UpdateIcons (map)
 
 	-- Blob
 
---	local f = self.BlobFrm
+	-- local f = self.BlobFrm
 
 
 	-- Draw completed quests
@@ -5690,6 +5724,26 @@ function Nx.Quest:UpdateIcons (map)
 						local typ = select(3, strsplit("~", obj))
 						local points = {select(4, strsplit("~", obj))}
 
+						-- local QMap = NxMap1.NxMap
+						-- if not InCombatLockdown() then	
+						-- 	if self.QIds[trackId] then
+						-- 		if not self.QIds[trackId].Complete then
+						-- 			QMap.QuestWin:DrawNone()
+						-- 			-- QMap.QuestWin:DrawQuestBlob(trackId, false)
+						-- 			if Nx.CharOpts["MapShowQuestBlobs"] then
+						-- 				QMap.QuestWin:DrawQuestBlob(trackId, true)
+						-- 				QMap:ClipZoneFrm( QMap.Cont, QMap.Zone, QMap.QuestWin, 1 )
+						-- 				QMap.QuestWin:SetFrameLevel(QMap.Level)		
+						-- 				QMap.QuestWin:SetFillAlpha(255 * QMap.QuestAlpha)
+						-- 				QMap.QuestWin:SetBorderAlpha( 255 * QMap.QuestAlpha )		
+						-- 				QMap.QuestWin:Show()		
+						-- 			else
+						-- 				QMap.QuestWin:Hide()
+						-- 			end
+						-- 		end
+						-- 	end
+						-- end
+
 						if typ == "p" then  -- Points
 
 --							Nx.prt ("%s, pt %s", objName, strsub (obj, loc + 1))
@@ -5721,8 +5775,9 @@ function Nx.Quest:UpdateIcons (map)
 										f.texture:SetTexture ("Interface\\AddOns\\Carbonite\\Gfx\\Map\\IconQTarget")
 										f.texture:SetVertexColor (r, g, b, .9)
 									else
-										f.texture:SetTexture ("Interface\\AddOns\\Carbonite\\Gfx\\Map\\IconCirclePlus")
-										f.texture:SetVertexColor (r, g, b, .5)
+										-- f.texture:SetTexture ("Interface\\AddOns\\Carbonite\\Gfx\\Map\\IconCirclePlus")
+										f.texture:SetTexture ("Interface\\AddOns\\Carbonite\\Gfx\\Map\\IconQTarget")
+										f.texture:SetVertexColor (r, g, b, .9)
 									end
 								end
 							end
@@ -5778,6 +5833,12 @@ function Nx.Quest:UpdateIcons (map)
 
 								local scale = map:GetWorldZoneScale (mapId) / 10.02
 								local points = {select(4, strsplit("~", obj))}
+
+								-- if Nx.Map.CPx and Nx.Map.CPy then	-- BLOB CAPTURE
+								-- 	points[#points + 1] = format("%.2f^%.2f^%.2f^%.2f",Nx.Map.CPx,Nx.Map.CPy,5.01,3.34) 
+								-- 	GameTooltip:Hide()
+								-- end
+
 								local ssub = strsub
 
 								for _, p in ipairs(points) do
@@ -7416,7 +7477,6 @@ function Nx.Quest.Watch:Set (data, on, track)
 
 		local q = cur.Q
 		if not q[2] and not q[3] then
-
 			Quest:MsgNotInDB()
 			return
 		end
@@ -7468,7 +7528,6 @@ function Nx.Quest.Watch:Set (data, on, track)
 		Quest.List:Update()
 
 	else
-
 		Quest:MsgNotInDB()
 	end
 
@@ -7840,7 +7899,7 @@ function Nx.Quest:TrackOnMap (qId, qObj, useEnd, target, skipSame)
 			name, zone, loc = Quest:UnpackObjective (questObj)
 		end
 		
---		Nx.prt ("TrackOnMap %s %s %s %s %s", qId, qObj, track, name, zone)
+		-- Nx.prt ("TrackOnMap %s %s %s %s %s", qId, qObj, track, name, zone)
 
 		if track > 0 and zone then
 			if self.GOpts["QSync"] then
@@ -7851,25 +7910,25 @@ function Nx.Quest:TrackOnMap (qId, qObj, useEnd, target, skipSame)
 				end
 			end
 
-	-- local QMap = NxMap1.NxMap
-	-- if not InCombatLockdown() then	
-	-- 	local cur = self.QIds[qId]
-	-- 	if cur then
-	-- 		if not cur.Complete then		
-	-- 			QMap.QuestWin:DrawNone();
-	-- 			if Nx.CharOpts["MapShowQuestBlobs"] then
-	-- 				QMap.QuestWin:DrawBlob(qId,true)
-	-- 				QMap:ClipZoneFrm( QMap.Cont, QMap.Zone, QMap.QuestWin, 1 )
-	-- 				QMap.QuestWin:SetFrameLevel(QMap.Level)		
-	-- 				QMap.QuestWin:SetFillAlpha(255 * QMap.QuestAlpha)
-	-- 				QMap.QuestWin:SetBorderAlpha( 255 * QMap.QuestAlpha )		
-	-- 				QMap.QuestWin:Show()		
-	-- 			else
-	-- 				QMap.QuestWin:Hide()
-	-- 			end
-	-- 		end
-	-- 	end
-	-- end
+			local QMap = NxMap1.NxMap
+			if not InCombatLockdown() then	
+				local cur = self.QIds[qId]
+				if cur then
+					if not cur.Complete then
+						QMap.QuestWin:DrawNone()
+						if Nx.CharOpts["MapShowQuestBlobs"] then
+							QMap.QuestWin:DrawQuestBlob(qId, true)
+							QMap:ClipZoneFrm( QMap.Cont, QMap.Zone, QMap.QuestWin, 1 )
+							QMap.QuestWin:SetFrameLevel(QMap.Level)		
+							QMap.QuestWin:SetFillAlpha(255 * QMap.QuestAlpha)
+							QMap.QuestWin:SetBorderAlpha( 255 * QMap.QuestAlpha )		
+							QMap.QuestWin:Show()		
+						else
+							QMap.QuestWin:Hide()
+						end
+					end
+				end
+			end
 	
 			local mId = Map.NxzoneToMapId[zone]
 			if mId then
@@ -7944,11 +8003,11 @@ function Nx.Quest:TrackOnMap (qId, qObj, useEnd, target, skipSame)
 							RemoveQuestWatch(BlizIndex)
 						end
 						self.Map:ClearTargets()
-						-- if not InCombatLockdown() then						
-						-- 	local QMap = NxMap1.NxMap						
-						-- 	QMap.QuestWin:DrawNone();
-						-- 	QMap.QuestWin:Hide()
-						-- end
+						if not InCombatLockdown() then						
+							local QMap = NxMap1.NxMap						
+							QMap.QuestWin:DrawNone();
+							QMap.QuestWin:Hide()
+						end
 					end
 				end
 			end
@@ -8029,7 +8088,7 @@ function Nx.Quest:GetSEPos (str)
 	local name, zone, loc = self:UnpackSE (str)
 
 	if zone then
-		return name, zone, self:GetPosLoc (str, loc)		-- x, y
+		return name, zone, self:GetPosLoc (str)		-- x, y
 	end
 end
 
@@ -8038,17 +8097,17 @@ end
 
 function Nx.Quest:GetObjectivePos (str)
 
-	local name, zone, loc = self:UnpackObjective (str)
+	local name, zone = self:UnpackObjective (str)
 
 	if zone then
-		return name, zone, self:GetPosLoc (str, loc)		-- x, y
+		return name, zone, self:GetPosLoc (str)		-- x, y
 	end
 end
 
 --------
 -- Get centered position from location string
 
-function Nx.Quest:GetPosLoc (str, loc)
+function Nx.Quest:GetPosLoc (str)
 
 	local cnt
 	local ox = 0
