@@ -7718,9 +7718,10 @@ function Nx.Quest:UpdateGiverIconMenu()
 
 	local qIds = self.QIds
 	local curI = 1
+	local qids = {strsplit("~", qdata)}
 
-	for n = 1, #qdata, 4 do
-		local qId = tonumber (strsub (qdata, n, n + 3), 16)
+	for _, qId in ipairs(qids) do
+		local qId = tonumber(qId)
 
 		local quest = self.IdToQuest[qId]
 		local qname, _, lvl, minlvl = self:Unpack (quest[1])
