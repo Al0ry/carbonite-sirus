@@ -234,8 +234,8 @@ function Nx.Quest:Init()
 	-- Patch quest data
 
 	local qdata = {
-		[3444] = "4^97^626^386",
-		[10447] = "5^96^738^357",
+		-- [3444] = "4^97^626^386",
+		-- [10447] = "5^96^738^357",
 --		[11514] = "4^19",
 --		[11521] = "4^96",
 --		[ 11541] = "2^119^538^341",
@@ -5834,10 +5834,10 @@ function Nx.Quest:UpdateIcons (map)
 								local scale = map:GetWorldZoneScale (mapId) / 10.02
 								local points = {select(4, strsplit("~", obj))}
 
-								-- if Nx.Map.CPx and Nx.Map.CPy then	-- BLOB CAPTURE
-								-- 	points[#points + 1] = format("%.2f^%.2f^%.2f^%.2f",Nx.Map.CPx,Nx.Map.CPy,5.01,3.34) 
-								-- 	GameTooltip:Hide()
-								-- end
+								if Nx.Map.CPx and Nx.Map.CPy then	-- BLOB CAPTURE
+									points[#points + 1] = format("%.2f^%.2f^%.2f^%.2f",Nx.Map.CPx,Nx.Map.CPy,5.01,3.34) 
+									GameTooltip:Hide()
+								end
 
 								local ssub = strsub
 
@@ -7903,13 +7903,13 @@ function Nx.Quest:TrackOnMap (qId, qObj, useEnd, target, skipSame)
 		-- Nx.prt ("TrackOnMap %s %s %s %s %s", qId, qObj, track, name, zone)
 
 		if track > 0 and zone then
-			if self.GOpts["QSync"] then
-				if BlizIndex then
-					if not (IsQuestWatched(BlizIndex)) then
-						AddQuestWatch(BlizIndex)
-					end	
-				end
-			end
+			-- if self.GOpts["QSync"] then
+			-- 	if BlizIndex then
+			-- 		if not (IsQuestWatched(BlizIndex)) then
+			-- 			AddQuestWatch(BlizIndex)
+			-- 		end	
+			-- 	end
+			-- end
 
 			local QMap = NxMap1.NxMap
 			if not InCombatLockdown() then	

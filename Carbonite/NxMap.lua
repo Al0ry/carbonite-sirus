@@ -4297,6 +4297,7 @@ function Nx.Map.OnUpdate (this, elapsed)	--V4 this
 		end
 
 		local over = winx and not Nx.Util_IsMouseOver (map.ToolBar.Frm)
+
 		map:SetLocationTip (over and not menuOpened and map.WorldHotspotTipStr and (map.WorldHotspotTipStr .. tip))
 	end
 
@@ -4383,7 +4384,7 @@ function Nx.Map:UpdateWorld()
 	local mapId = self:GetCurrentMapId()
 	local winfo = self.MapWorldInfo[mapId]
 
-	--Nx.prt ("%d Map UpdateWorld1 %d L%d", self.Tick, mapId or 0, GetCurrentMapDungeonLevel())
+	-- Nx.prt ("%d Map UpdateWorld1 %d L%d", self.Tick, mapId or 0, GetCurrentMapDungeonLevel())
 
 	if winfo.MapLevel then
 		if GetCurrentMapDungeonLevel() ~= winfo.MapLevel then	-- Wrong level?
@@ -4446,8 +4447,8 @@ function Nx.Map:Update (elapsed)
 	local Map = Nx.Map
 
 	self:MouseEnable (self.Win:IsSizeMax())
-
 	if self.NeedWorldUpdate then
+		-- Nx.prt("kek")
 		self:UpdateWorld()
 	end
 
@@ -4872,6 +4873,7 @@ function Nx.Map:Update (elapsed)
 	self:UpdateInstanceMap()
 
 	self:MinimapUpdate()
+
 	self:UpdateWorldMap()
 
 	self:DrawContinentsPOIs()
@@ -6206,6 +6208,7 @@ function Nx.Map:CheckWorldHotspotsType (wx, wy, quad)
 			end
 
 			self.WorldHotspotTipStr = spot.NxTipBase .. "\n"
+			
 --[[
 			if false then
 
@@ -6474,7 +6477,7 @@ function Nx.Map:AddOldMap (newMapId)
 			off = off + 1
 		end
 	end
-
+	-- Nx.prt (#self.MapsDrawnOrder)
 	local drawCnt = self.GOpts["MapZoneDrawCnt"]
 
 	if not dup then
@@ -6520,7 +6523,9 @@ function Nx.Map:UpdateZones()
 --			self:UpdateOverlay (id, .8, true)
 --		end
 
+		-- Nx.prt("------------")
 		for n, id in ipairs (self.MapsDrawnOrder) do
+			-- Nx.prt(self:GetWorldZone (id).Overlay)
 			self:UpdateOverlay (id, .8, true)
 		end
 
@@ -6585,6 +6590,7 @@ function Nx.Map:UpdateZones()
 			self:MoveCurZoneTiles()
 
 		else
+			-- Nx.prt(self:GetWorldZone (mapId).Overlay)
 			self:MoveCurZoneTiles()
 			self:UpdateOverlay (mapId, 1)
 			self:UpdateMiniFrames()
@@ -6615,7 +6621,6 @@ function Nx.Map:UpdateOverlayUnexplored()
 	local txFolder
 
 	local mapId = self:GetCurrentMapId()
-
 	local wzone = self:GetWorldZone (mapId)
 	if wzone then
 		if wzone.City then

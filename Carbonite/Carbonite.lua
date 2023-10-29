@@ -52,7 +52,7 @@ function NXInit()
 
 	NXTITLEFULL = NXTITLE
 
-	Nx.VERMAJOR			= 5.069
+	Nx.VERMAJOR			= 5.070
 	Nx.VERMINOR			= .000			-- Not 0 is a test version
 	Nx.BUILD				= 320
 
@@ -2506,7 +2506,7 @@ function Nx.Title:Init()
 	str = format (str, Nx.VERSION, Nx.BUILD)
 
 	self.NXFStr1:SetText (str)
-	self.NXFStr2:SetText ("|cffe0e0ffCopyright 2007-2012 Carbon Based Creations, LLC")
+	self.NXFStr2:SetText ("|cffffff00Sirus backport by Ritual|r")
 
 	Nx.Proc:New (self, self.TickWait, 40)
 
@@ -2577,7 +2577,7 @@ function Nx.Title:Tick()
 		self.ScaleTarget = .03
 		self.AlphaTarget = 0
 
-		return 1 * 60
+		return 5 * 60
 	end
 
 	if self.Alpha == 0 then
