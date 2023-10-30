@@ -5834,10 +5834,10 @@ function Nx.Quest:UpdateIcons (map)
 								local scale = map:GetWorldZoneScale (mapId) / 10.02
 								local points = {select(4, strsplit("~", obj))}
 
-								if Nx.Map.CPx and Nx.Map.CPy then	-- BLOB CAPTURE
-									points[#points + 1] = format("%.2f^%.2f^%.2f^%.2f",Nx.Map.CPx,Nx.Map.CPy,5.01,3.34) 
-									GameTooltip:Hide()
-								end
+								-- if Nx.Map.CPx and Nx.Map.CPy then	-- BLOB CAPTURE
+								-- 	points[#points + 1] = format("%.2f^%.2f^%.2f^%.2f",Nx.Map.CPx,Nx.Map.CPy,5.01,3.34) 
+								-- 	GameTooltip:Hide()
+								-- end
 
 								local ssub = strsub
 

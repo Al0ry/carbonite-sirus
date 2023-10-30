@@ -1686,7 +1686,7 @@ function Nx.Opts:InitTimer()
 	self:NXCmdGryphonsUpdate()
 	self:NXCmdCamForceMaxDist()
 
-	Nx.Timer:Start ("OptsQO", 2, self, self.QuickOptsTimer)
+	-- Nx.Timer:Start ("OptsQO", 2, self, self.QuickOptsTimer)
 end
 
 --------
