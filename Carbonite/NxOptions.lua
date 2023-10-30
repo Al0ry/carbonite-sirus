@@ -1686,7 +1686,7 @@ function Nx.Opts:InitTimer()
 	self:NXCmdGryphonsUpdate()
 	self:NXCmdCamForceMaxDist()
 
-	-- Nx.Timer:Start ("OptsQO", 2, self, self.QuickOptsTimer)
+	Nx.Timer:Start ("OptsQO", 2, self, self.QuickOptsTimer)
 end
 
 --------
@@ -1710,6 +1710,10 @@ function Nx.Opts:QuickOptsTimer()
 			opts["MapMMOwn"] = true
 			opts["MapMMButOwn"] = true
 			opts["MapMMShowOldNameplate"] = false
+
+			if ElvUI then
+				ElvUI[1].private.general.minimap.enable = false
+			end
 			ReloadUI()
 		end
 
@@ -1992,6 +1996,9 @@ function Nx.Opts:NXCmdMMOwnChange (item, var)
 	self:SetVar ("MapMMShowOldNameplate", not var)		-- Nameplate is opposite of integration
 	self:SetVar ("MapMMButOwn", var)
 	self:Update()
+	if ElvUI then
+		ElvUI[1].private.general.minimap.enable = not var
+	end
 	self:NXCmdReload()
 end
 

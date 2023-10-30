@@ -2271,8 +2271,6 @@ function Nx.Map:MinimapOwnInit()
 	self.MMAlphaDelay = 100
 
 	mm:SetParent (self.Frm)
-    self.MMFrm:SetQuestBlobRingAlpha(1)
-	self.MMFrm:SetPOIArrowTexture("")
 	mm:SetScript ("OnMouseDown", self.MinimapOnMouseDown)
 	mm:SetScript ("OnMouseUp", self.MinimapOnMouseUp)
 	mm:SetScript ("OnEnter", self.MinimapOnEnter)
@@ -2316,12 +2314,13 @@ function Nx.Map:MinimapOwnInit()
 	hooksecurefunc ("Minimap_ZoomOut", Nx.Map.Minimap_ZoomOutClick)
 
 -- Dont work anymore
---	hooksecurefunc ("Minimap_ZoomInClick", Nx.Map.Minimap_ZoomInClick)
---	hooksecurefunc ("Minimap_ZoomOutClick", Nx.Map.Minimap_ZoomOutClick)
---	hooksecurefunc ("MinimapPing_OnEvent", Nx.Map.Minimap_OnEvent)
+	-- hooksecurefunc ("Minimap_ZoomInClick", Nx.Map.Minimap_ZoomInClick)
+	-- hooksecurefunc ("Minimap_ZoomOutClick", Nx.Map.Minimap_ZoomOutClick)
+	-- hooksecurefunc ("MinimapPing_OnEvent", Nx.Map.Minimap_OnEvent)
 end
 
 function Nx.Map.Minimap_ZoomInClick()
+	-- Nx.prt ("Minimap_ZoomInClick %s", arg1 or "nil")
 	local map = Nx.Map:GetMap (1)
 	map:MinimapZoom (2)
 end
@@ -2377,7 +2376,7 @@ function Nx.Map:MinimapOnMouseDown (button)
 end
 
 function Nx.Map:MinimapOnMouseUp (button)
---	Nx.prt ("click %s", button)
+	-- Nx.prt ("click %s", button)
 
 	local this = self			--V4
 
@@ -2421,7 +2420,7 @@ function Nx.Map:Ping()
 	local x = wx - self.PlyrX
 	local y = self.PlyrY - wy
 
---	Nx.prt ("Ping %f %f %f %f", x, y, sc, mm:GetScale())
+--  Nx.prt ("Ping %f %f %f %f", x, y, sc, mm:GetScale())
 --	Nx.prt (" Sc %f, W %f", scales[zoom], mm:GetWidth())
 
 	mm:PingLocation (x / sc, y / sc)
