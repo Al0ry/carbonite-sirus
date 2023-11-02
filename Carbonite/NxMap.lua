@@ -1925,38 +1925,12 @@ function Nx.Map:InitHotspots()
 			local color, infoStr = self:GetMapNameDesc (mapId)
 			local tipStr = format ("%s, %s%s (%s)", cname, color, zname, infoStr)
 
-			local loc = Nx.MapWorldHotspots[nxz]	-- Old way
-			local locSize = 4
+			local loc = Nx.MapWorldHotspots[mapId] or "25^25^501^334"
+			local spots = {strsplit ("~", loc)}
 
-			if not loc then
+			for _, sp in pairs(spots) do
 
-				loc = Nx.MapWorldHotspots2[mapId]
-				if loc then
-					locSize = 12
-				else
-					loc = format ("%c%c%c%c", 85, 85, 135, 135)
-				end
-			end
-
-			for n = 0, 100 do
-
-				local locN = n * locSize + 1
-
-				local loc1 = strsub (loc, locN, locN + locSize - 1)
-				if loc1 == "" then
-					break
-				end
-
-				local zx, zy, zw, zh
-
-				if locSize == 4 then
-					zx, zy, zw, zh = Nx.Quest:UnpackLocRectOld (loc1)
-				else
-					zx = tonumber (strsub (loc1, 1, 3), 16) * 100 / 4095
-					zy = tonumber (strsub (loc1, 4, 6), 16) * 100 / 4095
-					zw = tonumber (strsub (loc1, 7, 9), 16) * 1002 / 4095
-					zh = tonumber (strsub (loc1, 10, 12), 16) * 668 / 4095
-				end
+				local zx, zy, zw, zh = Nx.Quest:UnpackLocRect (sp)
 
 				local spot = {}
 
@@ -1980,10 +1954,6 @@ function Nx.Map:InitHotspots()
 				spot.WY2 = wy
 
 				spot.NxTipBase = tipStr
-
---				if contN == 5 then
---					Nx.prtVar ("Spot", spot)
---				end
 
 			end
 
@@ -6625,13 +6595,13 @@ function Nx.Map:UpdateOverlayUnexplored()
 		if wzone.City then
 			return
 		end
-		txFolder = wzone.Overlay
+		txFolder = wzone.MapBaseName or wzone.Overlay
 	end
 
 	local overlays
 
 	if txFolder then
-		overlays = Nx.Map.ZoneOverlays[txFolder]
+		overlays = Nx.Map.ZoneOverlays[wzone.Overlay]
 	end
 
 	if not overlays or not self.ShowUnexplored then
@@ -6734,8 +6704,8 @@ function Nx.Map:UpdateOverlay (mapId, bright, noUnexplored)
 		return
 	end
 
-	local txFolder = wzone and wzone.Overlay or ""
-	local overlays = Nx.Map.ZoneOverlays[txFolder]
+	local txFolder = wzone and wzone.MapBaseName or wzone.Overlay or ""
+	local overlays = Nx.Map.ZoneOverlays[wzone.Overlay]
 	local unex
 
 	if not noUnexplored and (not overlays or not self.ShowUnexplored) then
@@ -8586,8 +8556,8 @@ function Nx.Map:InitTables()
 		{ GetMapZones(5)},
 		{ GetMapZones(6)},
 		{ GetMapZones(7)},
-		{}, -- мангровый пока не допилили
-		{}, -- тель абим
+		{ GetMapZones(8)},
+		{ GetMapZones(9)},
 		{ GetMapZones(10)},
 		{ GetMapZones(11)}
 	}
@@ -8596,8 +8566,8 @@ function Nx.Map:InitTables()
 	-- tinsert(self.MapNames[2], NXlMapNames["Gilneas City"] or "Gilneas City")
 	tinsert(self.MapNames[2], NXlMapNames["Gilneas: Silverpine Forest"] or "Gilneas: Silverpine Forest")
 
-	tinsert(self.MapNames[8], NXlMapNames["Mangrove Island"] or "Mangrove Island")
-	tinsert(self.MapNames[9], NXlMapNames["Tel'Abim"] or "Tel'Abim")
+	-- tinsert(self.MapNames[8], NXlMapNames["Mangrove Island"] or "Mangrove Island")
+	-- tinsert(self.MapNames[9], NXlMapNames["Tel'Abim"] or "Tel'Abim")
 	tinsert(self.MapNames[9], NXlMapNames["VIP"] or "VIP")
 	tinsert(self.MapNames[9], NXlMapNames["PRIME"] or "PRIME")
 

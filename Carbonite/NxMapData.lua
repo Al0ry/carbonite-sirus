@@ -272,7 +272,7 @@ Map.MapInfo = {
 		X = 3867,
 		Y = 2510,
 		Min = 8001,
-		Max = 8001,
+		Max = 8002,
 	},
     {
 	    Name = "Tel'Abim",
@@ -280,7 +280,7 @@ Map.MapInfo = {
 		X = 2145,
 		Y = 1776,
 		Min = 9001,
-		Max = 9003,
+		Max = 9005,
 	},
     {
 	    Name = "Tol'Garod",
@@ -350,6 +350,7 @@ Map.MapWorldInfo = {
 [1022]={Name="Thunder Bluff",2.087504,-103.3333,170,Overlay="thunderbluff",City = true,MMOutside = true,Fish = 75,},
 [1023]={Name="Un'Goro Crater",7.399998,-106.6661,1193.333,Overlay="ungorocrater",Fish = 300,},
 [1024]={Name="Winterspring",14.20029,63.32512,-1706.666,Overlay="winterspring",Fish = 425,},
+-- SIRUS
 [1025]={Name="Hyjal",5,297,-1229.17,Overlay="classicmounthyjal",Fish = 425,},
 [1026]={Name="Wailing Caverns",1.13554,381.066,98.6628,Overlay="wailingcavernsentrance",City = true, Fish = 75,},
 --
@@ -384,6 +385,7 @@ Map.MapWorldInfo = {
 [2028]={Name="Wetlands",8.27078,77.92012,429.5833,Overlay="wetlands",Fish = 150,},
 [2029]={Name="Isle of Quel'Danas",6.655,Map.BXO+1060.404,Map.BYO-2713.859,Overlay="sunwell",MId=2011,Fish = 450,},
 [2030]={Name="Plaguelands: The Scarlet Enclave",6.32,1200,-650,Overlay="scarletenclave",City = true,UseAId = true,},
+-- SIRUS
 [2031]={Name="Scarlet Monastery",0.40998,132.001,-589.766,Overlay="scarletmonasteryentrance",City = true,Fish = 425,UseAId = true,},
 [2032]={Name="Blackrock Mountain",1.425,152.25,1465,Overlay="blackrockmountain1",City = true, Fish = 225,},
 [2033]={Name="Blackrock Mountain1",1.52005,125.497,1417.33,Overlay="blackrockmountain2",City = true, Fish = 225,},
@@ -402,8 +404,9 @@ Map.MapWorldInfo = {
 [3006]={Name="Shattrath City",2.6125,-1227.052,294.7909,Overlay="shattrathcity",City = true,MMOutside = true,},
 [3007]={Name="Terokkar Forest",10.8,-1416.667,200,Overlay="terokkarforest",Fish = 450,QAchievementId=1191,QAchievementIdH=1272,},
 [3008]={Name="Zangarmarsh",10.05418,-1895,-387.0831,Overlay="zangarmarsh",Fish = 400,QAchievementId=1190,},
+--SIRUS
 [3009]={Name="Shar'gel",4.15816,109,42,Overlay="twistingnether", Explored = true, UseAId = true},
---1654.8,923
+--
 [4000]={35.5,0.01,-0.01,},
 [4001]={Name="Borean Tundra",11.521,125.764810,1139.054323,Overlay="boreantundra",Fish = 475,QAchievementId=33,QAchievementIdH=1358,},
 [4002]={Name="Crystalsong Forest",5.4416,1550.386409,817.907816,Overlay="crystalsongforest",Fish = 500,},
@@ -431,25 +434,28 @@ Map.MapWorldInfo = {
 [5009]={Name="Haustlund",6.3996*Map.FelyardScale,0*Map.FelyardScale,-213.32*Map.FelyardScale,Overlay="felyardhaustlund",},
 [5010]={Name="Chasha Proklyatih",3.1998*Map.FelyardScale,-213.32*Map.FelyardScale,-213.32*Map.FelyardScale,Overlay="felyardchashaproklyatih",},
 [5011]={Name="Yarnvid",8.5328*Map.FelyardScale,-853.28*Map.FelyardScale,-391.086*Map.FelyardScale,Overlay="felyardyarnvid",},
---
+--SIRUS
 [6000]={8.79945,-1173.2,-479.87,},
 [6001]={Name="Lost Island",8.79945,-1173.2,-479.87,Overlay="lostisland",Fish = 25,},
---
+--SIRUS
 [7000]={7.9995,-426.64,-213.32,},
 [7001]={Name="Rising Depths",7.9995,-426.64,-213.32,Overlay="risingdepths",Fish = 25,},
---
+--SIRUS
 [8000]={7.9995,-319.98,-213.32,},
-[8001]={Name="Mangrove Island",7.9995,-319.98,-213.32,Overlay="mangroveisland",},
---
--- [9000]={11.1993,-319.98,-213.32,},
+[8001]={Name="Ko'Tang",7.9995,-319.98,-213.32,Overlay="kotang",MapBaseName = "mangroveisland",},
+[8002]={Name="Rao-Dan",7.9995,-319.98,-213.32,Overlay="raodan",MapBaseName = "mangroveisland",},
+--SIRUS
 [9000]={6.3996,426.64+Map.VIPOffsetX,-799.95+Map.VIPOffsetY,},
-[9001]={Name="Tel'Abim",11.1993,-319.98,-213.32,Overlay="telabim",},
-[9002]={Name="VIP",1.46725,722.241+Map.VIPOffsetX,-754.619+Map.VIPOffsetY,Overlay="vip",City = true,UseAId = true,},
-[9003]={Name="PRIME",2.72976,580.304+Map.VIPOffsetX,-568.853+Map.VIPOffsetY,Overlay="prime",City = true,UseAId = true,},
---
+-- [9001]={Name="Tel'Abim",11.1993,-319.98,-213.32,Overlay="telabim",},
+[9001]={Name="Beszhalostniye Duny",11.1993,-319.98,-213.32,Overlay="beszhalostniyeduny",MapBaseName = "telabim",},
+[9002]={Name="Dikiye Chaschoby",11.1993,-319.98,-213.32,Overlay="dikiyechaschoby",MapBaseName = "telabim",},
+[9003]={Name="Utesi Pilnogo vetra",11.1993,-319.98,-213.32,Overlay="utesipilnogovetra",MapBaseName = "telabim",},
+[9004]={Name="VIP",1.46725,722.241+Map.VIPOffsetX,-754.619+Map.VIPOffsetY,Overlay="vip",City = true,UseAId = true,},
+[9005]={Name="PRIME",2.72976,580.304+Map.VIPOffsetX,-568.853+Map.VIPOffsetY,Overlay="prime",City = true,UseAId = true,},
+--SIRUS
 [10000]={4.65178*Map.TolGarodScale,-719.503*Map.TolGarodScale,-719.81*Map.TolGarodScale,},
 [10001]={Name="Tol'Garod",4.65178*Map.TolGarodScale,-719.503*Map.TolGarodScale,-719.81*Map.TolGarodScale,Overlay="tolgarod", ScaleAdjX = 0.837, Explored = true,},
---
+--SIRUS
 [11000]={6.61292,-277.316,-159.99,},
 [11001]={Name="Andrakkis",6.61292,-277.316,-159.99,Overlay="andrakkis",},
 --
@@ -2070,13 +2076,29 @@ Map.ZoneOverlays = {
         ["stationoftheelementals"] = "512,0,256,256",
         ["telseraitemple"] = "512,0,256,256"
     },
-    ["mangroveisland"] = {
-        ["darkwaters"] = "256,156,512,256",
-        ["fengraveyard"] = "256,156,512,512",
+    -- ["mangroveisland"] = {
+    --     ["darkwaters"] = "256,156,512,256",
+    --     ["fengraveyard"] = "256,156,512,512",
+    --     ["gongzeruins"] = "256,156,256,512",
+    --     ["guangximine"] = "256,0,512,256",
+    --     ["kotangjungle"] = "256,156,256,512",
+    --     ["kurgothclancamp"] = "0,156,512,512",
+    --     ["peileicamp"] = "256,156,512,512",
+    --     ["raodaneternalgloryterrace"] = "256,0,512,256",
+    --     ["raodanimperionstronghold"] = "512,0,256,256",
+    --     ["raodanjadetop"] = "512,156,256,256",
+    --     ["raodanslavequarter"] = "256,0,512,256",
+    --     ["raodantomboftheancient"] = "512,156,256,256"
+    -- },
+    ["kotang"] = {
         ["gongzeruins"] = "256,156,256,512",
-        ["guangximine"] = "256,0,512,256",
         ["kotangjungle"] = "256,156,256,512",
         ["kurgothclancamp"] = "0,156,512,512",
+    },
+    ["raodan"] = {
+        ["darkwaters"] = "256,156,512,256",
+        ["fengraveyard"] = "256,156,512,512",
+        ["guangximine"] = "256,0,512,256",
         ["peileicamp"] = "256,156,512,512",
         ["raodaneternalgloryterrace"] = "256,0,512,256",
         ["raodanimperionstronghold"] = "512,0,256,256",
@@ -2084,27 +2106,53 @@ Map.ZoneOverlays = {
         ["raodanslavequarter"] = "256,0,512,256",
         ["raodantomboftheancient"] = "512,156,256,256"
     },
-    ["telabim"] = {
-        ["ajumasettlement"] = "0,412,512,256",
+    -- ["telabim"] = {
+    --     ["ajumasettlement"] = "0,412,512,256",
+    --     ["caravanparking"] = "256,256,256,256",
+    --     ["clearings"] = "0,0,512,512",
+    --     ["darkspearcamp"] = "512,0,256,256",
+    --     ["factoria"] = "0,0,256,512",
+    --     ["graveyardoflizard"] = "256,156,256,256",
+    --     ["hustogrivvillage"] = "512,0,256,256",
+    --     ["pitilessdunes"] = "256,156,512,512",
+    --     ["rockqueentiffin"] = "0,0,512,256",
+    --     ["salttidecoast"] = "0,0,512,256",
+    --     ["sharphookvillage"] = "512,0,256,256",
+    --     ["sirenscallcamp"] = "256,0,512,256",
+    --     ["tellair"] = "512,412,256,256",
+    --     ["teloasisa"] = "256,256,512,256",
+    --     ["teloasisb"] = "512,256,256,256",
+    --     ["teloasisc"] = "256,412,256,256",
+    --     ["templeatalbagtari"] = "256,0,256,512",
+    --     ["tradingcompanypumpingstation"] = "512,156,256,512",
+    --     ["wildthickets"] = "256,0,512,512",
+    --     ["zulandiruins"] = "0,156,512,512"
+    -- },
+    ["utesipilnogovetra"] = {
+        ["ajumasettlement"] = "0,412,512,256"
+    },
+    ["beszhalostniyeduny"] = {
         ["caravanparking"] = "256,256,256,256",
-        ["clearings"] = "0,0,512,512",
-        ["darkspearcamp"] = "512,0,256,256",
-        ["factoria"] = "0,0,256,512",
         ["graveyardoflizard"] = "256,156,256,256",
-        ["hustogrivvillage"] = "512,0,256,256",
         ["pitilessdunes"] = "256,156,512,512",
-        ["rockqueentiffin"] = "0,0,512,256",
-        ["salttidecoast"] = "0,0,512,256",
-        ["sharphookvillage"] = "512,0,256,256",
-        ["sirenscallcamp"] = "256,0,512,256",
         ["tellair"] = "512,412,256,256",
         ["teloasisa"] = "256,256,512,256",
         ["teloasisb"] = "512,256,256,256",
         ["teloasisc"] = "256,412,256,256",
-        ["templeatalbagtari"] = "256,0,256,512",
         ["tradingcompanypumpingstation"] = "512,156,256,512",
-        ["wildthickets"] = "256,0,512,512",
         ["zulandiruins"] = "0,156,512,512"
+    },
+    ["dikiyechaschoby"] = {
+        ["clearings"] = "0,0,512,512",
+        ["darkspearcamp"] = "512,0,256,256",
+        ["factoria"] = "0,0,256,512",
+        ["hustogrivvillage"] = "512,0,256,256",
+        ["rockqueentiffin"] = "0,0,512,256",
+        ["salttidecoast"] = "0,0,512,256",
+        ["sharphookvillage"] = "512,0,256,256",
+        ["sirenscallcamp"] = "256,0,512,256",
+        ["templeatalbagtari"] = "256,0,256,512",
+        ["wildthickets"] = "256,0,512,512"
     },
     ["andrakkis"] = {
         ["cordheim"] = "234,0,512,512",

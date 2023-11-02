@@ -8625,16 +8625,6 @@ function Nx.Quest:UnpackLocRect (locStr)
 	return tonumber(x), tonumber(y), tonumber(w), tonumber(h)
 end
 
-function Nx.Quest:UnpackLocRectOld (locStr)
-
-	local x, y, w, h = strbyte (locStr, 1, 4)
-
-	return	(x - 35) * .5,		-- * 100 / 200	Optimised
-				(y - 35) * .5,		-- * 100 / 200
-				(w - 35) * 5.01,	-- * 1002 / 200,
-				(h - 35) * 3.34	-- * 668 / 200
-end
-
 --------
 -- Unpack location data point "xxyy"
 -- (string)
