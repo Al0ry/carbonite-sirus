@@ -224,7 +224,7 @@ Map.MapInfo = {
         X = 10564,
 		Y = -150,
 		Min = 2001,
-		Max = 2037,
+		Max = 2039,
 	},
 	{
 		Name = "Outland",
@@ -394,6 +394,8 @@ Map.MapWorldInfo = {
 [2035]={Name="Gilneas",3.51978,-458.638,149.324,Overlay="gilneascity",Fish = 25,UseAId = true,MId=2035,},
 [2036]={Name="Gilneas: Silverpine Forest",4.7997,-586.63,-106.66,Overlay="gilneassilverpineforest",Fish = 75,UseAId = true,MId=2035,},
 [2037]={Name="Norderon",10.666,-426.64,-1243.66,Overlay="norderon",Fish = 425,UseAId = true,MId=2037},
+[2038]={Name="Norderon Ruins",2.63,-356,-873.6,Overlay="norderon",City=true,Fish = 425,UseAId = true,MId=2038},
+[2039]={Name="Eldranil",1.5999,53.33,-1013.27,Overlay="norderon",City=true,Fish = 425,UseAId = true,MId=2039},
 --
 [3000]={34.606,-2587.3,-1151.7,},
 [3001]={Name="Blade's Edge Mountains",10.85003,-1769.168,-881.6678,Overlay="bladesedgemountains",QAchievementId=1193,},

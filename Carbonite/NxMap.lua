@@ -8565,6 +8565,8 @@ function Nx.Map:InitTables()
 	tinsert(self.MapNames[2], NXlMapNames["Plaguelands: The Scarlet Enclave"] or "Plaguelands: The Scarlet Enclave")
 	-- tinsert(self.MapNames[2], NXlMapNames["Gilneas City"] or "Gilneas City")
 	tinsert(self.MapNames[2], NXlMapNames["Gilneas: Silverpine Forest"] or "Gilneas: Silverpine Forest")
+	tinsert(self.MapNames[2], NXlMapNames["Norderon Ruins"] or "Norderon Ruins")
+	tinsert(self.MapNames[2], NXlMapNames["Eldranil"] or "Eldranil")
 
 	-- tinsert(self.MapNames[8], NXlMapNames["Mangrove Island"] or "Mangrove Island")
 	-- tinsert(self.MapNames[9], NXlMapNames["Tel'Abim"] or "Tel'Abim")

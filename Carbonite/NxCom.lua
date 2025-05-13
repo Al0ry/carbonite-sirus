@@ -869,7 +869,7 @@ function Nx.Com:OnJoinChanATimer()
 
 	self.TryA = self.TryA + 1
 
-	JoinChannelByName (self.Name .. self.ChanALetter .. self.TryA)
+	-- JoinChannelByName (self.Name .. self.ChanALetter .. self.TryA)
 
 	return 3
 end
@@ -893,7 +893,7 @@ function Nx.Com:OnJoinChanZTimer (name, timer)
 		return
 	end
 
-	JoinChannelByName (name)
+	-- JoinChannelByName (name)
 
 	return 3
 end
@@ -2098,7 +2098,7 @@ function Nx.Com:GetUserVerTimer()
 
 	local s = "crbb1"
 	Nx.prt ("Joining %s", s)
-	JoinChannelByName (s)
+	-- JoinChannelByName (s)
 
 	return 2
 end
