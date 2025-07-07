@@ -569,6 +569,20 @@ function Nx.Quest:Init()
 		[13836] = "1^0^i250^F",			-- Monsterbelly Appetite
 		[13830] = "1^0^i250^F",			-- The Ghostfish
 	}
+
+	-- SIRUS
+	-- Тол Гарод
+
+	for i=1,115 do
+		self.DailyIds[22259+i] = "1^2400"
+	end
+
+	-- Монеты прошлого
+
+	for i=1,100 do
+		self.DailyIds[26300+i] = "1^2400"
+	end
+
 	self.DailyDungeonIds = {
 		-- Dungeon
 		[11389] = "2^1639^c250t250",	-- Wanted: Arcatraz Sentinels

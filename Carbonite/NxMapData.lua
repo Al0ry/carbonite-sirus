@@ -322,6 +322,7 @@ Map.FelyardScale = 1.62
 Map.TolGarodScale = 1.20
 Map.VIPOffsetX = 427.4
 Map.VIPOffsetY = 639.9
+Map.BGOffsetX = -6000
 Map.MapWorldInfo = {
 --[0]={10,0,0,0,0,Overlay="barrens",},
 [0]={154.3,-2610,-5595,},
@@ -462,24 +463,30 @@ Map.MapWorldInfo = {
 [11001]={Name="Andrakkis",6.61292,-277.316,-159.99,Overlay="andrakkis",},
 --
 [90000]={1,0,0,},
-[90001]={Name="Arathi Basin",3.508,0,-1600,Short = "AB",},
-[90002]={Name="Warsong Gulch",2.29,0,-800,Short = "WG",},
-[90003]={Name="Alterac Valley",8.471,0,0,Short = "AV",},
-[90004]={Name="Eye of the Storm",4.538,0,800,Short = "EOS",},
-[90005]={Name="Blade's Edge Arena",1,0,0,Short = "BEA",Arena = true},
-[90006]={Name="Nagrand Arena",1,0,0,Short = "NA",Arena = true},
-[90007]={Name="Ruins of Lordaeron",1,0,0,Short = "RL",Arena = true},
-[90008]={Name="Strand of the Ancients",3.486,0,1600,Short = "SoA",},
-[90009]={Name="Isle of Conquest",5.295,0,-2400,Short = "IC",},
--- [11024]={0,0,.02},
--- [11025]={0,0,.04},
--- [11147]={0,0,.06},
--- [12017]={0,.01,0},
--- [12061]={0,0,.01},
--- [13027]={0,.0,-.0},
--- [13028]={0,-.04,.0},
--- [13029]={0,-.02,.0},
--- [13030]={0,.02,.00},
+-- BGs
+[90001]={Name="Arathi Basin",3.508,Map.BGOffsetX,-1600,Short = "AB",},
+[90002]={Name="Warsong Gulch",2.29,Map.BGOffsetX,-800,Short = "WG",},
+[90003]={Name="Alterac Valley",8.471,Map.BGOffsetX,0,Short = "AV",},
+[90004]={Name="Eye of the Storm",4.538,Map.BGOffsetX,800,Short = "EOS",},
+[90005]={Name="Strand of the Ancients",3.486,Map.BGOffsetX,1600,Short = "SoA",},
+[90006]={Name="Isle of Conquest",5.295,Map.BGOffsetX,2400,Short = "IC",},
+-- Sirus BGs
+[90007]={Name="Dolina Uznikov",4.15951,Map.BGOffsetX,3200,Short = "DU",},
+[90008]={Name="Diamond Mine",1.83101,Map.BGOffsetX,4000,Short = "DM",},
+[90009]={Name="Gilneas BG",2.60417,Map.BGOffsetX,4800,Short = "GB",},
+[90010]={Name="Temple of Kotmogu",1.67917,Map.BGOffsetX,5600,Short = "TK",},
+[90011]={Name="Temple City",3.1998,Map.BGOffsetX,6400,Short = "TC",},
+[90012]={Name="Twin Peaks",2.42917,Map.BGOffsetX,7200,Short = "TP",},
+[90013]={Name="Arathi Basin Winter",3.5125,Map.BGOffsetX,8000,Short = "ABW",},
+[90014]={Name="Alterac Valley Blitz",3.2,Map.BGOffsetX,8800,Short = "AVB",},
+[90015]={Name="goldrush",2.16667,Map.BGOffsetX,9400,Short = "GR",},
+
+-- Arenas
+[91001]={Name="Blade's Edge Arena",1,0,0,Short = "BEA",Arena = true},
+[91002]={Name="Nagrand Arena",1,0,0,Short = "NA",Arena = true},
+[91003]={Name="Ruins of Lordaeron",1,0,0,Short = "RL",Arena = true},
+-- Sirus arenas
+[91004]={Name="Venture Bay Arena",1,0,0,Short = "VBA",Arena = true},
 }
 
 --------

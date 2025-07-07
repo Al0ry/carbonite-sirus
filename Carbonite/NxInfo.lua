@@ -1052,8 +1052,7 @@ function Nx.Info:CalcIfMana (val)
 end
 
 function Nx.Info:CalcBGHonor()
-	local _, honor = GetCurrencyInfo (392)		--V4
-	return "|cffa0a0ff", format ("%d", honor)
+	return "|cffa0a0ff", format ("%d", GetHonorCurrency())
 end
 
 function Nx.Info:CalcBGStats()

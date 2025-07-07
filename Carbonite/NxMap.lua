@@ -4470,8 +4470,7 @@ function Nx.Map:Update (elapsed)
 				Nx.UEvents:AddInfo (format ("Left %s %d %d %d %d", sname, cb.KBs, cb.Deaths, cb.HKs, cb.Honor))
 
 				local tm = GetTime() - cb.BGEnterTime
-				local _, honor = GetCurrencyInfo (392)		--V4
-				local hGain = honor - cb.BGEnterHonor
+				local hGain = GetHonorCurrency() - cb.BGEnterHonor
 				Nx.UEvents:AddInfo (format (" %s +%d honor, +%d hour", Nx.Util_GetTimeElapsedMinSecStr (tm), hGain, hGain / tm * 3600))
 
 				local xpGain = UnitXP ("player") - cb.BGEnterXP
@@ -4498,8 +4497,7 @@ function Nx.Map:Update (elapsed)
 
 		local cb = Nx.Combat
 		cb.BGEnterTime = GetTime()
-		local _, honor = GetCurrencyInfo (392)		--V4
-		cb.BGEnterHonor = honor
+		cb.BGEnterHonor = GetHonorCurrency()
 		cb.BGEnterXP = UnitXP ("player")
 
 		if self.MapWorldInfo[rid].Arena then
@@ -4868,6 +4866,7 @@ function Nx.Map:Update (elapsed)
 	for n = 1, GetNumBattlefieldVehicles() do
 
 		local x, y, unitName, possessed, typ, orientation, player = GetBattlefieldVehicleInfo (n)
+		orientation = orientation or 0
 		if x and x > 0 and not player then
 
 --			Nx.prtCtrl ("#%s %s %.2f %.2f %.3f %s %s %s", n, unitName or "nil", x or -1, y or -1, orientation or -1, typ or "no type", possessed and "poss" or "-poss", player and "plyr" or "-plyr")
@@ -9412,7 +9411,7 @@ end
 --
 
 function Nx.Map:IsBattleGroundMap (mapId)
-	return mapId >= 99001 and mapId <= 99999
+	return mapId >= 90001 and mapId <= 99999
 end
 
 --------
@@ -10830,6 +10829,7 @@ function Nx.Map:VehicleDumpPos()
 	for n = 1, GetNumBattlefieldVehicles() do
 
 		local x, y, unitName, possessed, typ, dir, player = GetBattlefieldVehicleInfo (n)
+		dir = dir or 0
 		if x and not player then
 
 			local xo = self.PlyrRZX - x * 100
