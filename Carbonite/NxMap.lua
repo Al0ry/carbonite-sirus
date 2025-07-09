@@ -5276,13 +5276,6 @@ function Nx.Map:SetInstanceMap (mapId)
 
 	local info = Map.InstanceInfo[mapId]
 	local sizex, sizey = 1002, 668
-	self.InstMapAtlas = nil
-
-	if not info and _G["AtlasMaps"] then
-		info = Map.AtlasInstanceInfo[mapId]
-		sizex, sizey = 668, 668
-		self.InstMapAtlas = true
-	end
 
 	if info then
 
@@ -8419,59 +8412,37 @@ function Nx.Map:UpdateInstanceMap()
 
 --	Nx.prt ("Inst id %s", mapId)
 
-	if self.InstMapAtlas then
+	local wx = winfo[2]
+	local wy = winfo[3]
 
-		local wx = winfo[2]
-		local wy = winfo[3]
+	for n = 1, #info, 3 do
 
-		for n = 1, #info, 3 do
+		local imgI = 1
 
-			local sc = 668 / 256
-			local f = self:GetIconNI()
+		local offx = info[n] * .04 * 1002 / 1024
+		local offy = info[n + 1] * .03 * 668 / 768
 
-			if self:ClipFrameTL (f, wx, wy + (n - 1) * 668 / 768, sc, sc) then
-				local tex = info[n + 2]
-				tex = "Interface\\Addons\\Atlas\\Images\\Maps\\" .. tex
-				f.texture:SetTexture (tex)
-			end
-		end
+		for by = 0, 2 do
 
-		self.Level = self.Level + 1
+			for bx = 0, 3 do
 
-	else
-
-		local wx = winfo[2]
-		local wy = winfo[3]
-
-		for n = 1, #info, 3 do
-
-			local imgI = 1
-
-			local offx = info[n] * .04 * 1002 / 1024
-			local offy = info[n + 1] * .03 * 668 / 768
-
-			for by = 0, 2 do
-
-				for bx = 0, 3 do
-
-					local sc = 1
-					local f = self:GetIconNI()
+				local sc = 1
+				local f = self:GetIconNI()
 
 --					Nx.prt ("Inst %s, %s %s %s %s", mapId, wx, wy, bx, by)
 
-					if self:ClipFrameTL (f, wx + bx - offx, wy + by - offy, sc, sc) then
-						local tex = info[n + 2]
-						tex = "Interface\\WorldMap\\" .. tex .. imgI
-						f.texture:SetTexture (tex)
-					end
-
-					imgI = imgI + 1
+				if self:ClipFrameTL (f, wx + bx - offx, wy + by - offy, sc, sc) then
+					local tex = info[n + 2]
+					tex = "Interface\\WorldMap\\" .. tex .. imgI
+					f.texture:SetTexture (tex)
 				end
+
+				imgI = imgI + 1
 			end
 		end
-
-		self.Level = self.Level + 1
 	end
+
+	self.Level = self.Level + 1
 end
 
 ------------------------------------------
