@@ -1,6 +1,6 @@
 ## Interface: 30300
-## Title: Carbonite 5.076
-## Version: 5.076
+## Title: Carbonite 5.077
+## Version: 5.077
 ## Notes: Released Under GPL
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
