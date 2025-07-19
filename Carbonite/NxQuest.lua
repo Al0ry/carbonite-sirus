@@ -1856,7 +1856,7 @@ end
 
 function Nx.Quest:ScanBlizzQuestDataTimer()
 
-	WatchFrame:UnregisterEvent ("WORLD_MAP_UPDATE")		-- Map::ScanContinents can enable this again
+	ObjectiveTrackerFrame:UnregisterEvent ("WORLD_MAP_UPDATE")		-- Map::ScanContinents can enable this again
 
 --	local tm = GetTime()
 
@@ -1894,7 +1894,7 @@ function Nx.Quest:ScanBlizzQuestDataTimer()
 
 			if cont == Nx.Map.ContCnt then			-- Done?
 
-				WatchFrame:RegisterEvent ("WORLD_MAP_UPDATE")	-- Back on when done
+				ObjectiveTrackerFrame:RegisterEvent ("WORLD_MAP_UPDATE")	-- Back on when done
 
 				Map:SetCurrentMap(curMapId)
 
@@ -6962,7 +6962,7 @@ function Nx.Quest.Watch:UpdateList()
 			self.FlashColor = (self.FlashColor + 1) % 2
 			list:SetItemFrameScaleAlpha (gopts["QWItemScale"], Nx.Util_num2a (gopts["QWItemAlpha"]))
 			if gopts["QWHideBlizz"] then
-				WatchFrame:Hide()		-- Hide Blizzard's
+				ObjectiveTrackerFrame:Hide()		-- Hide Blizzard's
 			end				
 			if gopts["QWAchTrack"] then
 				local ach = { GetTrackedAchievements() }

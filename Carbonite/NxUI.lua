@@ -5164,7 +5164,7 @@ function Nx.List:GetFrame (list, typ)
 
 		elseif typ == "WatchItem" then
 
-			f = CreateFrame ("Button", "NxListFrms" .. self.FrmsUniqueI, list.Frm, "WatchFrameItemButtonTemplate")
+			f = CreateFrame ("Button", "NxListFrms" .. self.FrmsUniqueI, list.Frm, "QuestObjectiveItemButtonTemplate")
 
 		elseif typ == "Info" then
 
@@ -5916,14 +5916,29 @@ function Nx.List:Update (showLast)
 
 					f:SetID (id)
 
+					f.OnEnter = function() GameTooltip:SetQuestLogSpecialItem(id) end
+					f.OnUpdate = function() end
+					f.UpdateCooldown = function() end
+					f.OnClick = function() UseQuestLogSpecialItem(id) end
+
 					SetItemButtonTexture (f, v2);
 					SetItemButtonCount (f, tonumber (v3));
 					f["charges"] = tonumber (v3);
 
-					local _, dur = GetQuestLogSpecialItemCooldown (id)
-					if dur then
-						WatchFrameItem_UpdateCooldown (f)
-					end
+					-- local _, dur = GetQuestLogSpecialItemCooldown (id)
+					-- if dur then
+					-- 	WatchFrameItem_UpdateCooldown (f)
+					-- end
+
+					-- local start, duration, enable = GetQuestLogSpecialItemCooldown(id)
+					-- if start then
+					-- 	CooldownFrame_SetTimer(f.Cooldown, start, duration, enable)
+					-- 	if duration > 0 and enable == 0 then
+					-- 		SetItemButtonTextureVertexColor(f, 0.4, 0.4, 0.4)
+					-- 	else
+					-- 		SetItemButtonTextureVertexColor(f, 1, 1, 1)
+					-- 	end
+					-- end
 
 					if doBind then
 						doBind = false
