@@ -4907,23 +4907,23 @@ elseif GetLocale() == "zhTW" then	-- Chinese
 	
 elseif GetLocale() == "ruRU" then		-- Russian
 
-	BINDING_NAME_NxMAPTOGORIGINAL		= "Toggle Original Map"
-	BINDING_NAME_NxMAPTOGNORMMAX		= "Toggle Normal or Max Map"
-	BINDING_NAME_NxMAPTOGNONEMAX		= "Toggle None or Max Map"
-	BINDING_NAME_NxMAPTOGNONENORM		= "Toggle None or Normal Map"
-	BINDING_NAME_NxMAPSCALERESTORE	= "Restore Saved Map Scale"
-	BINDING_NAME_NxMAPTOGMINIFULL		= "Toggle Full Size Minimap"
-	BINDING_NAME_NxMAPTOGHERB			= "Toggle Herbs on map"
-	BINDING_NAME_NxMAPTOGMINE			= "Toggle Mining on map"
-	BINDING_NAME_NxTOGGLEFAV			= "Toggle Favorites"
-	BINDING_NAME_NxTOGGLEGUIDE			= "Toggle Guide"
-	BINDING_NAME_NxTOGGLEWAREHOUSE	= "Toggle Warehouse"
-	BINDING_NAME_NxTOGGLEWATCHMINI	= "Toggle Watch List Minimize"
-	BINDING_NAME_NxWATCHUSEITEM		= "Use Top Quest Watch Item"
-	BINDING_NAME_NxMAPSKIPTARGET		= "Skip Current Target"
+	BINDING_NAME_NxMAPTOGORIGINAL		= "Переключить оригинальную карту"
+	BINDING_NAME_NxMAPTOGNORMMAX		= "Переключить обычную/максимальную карту"
+	BINDING_NAME_NxMAPTOGNONEMAX		= "Переключить без карты/максимальную карту"
+	BINDING_NAME_NxMAPTOGNONENORM		= "Переключить без карты/обычную карту"
+	BINDING_NAME_NxMAPSCALERESTORE	= "Восстановить сохранённый масштаб карты"
+	BINDING_NAME_NxMAPTOGMINIFULL		= "Переключить полный размер миникарты"
+	BINDING_NAME_NxMAPTOGHERB			= "Показать/скрыть травы на карте"
+	BINDING_NAME_NxMAPTOGMINE			= "Показать/скрыть руду на карте"
+	BINDING_NAME_NxTOGGLEFAV			= "Показать/скрыть избранное"
+	BINDING_NAME_NxTOGGLEGUIDE			= "Показать/скрыть гид"
+	BINDING_NAME_NxTOGGLEWAREHOUSE	= "Показать/скрыть склад"
+	BINDING_NAME_NxTOGGLEWATCHMINI	= "Переключить свернутый список наблюдения"
+	BINDING_NAME_NxWATCHUSEITEM		= "Использовать верхний предмет задания"
+	BINDING_NAME_NxMAPSKIPTARGET		= "Пропустить текущую цель"
 
-	NXLOADING			= "loading"
-	NXLOAD_DONE			= "load done"
+	NXLOADING			= "загрузка"
+	NXLOAD_DONE			= "загрузка завершена"
 
 	NXlARTIFACTS		= "Поиск артефактов"
 	NXlGas				= "Газ"
@@ -4962,26 +4962,26 @@ elseif GetLocale() == "ruRU" then		-- Russian
 	}
 
 	NXlBGMessages = {		-- Battleground messages. Menu text, message text
-		"Incoming", "Inc",
-		"Clear", "Clear",
-		"Help", "Help",
-		"Attack", "Attack",
-		"Guard", "Guard",
-		"Well Defended", "Well Defended",
-		"Losing", "Losing",
+		"Враги идут", "Враги",
+		"Чисто", "Чисто",
+		"Помощь", "Помощь",
+		"Атакуйте", "Атака",
+		"Охраняйте", "Охрана",
+		"Хорошая оборона", "Хорошо защищено",
+		"Проигрываем", "Проигрываем",
 	}
 
-	NXlBGStatus			= "Report Status"
+	NXlBGStatus			= "Сообщить статус"
 
 	NXlItemTypes = {
-		ARMOR,
-		"Потребительское",
+		"Броня",
+		"Расходуемое",
 		"Контейнер",
-		"Камень",
+		"Самоцвет",
 		"Глиф",
 		"Ключ",
 		"Другое",
-		"Патроны",
+		"Снаряды",
 		"Задание",
 		"Колчан",
 		"Реагент",
@@ -4990,8 +4990,8 @@ elseif GetLocale() == "ruRU" then		-- Russian
 		"Оружие",
 	}
 
-	transportName={["Boat"]="Корабль",["Portal"]="Портал",["Tram"]="Поезд",["Zeppelin"]="Дерижабль",}
-	destinationName={["Blasted Lands"]="Выжженые земли",["Darnassus"]="Дарнас",["Exodar"]="Экзодар",["Hellfire Peninsula"]="Полуостров Адского Пламени",["Ironforge"]="Стальгорн",["Isle of Quel'Danas"]="Остров Кель'Данас",["Lake Wintergrasp"]="Озеро Ледяных Оков",["Orgrimmar"]="Оргриммар",["Shattrath"]="Шаттрат",["Silvermoon"]="Луносвет",["Stormwind"]="Штормград",["Thunder Bluff"]="Громовой Утес",["Undercity"]="Подгород",["Teldrassil"]="Тельдрассил",["Stormwind City"]="Штормград",["The Barrens"]="Степи",["Wetlands"]="Болотину",["Stranglethorn Vale"]="Тернистую долину",["Howling Fjord"]="Ревущий фьорд",["Dustwallow Marsh"]="Пылевые топи", ["Dragonblight"]="Драконий Погост", ["Darkshore"]="Темные берега", ["Borean Tundra"]="Борейскую Тундру", ["Azuremyst Isle"]="Остров Лазурной дымки",}
+	transportName={["Boat"]="Корабль",["Portal"]="Портал",["Tram"]="Поезд",["Zeppelin"]="Дирижабль",}
+	destinationName={["Blasted Lands"]="Выжженные земли",["Darnassus"]="Дарнас",["Exodar"]="Экзодар",["Hellfire Peninsula"]="Полуостров Адского Пламени",["Ironforge"]="Стальгорн",["Isle of Quel'Danas"]="Остров Кель'Данас",["Lake Wintergrasp"]="Озеро Ледяных Оков",["Orgrimmar"]="Оргриммар",["Shattrath"]="Шаттрат",["Silvermoon"]="Луносвет",["Stormwind"]="Штормград",["Thunder Bluff"]="Громовой Утес",["Undercity"]="Подгород",["Teldrassil"]="Тельдрассил",["Stormwind City"]="Штормград",["The Barrens"]="Степи",["Wetlands"]="Болотина",["Stranglethorn Vale"]="Тернистая долина",["Howling Fjord"]="Ревущий фьорд",["Dustwallow Marsh"]="Пылевые топи", ["Dragonblight"]="Драконий Погост", ["Darkshore"]="Темные берега", ["Borean Tundra"]="Борейская тундра", ["Azuremyst Isle"]="Остров Лазурной Дымки",}
 
 	NXlMapNames = { -- RU
 	["Ahn'kahet: The Old Kingdom"] = "Ан'кахет: Старое Королевство",
