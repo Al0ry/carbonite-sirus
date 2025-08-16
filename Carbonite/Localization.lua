@@ -60,7 +60,6 @@ NXlWarehouseDisabled = "Disabled"
 NXlNoEditBoxOpen = "No edit box open!"
 NXlWarehouseCaptureError = "Warehouse Capture Error"
 NXlDeleted = "%s deleted"
-
 NXlKalimdor = "Kalimdor"
 NXlEasternKingdoms = "Eastern Kingdoms"
 NXlOutlands = "Outlands"
@@ -129,8 +128,7 @@ NXlEyeOfTheStormBattlemaster = "Eye Of The Storm Battlemaster"
 NXlStrandOfTheAncientsBattlemaster = "Strand of the Ancients Battlemaster"
 NXlWarsongGulchBattlemaster = "Warsong Gulch Battlemaster"
 NXlBackButton = "Back"
-
-
+ 
 if GetLocale() == "deDE" then		-- German
 
 	BINDING_NAME_NxMAPTOGORIGINAL		= "Toggle Original Map"
@@ -5120,6 +5118,32 @@ elseif GetLocale() == "ruRU" then		-- Russian
        NXlStrandOfTheAncientsBattlemaster = "Полевой командир Берега древних",
        NXlWarsongGulchBattlemaster = "Полевой командир Ущелья Песни Войны",
        NXlBackButton = "Назад",
+NXlDurPattern = "^Прочность (%d+) / (%d+)"
+
+NXlResetMapOptions = "Сбросить настройки карты %f"
+NXlUnknownMapFunction = "Неизвестная функция карты %s"
+NXlTaxiCurrent = "Текущий маршрут такси %s (%s)"
+NXlTaxiTime = "Такси %s (%s) %.2f сек, узел %d, %s %s"
+NXlNoTaxiData = "Нет данных такси %s до %s"
+NXlTaxiRouteTime = "#%s %s до %s, %s сек"
+NXlTaxiNode = "Такси #%s %s, %s %f %f"
+NXlTaxiNodePos = "#%s %s %s"
+NXlGuideShowType = "тип отображения гида %s"
+NXlCapTimerRetry = "Повтор таймера захвата"
+NXlRemovedOldVendorItem = "Удален старый предмет продавца %s"
+NXlCaptured = "Захвачено %s (%d)"
+NXlBad = "плохой %s"
+NXlCarboniteItemsLoadErr = "Не удалось загрузить аддон CarboniteItems!"
+NXlCarboniteItemsAddonErr = "Ошибка аддона CarboniteItems!"
+NXlCarboniteItemsLoaded = "CarboniteItems загружен"
+NXlDetectedNear = "%s %s обнаружен рядом с вами"
+NXlPunkAdded = "Панк %s добавлен"
+NXlWarehouseDisabled = "Отключено"
+NXlNoEditBoxOpen = "Нет открытого поля ввода!"
+NXlWarehouseCaptureError = "Ошибка захвата склада"
+NXlDeleted = "%s удален"
+
+
 NXlDurPattern = "^Прочность (%d+) / (%d+)"
 
 NXlResetMapOptions = "Сбросить настройки карты %f"
