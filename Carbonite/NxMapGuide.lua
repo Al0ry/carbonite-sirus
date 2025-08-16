@@ -25,273 +25,273 @@
 -- Tables
 
 Nx.GuideAbr = {
-	["K"] = "Kalimdor",
-	["E"] = "Eastern Kingdoms",
-	["O"] = "Outlands",
-	["N"] = "Northrend",
-	["M"] = "The Maelstrom",
-	["P"] = "Pandaria",
+["K"] = NXlKalimdor,
+["E"] = NXlEasternKingdoms,
+["O"] = NXlOutlands,
+["N"] = NXlNorthrend,
+["M"] = NXlTheMaelstrom,
+["P"] = NXlPandaria,
 }
 
 Nx.GuideInfo = {
-	Name = "All",
-	Tx = "INV_Misc_QuestionMark",
-	{
-		T = "Auctioneer",
-		Tx = "Racial_Dwarf_FindTreasure",
-	},
-	{
-		T = "Banker",
-		Tx = "INV_Misc_Coin_02",
-	},
-	{
-		T = "Barber",
-		Tx = "INV_Misc_Comb_02",
-	},
-	{
-		T = "Flight Master",
-		Tx = "Ability_Mount_Wyvern_01",
-	},
-	{
-		T = "Innkeeper",
-		Tx = "Spell_Shadow_Twilight",
-	},
-	{
-		T = "Mailbox",
-		Tx = "INV_Letter_15",
-	},
-	{
-		Name = "Quest Givers",
-		T = "&",
-		Tx = "INV_Misc_Note_02",
-		Persist = "QMapShowQuestGivers3",
-	},
+Name = NXlAll,
+Tx = "INV_Misc_QuestionMark",
+{
+T = NXlAuctioneer,
+Tx = "Racial_Dwarf_FindTreasure",
+},
+{
+T = NXlBanker,
+Tx = "INV_Misc_Coin_02",
+},
+{
+T = NXlBarber,
+Tx = "INV_Misc_Comb_02",
+},
+{
+T = NXlFlightMaster,
+Tx = "Ability_Mount_Wyvern_01",
+},
+{
+T = NXlInnkeeper,
+Tx = "Spell_Shadow_Twilight",
+},
+{
+T = NXlMailbox,
+Tx = "INV_Letter_15",
+},
+{
+Name = NXlQuestGivers,
+T = "&",
+Tx = "INV_Misc_Note_02",
+Persist = "QMapShowQuestGivers3",
+},
 --[[
 	{
 		T = "Repair",
 		Tx = "Ability_Repair",
 	},
 --]]
-	{
-		T = "Stable Master",
-		Tx = "Ability_Hunter_BeastTaming",
-	},
-	{
-		Name = "Trade Skill",
-		Tx = "INV_Misc_Note_04",
-		{
-			T = "Alchemy Lab",
-			Tx = "INV_Potion_06",
-		},
-		{
-			T = "Altar Of Shadows",
-			Tx = "INV_Fabric_Felcloth_Ebon",
-		},
-		{
-			T = "Anvil",
-			Tx = "Trade_BlackSmithing",
-		},
-		{
-			T = "Forge",
-			Tx = "INV_Sword_09",
-		},
-		{
-			T = "Mana Loom",
-			Tx = "INV_Fabric_Netherweave_Bolt_Imbued",
-		},
-		{
-			T = "Moonwell",
-			Tx = "INV_Fabric_MoonRag_Primal",
-		},
-	},
-	{
-		Name = "Trainer",
-		T = "^C",
-		Tx = "INV_Misc_Book_01",
-		{
-			Name = "Class Trainer",
-			T = "^C",
-			Tx = "INV_Misc_Book_01",
-			{
-				T = "Death Knight Trainer",
-				Tx = "Spell_Deathknight_ClassIcon",
-			},
-			{
-				T = "Druid Trainer",
-				Tx = "Ability_Druid_Maul",
-			},
-			{
-				T = "Hunter Trainer",
-				Tx = "INV_Weapon_Bow_07",
-			},
-			{
-				T = "Mage Trainer",
-				Tx = "INV_Staff_13",
-			},
-			{
-				T = "Paladin Trainer",
-				Tx = "INV_Hammer_01",
-			},
-			{
-				T = "Priest Trainer",
-				Tx = "INV_Staff_30",
-			},
-			{
-				T = "Rogue Trainer",
-				Tx = "INV_ThrowingKnife_04",
-			},
-			{
-				T = "Shaman Trainer",
-				Tx = "Spell_Nature_BloodLust",
-			},
-			{
-				T = "Warlock Trainer",
-				Tx = "Spell_Nature_FaerieFire",
-			},
-			{
-				T = "Warrior Trainer",
-				Tx = "INV_Sword_27",
-			},
-		},
-		{
-			Pre = "Alchemy",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "Trade_Alchemy",
-		},
-		{
-			Pre = "Archaeology",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "trade_archaeology",
-		},
-		{
-			Pre = "Blacksmithing",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "Trade_BlackSmithing",
-		},
-		{
-			Pre = "Enchanting",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "Trade_Engraving",
-		},
-		{
-			Pre = "Engineering",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "Trade_Engineering",
-		},
-		{
-			Pre = "Herbalism",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "Trade_Herbalism",
-		},
-		{
-			Pre = "Inscription",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "INV_Inscription_Tradeskill01",
-		},
-		{
-			Pre = "Jewelcrafting",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "INV_Misc_Gem_02",
-		},
-		{
-			Pre = "Leatherworking",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "INV_Misc_ArmorKit_17",
-		},
-		{
-			Pre = "Mining",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "Trade_Mining",
-		},
-		{
-			Pre = "Skinning",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "INV_Misc_Pelt_Wolf_01",
-		},
-		{
-			Pre = "Tailoring",
-			Name = "Trainer",
-			T = "^P",
-			Tx = "Trade_Tailoring",
-		},
-		{
-			Pre = "Cooking",
-			Name = "Trainer",
-			T = "^S",
-			Tx = "INV_Misc_Food_15",
-		},
-		{
-			Pre = "First Aid",
-			Name = "Trainer",
-			T = "^S",
-			Tx = "Spell_Holy_SealOfSacrifice",
-		},
-		{
-			Pre = "Fishing",
-			Name = "Trainer",
-			T = "^S",
-			Tx = "Trade_Fishing",
-		},
-		{
-			Pre = "Flying",
-			Name = "Trainer",
-			T = "^S",
-			Tx = "inv_scroll_11",
-		},
-		{
-			Pre = "Riding",
-			Name = "Trainer",
-			T = "^S",
-			Tx = "spell_nature_swiftness",
-		},
-	},
-	{
-		Name = "Travel",
-		Tx = "Ability_Townwatch",
-	},
-	{
-		T = "Items",
-		Tx = "Achievement_Arena_3v3_4",
-	},
-	{
-		Name = "Visited Vendor",
-		Tx = "INV_Misc_Coin_05",
-		{
-			Name = "All Items",
-			NoShowChild = true,
-		},
-	},
-	{
-		Name = "Gather",
-		Tx = "INV_Misc_Bag_10",
-		{
-			Name = "Herb",
-			Tx = "INV_Misc_Flower_02",
-			Persist = "MapShowGatherH",
-		},
-		{
-			Name = "Ore",
-			Tx = "INV_Ore_Copper_01",
-			Persist = "MapShowGatherM",
-		},
-		{
-			Name = "Artifacts",
-			T = "$ A",
-			Id = "Art",
-			Tx = "Trade_Archaeology",
-			Persist = "MapShowGatherA",
-		},
+{
+T = NXlStableMaster,
+Tx = "Ability_Hunter_BeastTaming",
+},
+{
+Name = NXlTradeSkill,
+Tx = "INV_Misc_Note_04",
+{
+T = NXlAlchemyLab,
+Tx = "INV_Potion_06",
+},
+{
+T = NXlAltarOfShadows,
+Tx = "INV_Fabric_Felcloth_Ebon",
+},
+{
+T = NXlAnvil,
+Tx = "Trade_BlackSmithing",
+},
+{
+T = NXlForge,
+Tx = "INV_Sword_09",
+},
+{
+T = NXlManaLoom,
+Tx = "INV_Fabric_Netherweave_Bolt_Imbued",
+},
+{
+T = NXlMoonwell,
+Tx = "INV_Fabric_MoonRag_Primal",
+},
+},
+{
+Name = NXlTrainer,
+T = "^C",
+Tx = "INV_Misc_Book_01",
+{
+Name = NXlClassTrainer,
+T = "^C",
+Tx = "INV_Misc_Book_01",
+{
+T = NXlDeathKnightTrainer,
+Tx = "Spell_Deathknight_ClassIcon",
+},
+{
+T = NXlDruidTrainer,
+Tx = "Ability_Druid_Maul",
+},
+{
+T = NXlHunterTrainer,
+Tx = "INV_Weapon_Bow_07",
+},
+{
+T = NXlMageTrainer,
+Tx = "INV_Staff_13",
+},
+{
+T = NXlPaladinTrainer,
+Tx = "INV_Hammer_01",
+},
+{
+T = NXlPriestTrainer,
+Tx = "INV_Staff_30",
+},
+{
+T = NXlRogueTrainer,
+Tx = "INV_ThrowingKnife_04",
+},
+{
+T = NXlShamanTrainer,
+Tx = "Spell_Nature_BloodLust",
+},
+{
+T = NXlWarlockTrainer,
+Tx = "Spell_Nature_FaerieFire",
+},
+{
+T = NXlWarriorTrainer,
+Tx = "INV_Sword_27",
+},
+},
+{
+Pre = NXlAlchemy,
+Name = NXlTrainer,
+T = "^P",
+Tx = "Trade_Alchemy",
+},
+{
+Pre = NXlArchaeology,
+Name = NXlTrainer,
+T = "^P",
+Tx = "trade_archaeology",
+},
+{
+Pre = NXlBlacksmithing,
+Name = NXlTrainer,
+T = "^P",
+Tx = "Trade_BlackSmithing",
+},
+{
+Pre = NXlEnchanting,
+Name = NXlTrainer,
+T = "^P",
+Tx = "Trade_Engraving",
+},
+{
+Pre = NXlEngineering,
+Name = NXlTrainer,
+T = "^P",
+Tx = "Trade_Engineering",
+},
+{
+Pre = NXlHerbalism,
+Name = NXlTrainer,
+T = "^P",
+Tx = "Trade_Herbalism",
+},
+{
+Pre = NXlInscription,
+Name = NXlTrainer,
+T = "^P",
+Tx = "INV_Inscription_Tradeskill01",
+},
+{
+Pre = NXlJewelcrafting,
+Name = NXlTrainer,
+T = "^P",
+Tx = "INV_Misc_Gem_02",
+},
+{
+Pre = NXlLeatherworking,
+Name = NXlTrainer,
+T = "^P",
+Tx = "INV_Misc_ArmorKit_17",
+},
+{
+Pre = NXlMining,
+Name = NXlTrainer,
+T = "^P",
+Tx = "Trade_Mining",
+},
+{
+Pre = NXlSkinning,
+Name = NXlTrainer,
+T = "^P",
+Tx = "INV_Misc_Pelt_Wolf_01",
+},
+{
+Pre = NXlTailoring,
+Name = NXlTrainer,
+T = "^P",
+Tx = "Trade_Tailoring",
+},
+{
+Pre = NXlCooking,
+Name = NXlTrainer,
+T = "^S",
+Tx = "INV_Misc_Food_15",
+},
+{
+Pre = NXlFirstAid,
+Name = NXlTrainer,
+T = "^S",
+Tx = "Spell_Holy_SealOfSacrifice",
+},
+{
+Pre = NXlFishing,
+Name = NXlTrainer,
+T = "^S",
+Tx = "Trade_Fishing",
+},
+{
+Pre = NXlFlying,
+Name = NXlTrainer,
+T = "^S",
+Tx = "inv_scroll_11",
+},
+{
+Pre = NXlRiding,
+Name = NXlTrainer,
+T = "^S",
+Tx = "spell_nature_swiftness",
+},
+},
+{
+Name = NXlTravel,
+Tx = "Ability_Townwatch",
+},
+{
+T = NXlItems,
+Tx = "Achievement_Arena_3v3_4",
+},
+{
+Name = NXlVisitedVendor,
+Tx = "INV_Misc_Coin_05",
+{
+Name = NXlAllItems,
+NoShowChild = true,
+},
+},
+{
+Name = NXlGather,
+Tx = "INV_Misc_Bag_10",
+{
+Name = NXlHerb,
+Tx = "INV_Misc_Flower_02",
+Persist = "MapShowGatherH",
+},
+{
+Name = NXlOre,
+Tx = "INV_Ore_Copper_01",
+Persist = "MapShowGatherM",
+},
+{
+Name = NXlArtifacts,
+T = "$ A",
+Id = "Art",
+Tx = "Trade_Archaeology",
+Persist = "MapShowGatherA",
+},
 		{
 			Name = NXlEverfrost,
 			T = "$ E",
@@ -305,9 +305,9 @@ Nx.GuideInfo = {
 			Tx = "inv_gizmo_zapthrottlegascollector",
 		},
 	},
-	{
-		Name = "Instances",
-		Tx = "INV_Misc_ShadowEgg",
+{
+Name = NXlInstances,
+Tx = "INV_Misc_ShadowEgg",
 		{
 			Name = "@K",
 			Inst = 1
@@ -333,13 +333,13 @@ Nx.GuideInfo = {
 			Inst = 6
 		},
 	},
-	{
-		Name = "Zone",
-		Tx = "INV_Misc_Map_01",
-		{
-			Name = "All",
-			Map = 0
-		},
+{
+Name = NXlZone,
+Tx = "INV_Misc_Map_01",
+{
+Name = NXlAll,
+Map = 0
+},
 		{
 			Name = "@K",
 			Map = 1
@@ -365,34 +365,34 @@ Nx.GuideInfo = {
 			Map = 6
 		},
 	},
-	{
-		Name = "PVP",
-		Tx = "INV_Misc_Coin_05",
-		{
-			T = "Alterac Valley Battlemaster",
-			Tx = "INV_Jewelry_Necklace_21"
-		},
-		{
-			T = "Arathi Basin Battlemaster",
-			Tx = "INV_Jewelry_Amulet_07"
-		},
-		{
-			T = "Arena Battlemaster",
-			Tx = "Spell_Holy_PrayerOfHealing"
-		},
-		{
-			T = "Eye Of The Storm Battlemaster",
-			Tx = "Spell_Nature_EyeOfTheStorm"
-		},
-		{
-			T = "Strand of the Ancients Battlemaster",
-			Tx = "INV_Jewelry_Amulet_01"
-		},
-		{
-			T = "Warsong Gulch Battlemaster",
-			Tx = "INV_Misc_Rune_07"
-		},
-	},
+{
+Name = NXlPVP,
+Tx = "INV_Misc_Coin_05",
+{
+T = NXlAlteracValleyBattlemaster,
+Tx = "INV_Jewelry_Necklace_21"
+},
+{
+T = NXlArathiBasinBattlemaster,
+Tx = "INV_Jewelry_Amulet_07"
+},
+{
+T = NXlArenaBattlemaster,
+Tx = "Spell_Holy_PrayerOfHealing"
+},
+{
+T = NXlEyeOfTheStormBattlemaster,
+Tx = "Spell_Nature_EyeOfTheStorm"
+},
+{
+T = NXlStrandOfTheAncientsBattlemaster,
+Tx = "INV_Jewelry_Amulet_01"
+},
+{
+T = NXlWarsongGulchBattlemaster,
+Tx = "INV_Misc_Rune_07"
+},
+},
 }
 
 --[[
@@ -455,7 +455,7 @@ function Nx.Map.Guide:Create (map)
 
 	-- Back button
 
-	local but = Nx.Button:Create (win.Frm, "Txt64", "Back", nil, 0, 0, "TOPLEFT", 100, 24, self.But_OnBack, g)
+local but = Nx.Button:Create (win.Frm, "Txt64", NXlBackButton, nil, 0, 0, "TOPLEFT", 100, 24, self.But_OnBack, g)
 
 	win:Attach (but.Frm, 1.01, 1.01+44, -10020, -10001)
 
