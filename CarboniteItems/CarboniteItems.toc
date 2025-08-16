@@ -1,8 +1,10 @@
 ## Interface: 30300
 ## Title: Carbonite Items
+## Title-ruRU: Carbonite: Предметы
 ## Version: 1.00
 ## Author: Carbon Based Creations, LLC
 ## Notes: Copyright 2010 Carbon Based Creations, LLC.  Item data.
+## Notes-ruRU: © 2010 Carbon Based Creations, LLC. Данные предметов.
 ## DefaultState: Enabled
 ## LoadOnDemand: 1
 

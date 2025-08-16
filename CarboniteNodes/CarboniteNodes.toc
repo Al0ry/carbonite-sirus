@@ -1,8 +1,10 @@
 ## Interface: 30300
 ## Title: Carbonite Nodes
+## Title-ruRU: Carbonite: Узлы
 ## Version: 1.00
 ## Author: Carbon Based Creations, LLC
 ## Notes: Copyright 2008-2010 Carbon Based Creations, LLC.  Contains Herbalism and Mining locations. Import using Guide page of Options Window.
+## Notes-ruRU: © 2008-2010 Carbon Based Creations, LLC. Содержит местоположения травничества и горного дела. Импортируйте через страницу Гида в окне настроек.
 ## DefaultState: Enabled
 ## LoadOnDemand: 1
 

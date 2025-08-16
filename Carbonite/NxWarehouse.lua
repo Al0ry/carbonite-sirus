@@ -326,7 +326,7 @@ function Nx.Warehouse:ToggleShow_()
 --PAIDS!
 
 	if not self.Enabled then
-		Nx.prt ("Disabled")
+            Nx.prt (NXlWarehouseDisabled)
 		return
 	end
 
@@ -409,7 +409,7 @@ function Nx.Warehouse:OnListEvent (eventName, sel, val2, click)
 				eb:SetText (eb:GetText() .. profT["Link"])
 
 			else
-				Nx.prt ("No edit box open!")
+                            Nx.prt (NXlNoEditBoxOpen)
 			end
 
 		elseif id >= 1 and id <= #Nx.RealmChars then
@@ -522,7 +522,7 @@ function Nx.Warehouse:OnItemListEvent (eventName, sel, val2, click)
 						AuctionFrameBrowse_Search()
 					end
 				else
-					Nx.prt ("No edit box open!")
+                                    Nx.prt (NXlNoEditBoxOpen)
 				end
 			end
 --		end
@@ -1856,7 +1856,7 @@ function Nx.Warehouse:Capture (link)
 
 	local s1, s2, id = strfind (link, "item:(%d+)")
 	if not s1 then
-		Nx.prt ("Warehouse Capture Error")
+           Nx.prt (NXlWarehouseCaptureError)
 		return
 	end
 
@@ -1978,7 +1978,7 @@ function Nx.Warehouse:RecordCharacterSkills()
 	for name, v in pairs (ch["Profs"]) do
 		if v.Old then
 			ch["Profs"][name] = nil
-			Nx.prt ("%s deleted", name)
+                   Nx.prt (NXlDeleted, name)
 		end
 	end
 
