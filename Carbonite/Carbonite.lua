@@ -475,9 +475,10 @@ function Nx:LocaleInit()
 		Nx.prt (" %s", loc)
 	end
 
-	if loc ~= "deDE" and loc ~= "frFR" and loc ~= "esES" and loc ~= "esMX" then
-		loc = "enUS"
-	end
+       if loc ~= "deDE" and loc ~= "frFR" and loc ~= "esES" and loc ~= "esMX" and
+               loc ~= "ruRU" and loc ~= "itIT" and loc ~= "ptBR" and loc ~= "zhTW" then
+               loc = "enUS"
+       end
 
 --	if loc == "enGB" then
 --		loc = "enUS"

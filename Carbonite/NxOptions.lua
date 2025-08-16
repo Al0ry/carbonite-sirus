@@ -294,8 +294,12 @@ Nx.OptsVars = {
 	["TitleOff"] = "~B",
 	["TitleSoundOn"] = "~B",
 	["WarehouseEnable"] = "~B~T",
-	["WarehouseAddTooltip"] = "~B~T",
+["WarehouseAddTooltip"] = "~B~T",
 }
+
+local function L(str)
+       return (NXlOptsData and NXlOptsData[str]) or str
+end
 
 Nx.OptsData = {
 	{
@@ -1717,9 +1721,9 @@ function Nx.Opts:QuickOptsTimer()
 			ReloadUI()
 		end
 
-		local s = "Put the game minimap into the Carbonite map?\n\nThis will make one unified map. The minimap buttons will go into the Carbonite button window. This can also be changed using the Map Minimap options page."
+               local s = NXlPutMinimapIntoCarbonite
 
-		Nx:ShowMessage (s, "Yes", func, "No")
+               Nx:ShowMessage (s, NXlYes, func, NXlNo)
 	end
 end
 
@@ -1732,7 +1736,7 @@ function Nx.Opts:Reset (onlyNew)
 	self.COpts = Nx.CurCharacter["Opts"]
 
 	if not onlyNew then
-		Nx.prt ("Reset global options")
+               Nx.prt (NXlResetGlobalOptions)
 	end
 
 	for name, v in pairs (Nx.OptsVars) do
@@ -1845,7 +1849,7 @@ function Nx.Opts:Create()
 
 	frm:SetToplevel (true)
 
-	win:SetTitle (Nx.TXTBLUE.."CARBONITE " .. Nx.VERSION .. "|cffffffff Options")
+       win:SetTitle (Nx.TXTBLUE.."CARBONITE " .. Nx.VERSION .. "|cffffffff " .. L("Options"))
 
 	-- Page list
 
@@ -1859,13 +1863,13 @@ function Nx.Opts:Create()
 
 	list:SetLineHeight (8)
 
-	list:ColumnAdd ("Page", 1, listW)
+       list:ColumnAdd (L("Page"), 1, listW)
 
 	for k, t in ipairs (Nx.OptsData) do
 
-		list:ItemAdd (k)
-		list:ItemSet (1, t.N)
-	end
+               list:ItemAdd (k)
+               list:ItemSet (1, L(t.N))
+       end
 
 	self.PageSel = 1
 
@@ -1924,7 +1928,7 @@ function Nx.Opts:NXCmdDeleteHerb()
 	local function func()
 		Nx:GatherDeleteHerb()
 	end
-	Nx:ShowMessage ("Delete Herb Locations?", "Delete", func, "Cancel")
+       Nx:ShowMessage (NXlDeleteHerbLocations, NXlDelete, func, NXlCancel)
 end
 
 function Nx.Opts:NXCmdDeleteMine()
@@ -1932,7 +1936,7 @@ function Nx.Opts:NXCmdDeleteMine()
 	local function func()
 		Nx:GatherDeleteMine()
 	end
-	Nx:ShowMessage ("Delete Mine Locations?", "Delete", func, "Cancel")
+       Nx:ShowMessage (NXlDeleteMineLocations, NXlDelete, func, NXlCancel)
 end
 
 function Nx.Opts:NXCmdDeleteMisc()
@@ -1940,7 +1944,7 @@ function Nx.Opts:NXCmdDeleteMisc()
 	local function func()
 		Nx:GatherDeleteMisc()
 	end
-	Nx:ShowMessage ("Delete Misc Locations?", "Delete", func, "Cancel")
+       Nx:ShowMessage (NXlDeleteMiscLocations, NXlDelete, func, NXlCancel)
 end
 
 function Nx.Opts:NXCmdImportCarbHerb()
@@ -1948,7 +1952,7 @@ function Nx.Opts:NXCmdImportCarbHerb()
 	local function func()
 		Nx:GatherImportCarbHerb()
 	end
-	Nx:ShowMessage ("Import Herbs?", "Import", func, "Cancel")
+       Nx:ShowMessage (NXlImportHerbs, NXlImport, func, NXlCancel)
 end
 
 function Nx.Opts:NXCmdImportCarbMine()
@@ -1956,7 +1960,7 @@ function Nx.Opts:NXCmdImportCarbMine()
 	local function func()
 		Nx:GatherImportCarbMine()
 	end
-	Nx:ShowMessage ("Import Mining?", "Import", func, "Cancel")
+       Nx:ShowMessage (NXlImportMining, NXlImport, func, NXlCancel)
 end
 
 function Nx.Opts:NXCmdImportCarbMisc()
@@ -1964,7 +1968,7 @@ function Nx.Opts:NXCmdImportCarbMisc()
 	local function func()
 		Nx:GatherImportCarbMisc()
 	end
-	Nx:ShowMessage ("Import Misc?", "Import", func, "Cancel")
+       Nx:ShowMessage (NXlImportMisc, NXlImport, func, NXlCancel)
 end
 
 --[[
@@ -1973,7 +1977,7 @@ function Nx.Opts:NXCmdImportCartHerb()
 	local function func()
 		Nx:GatherImportCartHerb()
 	end
-	Nx:ShowMessage ("Import Herbs?", "Import", func, "Cancel")
+       Nx:ShowMessage (NXlImportHerbs, NXlImport, func, NXlCancel)
 end
 
 function Nx.Opts:NXCmdImportCartMine()
@@ -1981,7 +1985,7 @@ function Nx.Opts:NXCmdImportCartMine()
 	local function func()
 		Nx:GatherImportCartMine()
 	end
-	Nx:ShowMessage ("Import Mining?", "Import", func, "Cancel")
+       Nx:ShowMessage (NXlImportMining, NXlImport, func, NXlCancel)
 end
 --]]
 
@@ -2061,7 +2065,7 @@ function Nx.Opts:NXCmdImportCharSettings()
 			end
 		end
 
-		Nx:ShowMessage (format ("Import %s character data and reload?", name), "Import", func, "Cancel")
+               Nx:ShowMessage (format (NXlImportCharacter, name), NXlImport, func, NXlCancel)
 	end
 
 	local t = {}
@@ -2088,7 +2092,7 @@ function Nx.Opts:NXCmdDeleteCharSettings()
 			Nx:DeleteCharacterData (name)
 		end
 
-		Nx:ShowMessage (format ("Delete %s character data?", name), "Delete", func, "Cancel")
+               Nx:ShowMessage (format (NXlDeleteCharacter, name), NXlDelete, func, NXlCancel)
 	end
 
 	local rcName = Nx:GetRealmCharName()
@@ -2124,7 +2128,7 @@ function Nx.Opts:NXCmdResetOpts()
 		self:NXCmdUIChange()
 	end
 
-	Nx:ShowMessage ("Reset options?", "Reset", func, "Cancel")
+       Nx:ShowMessage (NXlResetOptions, NXlReset, func, NXlCancel)
 end
 
 function Nx.Opts:NXCmdResetWinLayouts()
@@ -2133,7 +2137,7 @@ function Nx.Opts:NXCmdResetWinLayouts()
 		Nx.Window:ResetLayouts()
 	end
 
-	Nx:ShowMessage ("Reset window layouts?", "Reset", func, "Cancel")
+       Nx:ShowMessage (NXlResetLayouts, NXlReset, func, NXlCancel)
 end
 
 function Nx.Opts:NXCmdResetWatchWinLayout()
@@ -2146,7 +2150,7 @@ function Nx.Opts:NXCmdReload()
 		ReloadUI()
 	end
 
-	Nx:ShowMessage ("Reload UI?", "Reload", func, "Cancel")
+       Nx:ShowMessage (NXlReloadUI, NXlReload, func, NXlCancel)
 end
 
 function Nx.Opts:NXCmdSkinColor()
@@ -2266,7 +2270,7 @@ function Nx.Opts:Update()
 					col = "|cffdfdfdf"
 				end
 
-				local istr = format ("%s%s", col, item.N)
+                               local istr = format ("%s%s", col, L(item.N))
 
 				if item.V then
 
@@ -2319,9 +2323,9 @@ function Nx.Opts:Update()
 		elseif type (item) == "string" then
 
 			local col = "|cff9f9f9f"
-			list:ItemSet (2, format ("%s%s", col, item))
-		end
-	end
+                       list:ItemSet (2, format ("%s%s", col, L(item)))
+               end
+       end
 
 	list:FullUpdate()
 
