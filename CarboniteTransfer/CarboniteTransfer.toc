@@ -1,8 +1,10 @@
 ## Interface: 30300
 ## Title: Carbonite Transfer
+## Title-ruRU: Carbonite: Передача
 ## Version: 1.01
 ## Author: Carbon Based Creations, LLC
 ## Notes: Copyright 2008-2010 Carbon Based Creations, LLC.  Used to transfer Warehouse data between accounts.
+## Notes-ruRU: © 2008-2010 Carbon Based Creations, LLC. Используется для передачи данных склада между учетными записями.
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## SavedVariables: CarboniteTransferData

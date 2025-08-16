@@ -38,6 +38,28 @@ NXlImport = "Import"
 NXlReset = "Reset"
 NXlReload = "Reload"
 NXlCancel = "Cancel"
+NXlResetMapOptions = "Reset map options %f"
+NXlUnknownMapFunction = "Unknown map function %s"
+NXlTaxiCurrent = "Taxi current %s (%s)"
+NXlTaxiTime = "Taxi %s (%s) %.2f secs, node %d, %s %s"
+NXlNoTaxiData = "No taxi data %s to %s"
+NXlTaxiRouteTime = "#%s %s to %s, %s secs"
+NXlTaxiNode = "Taxi #%s %s, %s %f %f"
+NXlTaxiNodePos = "#%s %s %s"
+NXlGuideShowType = "guide showType %s"
+NXlCapTimerRetry = "CapTimer retry"
+NXlRemovedOldVendorItem = "Removed old vendor item %s"
+NXlCaptured = "Captured %s (%d)"
+NXlBad = "bad %s"
+NXlCarboniteItemsLoadErr = "CarboniteItems addon could not be loaded!"
+NXlCarboniteItemsAddonErr = "CarboniteItems addon error!"
+NXlCarboniteItemsLoaded = "CarboniteItems loaded"
+NXlDetectedNear = "%s %s detected near you"
+NXlPunkAdded = "Punk %s added"
+NXlWarehouseDisabled = "Disabled"
+NXlNoEditBoxOpen = "No edit box open!"
+NXlWarehouseCaptureError = "Warehouse Capture Error"
+NXlDeleted = "%s deleted"
 
 
 if GetLocale() == "deDE" then		-- German
@@ -4961,9 +4983,32 @@ elseif GetLocale() == "ruRU" then		-- Russian
 
 	NXlRiding			= "Верховая езда"
 
-        NXlDurPattern = "^Прочность (%d+) / (%d+)"
+NXlDurPattern = "^Прочность (%d+) / (%d+)"
 
-       NXlOptsData = {
+NXlResetMapOptions = "Сбросить настройки карты %f"
+NXlUnknownMapFunction = "Неизвестная функция карты %s"
+NXlTaxiCurrent = "Текущий маршрут такси %s (%s)"
+NXlTaxiTime = "Такси %s (%s) %.2f сек, узел %d, %s %s"
+NXlNoTaxiData = "Нет данных такси %s до %s"
+NXlTaxiRouteTime = "#%s %s до %s, %s сек"
+NXlTaxiNode = "Такси #%s %s, %s %f %f"
+NXlTaxiNodePos = "#%s %s %s"
+NXlGuideShowType = "тип отображения гида %s"
+NXlCapTimerRetry = "Повтор таймера захвата"
+NXlRemovedOldVendorItem = "Удален старый предмет продавца %s"
+NXlCaptured = "Захвачено %s (%d)"
+NXlBad = "плохой %s"
+NXlCarboniteItemsLoadErr = "Не удалось загрузить аддон CarboniteItems!"
+NXlCarboniteItemsAddonErr = "Ошибка аддона CarboniteItems!"
+NXlCarboniteItemsLoaded = "CarboniteItems загружен"
+NXlDetectedNear = "%s %s обнаружен рядом с вами"
+NXlPunkAdded = "Панк %s добавлен"
+NXlWarehouseDisabled = "Отключено"
+NXlNoEditBoxOpen = "Нет открытого поля ввода!"
+NXlWarehouseCaptureError = "Ошибка захвата склада"
+NXlDeleted = "%s удален"
+
+NXlOptsData = {
                ["Options"] = "Настройки",
                ["Page"] = "Страница",
                ["Welcome"] = "Добро пожаловать",

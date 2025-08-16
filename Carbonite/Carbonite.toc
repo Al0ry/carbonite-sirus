@@ -1,7 +1,9 @@
 ## Interface: 30300
 ## Title: Carbonite 5.078
+## Title-ruRU: Carbonite 5.078
 ## Version: 5.078
 ## Notes: Released Under GPL
+## Notes-ruRU: Выпущено под GPL
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## SavedVariables: NxData, NxCombatOpts, NxMapOpts

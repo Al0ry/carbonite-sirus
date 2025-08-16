@@ -1873,7 +1873,7 @@ function Nx.Map.Guide:UpdateMapGeneralIcons (cont, showType, hideFac, tx, name, 
 	local map = self.Map
 
 	if not Nx.GuideData[showType] then
-		Nx.prt ("guide showType %s", showType)
+       Nx.prt (NXlGuideShowType, showType)
 		return
 	end
 
@@ -2574,7 +2574,7 @@ function Nx.Map.Guide:CapTimer()
 
 	if not ok and MerchantFrame:IsVisible() then
 		if Nx.LootOn then
-			Nx.prt ("CapTimer retry")
+       Nx.prt (NXlCapTimerRetry)
 		end
 		return .5
 	end
@@ -2667,7 +2667,7 @@ function Nx.Map.Guide:UpdateVisitedVendors()
 				if not name then
 					if Nx.Item:Load (id) then	-- Failed before?
 						tremove (links, n)
-						Nx.prt ("Removed old vendor item %s", id)
+               Nx.prt (NXlRemovedOldVendorItem, id)
 						n = n - 1
 					end
 				end
@@ -2892,7 +2892,7 @@ function Nx.Map.Guide:CaptureItems()
 		end
 
 		if Nx.LootOn then
-			Nx.prt ("Captured %s (%d)", npc, #links)
+               Nx.prt (NXlCaptured, npc, #links)
 		end
 
 		return true
@@ -3787,7 +3787,7 @@ function Nx.Map.Guide:ItemsAddItem (folder, id)
 	local info, stats, statsExtra, src = strsplit ("\t", root["Items"][id])
 
 	if not info then
-		Nx.prt ("bad %s", id)
+           Nx.prt (NXlBad, id)
 	end
 
 	local flags = strbyte (info, 2) - 35
@@ -4107,16 +4107,16 @@ function Nx.Map.Guide:ItemsLoad()
 	end
 
 	if not LoadAddOn ("CarboniteItems") then
-		Nx.prt ("CarboniteItems addon could not be loaded!")
+       Nx.prt (NXlCarboniteItemsLoadErr)
 		return
 	end
 
 	if not CarboniteItems then
-		Nx.prt ("CarboniteItems addon error!")
+       Nx.prt (NXlCarboniteItemsAddonErr)
 		return
 	end
 
-	Nx.prt ("CarboniteItems loaded")
+   Nx.prt (NXlCarboniteItemsLoaded)
 end
 
 --------
