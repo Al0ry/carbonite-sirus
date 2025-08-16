@@ -1243,7 +1243,7 @@ function Nx.Social:AddLocalPunk (name, plyrNear, level, class)
 
 			local typ = self.Punks[name] and "|cffff4040Punk" or "Enemy"
 
-			Nx.prt ("%s %s detected near you", typ, name)
+                   Nx.prt (NXlDetectedNear, typ, name)
 
 			if self.GOpts["PunkNewLocalWarnSnd"] then
 				Nx:PlaySoundFile ("sound\\doodad\\belltolltribal.wav")
@@ -1676,7 +1676,7 @@ function Nx.Social.PunksHUD:Click()
 
 	if IsShiftKeyDown() then
 		Nx.Social.List:PunkAdd (but.NXName)
-		Nx.prt ("Punk %s added", but.NXName or "")
+       Nx.prt (NXlPunkAdded, but.NXName or "")
 	else
 		Nx.Social.PunksHUD:Remove (but.NXName)
 	end

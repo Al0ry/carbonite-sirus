@@ -115,7 +115,7 @@ function Nx.Travel:CaptureTaxi()
 
 			if NxData.DebugMap then
 				local name = Nx.Map.Guide:FindTaxis (locName)
-				Nx.prt ("Taxi current %s (%s)", name or "nil", locName)
+            Nx.prt (NXlTaxiCurrent, name or "nil", locName)
 			end
 		end
 	end
@@ -148,7 +148,7 @@ function Nx.Travel.TakeTaxiNode (node)
 	end
 
 	if NxData.DebugMap then
-		Nx.prt ("Taxi %s (%s) %.2f secs, node %d, %s %s", name or "nil", map.TaxiName, tm, node, x or "?", y or "?")
+            Nx.prt (NXlTaxiTime, name or "nil", map.TaxiName, tm, node, x or "?", y or "?")
 	end
 
 	Nx.Travel.OrigTakeTaxiNode (node)
@@ -201,7 +201,7 @@ function Nx.Travel:TaxiCalcTime (dest)
 					if not t then
 
 						if NxData.DebugMap then
-							Nx.prt (" No taxi data %s to %s", srcName, destName)
+                                                    Nx.prt (NXlNoTaxiData, srcName, destName)
 						end
 
 						if rCnt == 1 then
@@ -215,7 +215,7 @@ function Nx.Travel:TaxiCalcTime (dest)
 				tm = tm + t
 
 				if NxData.DebugMap then
-					Nx.prt (" #%s %s to %s, %s secs", n, srcName, destName, t)
+                                    Nx.prt (NXlTaxiRouteTime, n, srcName, destName, t)
 				end
 
 			end
@@ -808,7 +808,7 @@ function Nx.Travel:DebugCaptureTaxi()
 			local name = TaxiNodeName (n)
 			local typ = TaxiNodeGetType (n)		-- NONE, CURRENT, REACHABLE, DISTANT
 			local x, y = TaxiNodePosition (n)
-			Nx.prt ("Taxi #%s %s, %s %f %f", n, name, typ, x, y)
+                    Nx.prt (NXlTaxiNode, n, name, typ, x, y)
 			tinsert (d, name)
 		end
 --[[
@@ -820,7 +820,7 @@ function Nx.Travel:DebugCaptureTaxi()
 			local x = TaxiGetDestX (dest, n)
 			local y = TaxiGetDestY (dest, n)
 
-			Nx.prt (" #%s %s %s", n, x, y)
+                    Nx.prt (NXlTaxiNodePos, n, x, y)
 
 			local match
 

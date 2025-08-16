@@ -280,7 +280,7 @@ function Nx.Map:Open()
 	if NxMapOpts.Version < NxMAPOPTS_VERSION then
 
 		if NxMapOpts.Version > 0 then
-			Nx.prt ("Reset map options %f", NxMapOpts.Version)
+                    Nx.prt (NXlResetMapOptions, NxMapOpts.Version)
 		end
 
 		NxMapOpts = NxMapOptsDefaults
@@ -503,7 +503,7 @@ function Nx.Map:CallFunc (optName)
 	if func then
 		func (self)
 	else
-		Nx.prt ("Unknown map function %s", name)
+            Nx.prt (NXlUnknownMapFunction, name)
 	end
 
 	return true	-- We did something

@@ -1,1 +1,1 @@
-Carbonite for private server sirus.su
+Carbonite для приватного сервера sirus.su
